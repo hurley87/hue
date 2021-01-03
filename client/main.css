@@ -2,3 +2,7 @@ body {
   padding: 0px;
   font-family: sans-serif;
 }
+
+button:not(:disabled):hover {
+  filter: brightness(120%) hue-rotate(2deg);
+}
