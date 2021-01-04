@@ -289,7 +289,7 @@ export const Game = ({ game }) => {
 
     const renderTopResults = (player) => (
         <div>
-            <h5>{player.username} {game.dealer === player.id ? dealer() : null} {game.maker === player.id ? (<span style={{ position: 'relative', bottom: '1px' }}>{renderSuit(game.trump)}</span>) : null}</h5>
+            <h5>{player.username} {game.dealer === player.id ? dealer() : null} {game.maker === player.id && game.trump !== "" ? (<span>{renderSuit(game.trump)}</span>) : null}</h5>
             <h1>{player.score} <small>{player.trick}</small></h1>
         </div>
     );
@@ -297,7 +297,7 @@ export const Game = ({ game }) => {
     const renderBottomResults = (player) => (
         <div>
             <h1>{player.score} <small>{player.trick} {game.currentPlayer === player.id && game.status === 'PlayCards' ? yourTurn() : null}</small></h1>
-            <h5>{player.username} {game.dealer === player.id ? dealer() : null} {game.maker === player.id ? (<span style={{ position: 'relative', bottom: '1px' }}>{renderSuit(game.trump)}</span>) : null}</h5>
+            <h5>{player.username} {game.dealer === player.id ? dealer() : null} {game.maker === player.id && game.trump !== "" ? (<span>{renderSuit(game.trump)}</span>) : null}</h5>
         </div>
     );
 
