@@ -4,7 +4,7 @@ export const Order = ({ game, updateGame, renderCard, userId }) => {
 
     const orderCurrentUi = () => (
         <div>
-            Do you want to order up the {renderCard(game.deck[0].suit, game.deck[0].value)} or pass?
+            Do you want to order up the {game.deck[0].value === 15 ? renderCard(game.deck[1].suit, game.deck[1].value) : renderCard(game.deck[0].suit, game.deck[0].value)} or pass?
             <button onClick={() => handleOrderPickup()}>Order</button>
             <button onClick={() => handleOrderPass()}>Pass</button>
         </div>
@@ -12,7 +12,7 @@ export const Order = ({ game, updateGame, renderCard, userId }) => {
 
     const orderOpposingUi = () => (
         <div>
-            {game.playerTwo.username} has option to order {renderCard(game.deck[0].suit, game.deck[0].value)}
+            {game.playerTwo.username} has option to order {game.deck[0].value === 15 ? renderCard(game.deck[1].suit, game.deck[1].value) : renderCard(game.deck[0].suit, game.deck[0].value)}
         </div>
     );
 
@@ -26,7 +26,7 @@ export const Order = ({ game, updateGame, renderCard, userId }) => {
             newGame.maker = newGame.playerTwo.id;
             newGame.currentPlayer = newGame.playerOne.id;
         }
-        newGame.trump = newGame.deck[0].suit;
+        newGame.deck[0].value === 15 ? newGame.trump = newGame.deck[1].suit : newGame.trump = newGame.deck[0].suit
         updateGame(newGame);
     };
 
