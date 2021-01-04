@@ -64,7 +64,7 @@ Meteor.methods({
             currentPlayer: this.userId,
             handCount: 0,
             deck: cards,
-            status: 'invite-sent',
+            status: 'InviteSent',
             trump: ''
         })
     } catch (e) {
@@ -98,7 +98,26 @@ Meteor.methods({
     const newGame = GamesCollection.findOne(gameId);
     newGame.playerTwo.username = Meteor.users.findOne(this.userId).username;
     newGame.playerTwo.id = this.userId;
+    newGame.status = 'Deal';
 
     GamesCollection.update(gameId, { $set: newGame })
+  },
+  'games.update'(game) {
+    check(game, {
+      _id: String,
+      limit: Number,
+      playerOne: Object,
+      playerTwo: Object,
+      dealer: String,
+      maker: String,
+      handCount: Number,
+      currentPlayer: String,
+      deck: Array,
+      status: String,
+      trump: String,
+      inviteCode: String,
+    });
+
+    GamesCollection.update(game._id, { $set: game });
   },
 });

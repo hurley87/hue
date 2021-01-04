@@ -3,7 +3,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Unauthenticated } from './Unauthenticated';
 import { Loading } from './Loading';
 import { NoGame } from './NoGame';
-import { ViewGame } from './ViewGame';
+import { Game } from './Game';
 import { GamesCollection } from "../db/GamesCollection"
 
 export const App = () => {
@@ -32,7 +32,7 @@ export const App = () => {
             <p>{user.username}</p>
             <button className='btn' onClick={logout}>logout</button>
             {
-              game ? <ViewGame game={game} /> : <NoGame />
+              game ? <Game game={game} /> : <NoGame />
             }
           </div>
         ) : <Unauthenticated />
