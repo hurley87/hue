@@ -3,11 +3,15 @@ import { JoinGame } from './JoinGame';
 import { NewGame } from './NewGame';
 
 
-export const NoGame = () => {
+export const NoGame = ({ user }) => {
     const [showNewGame, setShowNewGame] = useState(false);
+    const logout = () => Meteor.logout();
 
     return (
         <div>
+            <h1>Hue</h1>
+            <p>{user.username}</p>
+            <button className='btn' onClick={logout}>logout</button>
             {
                 showNewGame ? <NewGame /> : <JoinGame />
             }

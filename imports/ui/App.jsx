@@ -7,8 +7,6 @@ import { Game } from './Game';
 import { GamesCollection } from "../db/GamesCollection"
 
 export const App = () => {
-  const logout = () => Meteor.logout();
-
   const { user, game, isLoading } = useTracker(() => {
     const noDataAvailable = { game: null, isLoading: true };
     const handler = Meteor.subscribe('games');
@@ -21,18 +19,15 @@ export const App = () => {
     const user = Meteor.user();
 
     return { user, game, isLoading: false };
-  })
+  });
 
   return (
     <div className='main'>
       {
         isLoading ? <Loading /> : user ? (
           <div>
-            <h1>Hue</h1>
-            <p>{user.username}</p>
-            <button className='btn' onClick={logout}>logout</button>
             {
-              game ? <Game game={game} /> : <NoGame />
+              game ? <Game game={game} /> : <NoGame user={user} />
             }
           </div>
         ) : <Unauthenticated />
