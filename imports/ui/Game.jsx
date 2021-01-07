@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { InviteSent } from "./Game/InviteSent";
 import { Deal } from "./Game/Deal";
@@ -15,12 +15,12 @@ import _ from 'lodash';
 
 export const Game = ({ game }) => {
     const [error, setError] = useState(null);
-    const [disableCards, setDisableCards] = useState(false);
-
     const deleteGame = ({ _id }) => Meteor.call('games.remove', _id);
     const renderCard = (suit, value) => <img className="play-card" alt="player-card" src={`https://adsgen.s3.amazonaws.com/${suit}/${value}.png`} height="100" />;
     const renderSuit = suit => <img height="20px" src={`https://adsgen.s3.amazonaws.com/${suit}.png`} />;
     const renderCover = () => <img className="play-card" src={`https://adsgen.s3.amazonaws.com/blue.png`} height="100" />;
+    const dealer = () => (<span>Dealer</span>);
+    const yourTurn = () => (<span>Your { game.handCount % 2 === 0 ? 'lead' : 'turn'}</span>);
     const userId = Meteor.userId();
     let currentPlayer = game.playerOne;
     let opposingPlayer = game.playerTwo;
@@ -29,8 +29,6 @@ export const Game = ({ game }) => {
         opposingPlayer = game.playerOne;
     }
 
-    const dealer = () => (<span>Dealer</span>);
-    const yourTurn = () => (<span>Your { game.handCount % 2 === 0 ? 'lead' : 'turn'}</span>);
 
     const endGame = () => {
         let winner = game.playerOne.id;
@@ -71,7 +69,6 @@ export const Game = ({ game }) => {
 
     const handlePlayCard = (player, card, hand) => {
         const newGame = game;
-        setDisableCards(true);
 
         if (game.handCount % 2 !== 0) {
             if (game.currentPlayer === game.playerOne.id) {
@@ -156,7 +153,6 @@ export const Game = ({ game }) => {
             newGame.currentPlayer === newGame.playerOne.id ? newGame.currentPlayer = newGame.playerTwo.id : newGame.currentPlayer = newGame.playerOne.id;
         }
 
-        // remove card from hand
         switch (hand) {
             case 'first':
                 player.id === newGame.playerOne.id ? newGame.playerOne.first.splice(_.findIndex(newGame.playerOne.first, { suit: card.suit, value: card.value }), 1) : newGame.playerTwo.first.splice(_.findIndex(newGame.playerTwo.first, { suit: card.suit, value: card.value }), 1);
@@ -185,9 +181,7 @@ export const Game = ({ game }) => {
             newGame.status = 'PlayCards';
             newGame.handCount = game.handCount + 1;
         }
-
         updateGame(newGame);
-        setDisableCards(false);
     };
 
     const convertCard = (trump, card) => {
@@ -277,15 +271,15 @@ export const Game = ({ game }) => {
     const renderBottomCards = (player) => (
         <div>
             <div className="secondRow">
-                {(player.first.length === 1 || player.first.length === 2) && game.status === 'PlayCards' ? <button disabled={!disableCards && followsuit(player, player.first[0])} onClick={() => handlePlayCard(player, player.first[0], 'first')}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : null}
+                {(player.first.length === 1 || player.first.length === 2) && game.status === 'PlayCards' ? <button disabled={followsuit(player, player.first[0])} onClick={() => handlePlayCard(player, player.first[0], 'first')}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : null}
                 <span>{player.first.length === 2 ? renderCover() : null}</span>
-                {(player.second.length === 1 || player.second.length === 2) && game.status === 'PlayCards' ? <button disabled={!disableCards && followsuit(player, player.second[0])} onClick={() => handlePlayCard(player, player.second[0], 'second')}>{renderCard(player.second[0].suit, player.second[0].value)}</button> : null}
+                {(player.second.length === 1 || player.second.length === 2) && game.status === 'PlayCards' ? <button disabled={followsuit(player, player.second[0])} onClick={() => handlePlayCard(player, player.second[0], 'second')}>{renderCard(player.second[0].suit, player.second[0].value)}</button> : null}
                 <span>{player.second.length === 2 ? renderCover() : null}</span>
-                {(player.third.length === 1 || player.third.length === 2) && game.status === 'PlayCards' ? <button disabled={!disableCards && followsuit(player, player.third[0])} onClick={() => handlePlayCard(player, player.third[0], 'third')}>{renderCard(player.third[0].suit, player.third[0].value)}</button> : null}
+                {(player.third.length === 1 || player.third.length === 2) && game.status === 'PlayCards' ? <button disabled={followsuit(player, player.third[0])} onClick={() => handlePlayCard(player, player.third[0], 'third')}>{renderCard(player.third[0].suit, player.third[0].value)}</button> : null}
                 <span>{player.third.length === 2 ? renderCover() : null}</span>
             </div>
             <div className="firstRow">
-                {player.hand.map((card, i) => (<button key={i} disabled={!disableCards && followsuit(player, card)} onClick={() => handlePlayCard(player, card, 'hand')}>{renderCard(card.suit, card.value)}</button>))}
+                {player.hand.map((card, i) => (<button key={i} disabled={followsuit(player, card)} onClick={() => handlePlayCard(player, card, 'hand')}>{renderCard(card.suit, card.value)}</button>))}
             </div>
         </div>
     );
