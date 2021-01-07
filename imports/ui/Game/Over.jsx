@@ -121,9 +121,7 @@ export const Over = ({ game, updateGame, userId }) => {
 
     return (
         <div>
-            {
-                userId === game.playerOne.id ? renderPlayerOneOver() : renderPlayerTwoOver()
-            }
+            {userId === game.playerOne.id ? renderPlayerOneOver() : renderPlayerTwoOver()}
             <button onClick={() => nextHand()}>Next Hand</button>
         </div>
 
