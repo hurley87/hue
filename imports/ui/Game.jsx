@@ -48,23 +48,16 @@ export const Game = ({ game }) => {
             loser,
             winnerScore,
             loserScore,
+            gameId: game._id,
         };
 
-        Meteor.call('scores.insert', score, (error) => {
-            if (error) {
-                setError(error)
-            } else {
-                Meteor.call('profiles.insert', profile2, (error) => {
-                    if (error) {
-                        setError(error)
-                    } else {
-                        Meteor.call('games.remove', game._id, (error) => {
-                            if (error) setError(error)
-                        });
-                    }
-                });
-            }
-        })
+        try {
+            Meteor.call('scores.insert', score, (error) => {
+                if (error) setError(error)
+            })
+        } catch (e) {
+            setError(e)
+        }
 
     }
 
