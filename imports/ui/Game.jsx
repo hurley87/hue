@@ -31,19 +31,26 @@ export const Game = ({ game }) => {
     const yourTurn = () => (<span>Your { game.handCount % 2 === 0 ? 'lead' : 'turn'}</span>);
 
     const endGame = () => {
-        const profile1 = {
-            username: game.playerOne.username,
-            score: game.playerOne.score,
-            playerId: game.playerOne.id,
-            winner: (game.playerOne.score > game.playerTwo.score),
+        let winner = game.playerOne.id;
+        let loser = game.playerTwo.id;
+        let winnerScore = game.playerOne.score;
+        let loserScore = game.playerTwo.score;
+
+        if (game.playerTwo.score > game.playerOne.score) {
+            winner = game.playerTwo.id;
+            loser = game.playerOne.id;
+            winnerScore = game.playerTwo.score;
+            loserScore = game.playerOne.score;
+        }
+
+        const score = {
+            winner,
+            loser,
+            winnerScore,
+            loserScore,
         };
-        const profile2 = {
-            username: game.playerTwo.username,
-            score: game.playerTwo.score,
-            playerId: game.playerTwo.id,
-            winner: (game.playerTwo.score > game.playerOne.score),
-        };
-        Meteor.call('profiles.insert', profile1, (error) => {
+
+        Meteor.call('scores.insert', score, (error) => {
             if (error) {
                 setError(error)
             } else {
@@ -57,7 +64,8 @@ export const Game = ({ game }) => {
                     }
                 });
             }
-        });
+        })
+
     }
 
     const updateGame = (game) => {
