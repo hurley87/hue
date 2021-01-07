@@ -279,7 +279,7 @@ export const Game = ({ game }) => {
                 <span>{player.third.length === 2 ? renderCover() : null}</span>
             </div>
             <div className="firstRow">
-                {player.hand.map((card, i) => (<button key={i} disabled={followsuit(player, card)} onClick={() => handlePlayCard(player, card, 'hand')}>{renderCard(card.suit, card.value)}</button>))}
+                {player.hand.map((card, i) => (<span style={{ width: '83px', display: 'inline-block' }}><button key={i} disabled={followsuit(player, card)} onClick={() => handlePlayCard(player, card, 'hand')}>{renderCard(card.suit, card.value)}</button></span>))}
             </div>
         </div>
     );
