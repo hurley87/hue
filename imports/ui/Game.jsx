@@ -77,10 +77,9 @@ export const Game = ({ game }) => {
 
     const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-    function handlePlayCard(player, card, hand) {
+    async function handlePlayCard(player, card, hand) {
         setDisableCards(true)
 
-        console.log(disableCards)
         const newGame = game;
         if (game.handCount % 2 !== 0) {
             if (game.currentPlayer === game.playerOne.id) {
@@ -194,6 +193,7 @@ export const Game = ({ game }) => {
             newGame.handCount = game.handCount + 1;
         }
         updateGame(newGame);
+        await pause(200);
         setDisableCards(false);
     };
 
