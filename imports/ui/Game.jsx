@@ -284,11 +284,11 @@ export const Game = ({ game }) => {
     const renderBottomCards = (player) => (
         <div>
             <div className="secondRow">
-                {(player.first.length === 1 || player.first.length === 2) && game.status === 'PlayCards' ? disableCards ? null : <button disabled={followsuit(player, player.first[0])} onClick={() => handlePlayCard(player, player.first[0], 'first')}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : null}
+                {(player.first.length === 1 || player.first.length === 2) && game.status === 'PlayCards' ? disableCards ? <button disabled={followsuit(player, player.first[0])}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : <button disabled={followsuit(player, player.first[0])} onClick={() => handlePlayCard(player, player.first[0], 'first')}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : null}
                 <span>{player.first.length === 2 ? renderCover() : null}</span>
-                {(player.second.length === 1 || player.second.length === 2) && game.status === 'PlayCards' ? disableCards ? null : <button disabled={followsuit(player, player.second[0])} onClick={() => handlePlayCard(player, player.second[0], 'second')}>{renderCard(player.second[0].suit, player.second[0].value)}</button> : null}
+                {(player.second.length === 1 || player.second.length === 2) && game.status === 'PlayCards' ? disableCards ? <button disabled={followsuit(player, player.first[0])}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : <button disabled={followsuit(player, player.second[0])} onClick={() => handlePlayCard(player, player.second[0], 'second')}>{renderCard(player.second[0].suit, player.second[0].value)}</button> : null}
                 <span>{player.second.length === 2 ? renderCover() : null}</span>
-                {(player.third.length === 1 || player.third.length === 2) && game.status === 'PlayCards' ? disableCards ? null : <button disabled={followsuit(player, player.third[0])} onClick={() => handlePlayCard(player, player.third[0], 'third')}>{renderCard(player.third[0].suit, player.third[0].value)}</button> : null}
+                {(player.third.length === 1 || player.third.length === 2) && game.status === 'PlayCards' ? disableCards ? <button disabled={followsuit(player, player.first[0])}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : <button disabled={followsuit(player, player.third[0])} onClick={() => handlePlayCard(player, player.third[0], 'third')}>{renderCard(player.third[0].suit, player.third[0].value)}</button> : null}
                 <span>{player.third.length === 2 ? renderCover() : null}</span>
             </div>
             <div className="firstRow">
