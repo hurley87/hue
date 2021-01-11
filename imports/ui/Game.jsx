@@ -16,10 +16,29 @@ import _ from 'lodash';
 export const Game = ({ game }) => {
     const [error, setError] = useState(null);
     const [disableCards, setDisableCards] = useState(null);
+    const [startTime, setStartTime] = useState(null);
     const deleteGame = ({ _id }) => Meteor.call('games.remove', _id);
-    const renderCard = (suit, value) => <img className="play-card" alt="player-card" src={`https://adsgen.s3.amazonaws.com/${suit}/${value}.png`} height="100" />;
+    function convertValue(value) {
+        switch (value) {
+            case 14:
+                return 'A';
+            case 13:
+                return 'K';
+            case 12:
+                return 'Q';
+            case 11:
+                return 'J';
+            case 10:
+                return '10';
+            case 9:
+                return '9';
+            default:
+                return 'Joker';
+        }
+    }
+    const renderCard = (suit, value) => <span>{convertValue(value)} {suit !== "J" ? suit : null}</span>;
     const renderSuit = suit => <img height="20px" src={`https://adsgen.s3.amazonaws.com/${suit}.png`} />;
-    const renderCover = () => <img className="play-card" src={`https://adsgen.s3.amazonaws.com/blue.png`} height="100" />;
+    const renderCover = () => <button disabled={true}>----</button>;
     const dealer = () => (<span>Dealer</span>);
     const yourTurn = () => (<span>Your { game.handCount % 2 === 0 ? 'lead' : 'turn'}</span>);
     const userId = Meteor.userId();
@@ -33,22 +52,56 @@ export const Game = ({ game }) => {
     useEffect(() => {
         async function onLoad() {
             setDisableCards(false)
+            setStartTime(new Date())
         }
         onLoad();
     }, []);
+
+    function recordHand() {
+        let winnerId = game.playerOne.id;
+        let loserId = game.playerTwo.id;
+        let winnerScore = game.playerOne.score;
+        let loserScore = game.playerTwo.score;
+
+        if (game.playerTwo.score > game.playerOne.score) {
+            winnerId = game.playerTwo.id;
+            loserId = game.playerOne.id;
+            winnerScore = game.playerTwo.score;
+            loserScore = game.playerOne.score;
+        }
+
+        const endTime = new Date();
+        const timePlayed = (endTime - startTime) / 1000;
+
+        const hand = {
+            winnerId,
+            loserId,
+            gameId: game._id,
+            maker: game.maker,
+            winnerScore,
+            loserScore,
+            timePlayed,
+        };
+
+        try {
+            Meteor.call('hand.insert', hand, (error) => {
+                if (error) setError(error)
+            })
+        } catch (e) {
+            setError(e)
+        }
+    }
 
 
     const endGame = () => {
         let winner = game.playerOne.id;
         let loser = game.playerTwo.id;
         let winnerScore = game.playerOne.score;
-        let loserScore = game.playerTwo.score;
 
         if (game.playerTwo.score > game.playerOne.score) {
             winner = game.playerTwo.id;
             loser = game.playerOne.id;
             winnerScore = game.playerTwo.score;
-            loserScore = game.playerOne.score;
         }
 
         const score = {
@@ -66,7 +119,6 @@ export const Game = ({ game }) => {
         } catch (e) {
             setError(e)
         }
-
     }
 
     const updateGame = (game) => {
@@ -198,20 +250,24 @@ export const Game = ({ game }) => {
     };
 
     const convertCard = (trump, card) => {
-        if (card.value === 15) {
-            return { suit: trump, value: 18 };
-        } else if (card.value === 11 && card.suit === trump) {
-            return { suit: trump, value: 17 };
-        } else if (trump === 'S' && card.value === 11 && card.suit === 'C') {
-            return { suit: trump, value: 16 };
-        } else if (trump === 'C' && card.value === 11 && card.suit === 'S') {
-            return { suit: trump, value: 16 };
-        } else if (trump === 'H' && card.value === 11 && card.suit === 'D') {
-            return { suit: trump, value: 16 };
-        } else if (trump === 'D' && card.value === 11 && card.suit === 'H') {
-            return { suit: trump, value: 16 };
+        try {
+            if (card.value === 15) {
+                return { suit: trump, value: 18 };
+            } else if (card.value === 11 && card.suit === trump) {
+                return { suit: trump, value: 17 };
+            } else if (trump === 'S' && card.value === 11 && card.suit === 'C') {
+                return { suit: trump, value: 16 };
+            } else if (trump === 'C' && card.value === 11 && card.suit === 'S') {
+                return { suit: trump, value: 16 };
+            } else if (trump === 'H' && card.value === 11 && card.suit === 'D') {
+                return { suit: trump, value: 16 };
+            } else if (trump === 'D' && card.value === 11 && card.suit === 'H') {
+                return { suit: trump, value: 16 };
+            }
+            return card;
+        } catch (e) {
+            console.log('error converting card', e)
         }
-        return card;
     };
 
     const hasSuitToFollow = (player, suitToFollow, trump) => {
@@ -284,15 +340,15 @@ export const Game = ({ game }) => {
     const renderBottomCards = (player) => (
         <div>
             <div className="secondRow">
-                {(player.first.length === 1 || player.first.length === 2) && game.status === 'PlayCards' ? disableCards ? <button disabled={followsuit(player, player.first[0])}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : <button disabled={followsuit(player, player.first[0])} onClick={() => handlePlayCard(player, player.first[0], 'first')}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : null}
+                {(player.first.length === 1 || player.first.length === 2) && game.status === 'PlayCards' ? <button disabled={followsuit(player, player.first[0])} onClick={() => handlePlayCard(player, player.first[0], 'first')}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : null}
                 <span>{player.first.length === 2 ? renderCover() : null}</span>
-                {(player.second.length === 1 || player.second.length === 2) && game.status === 'PlayCards' ? disableCards ? <button disabled={followsuit(player, player.first[0])}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : <button disabled={followsuit(player, player.second[0])} onClick={() => handlePlayCard(player, player.second[0], 'second')}>{renderCard(player.second[0].suit, player.second[0].value)}</button> : null}
+                {(player.second.length === 1 || player.second.length === 2) && game.status === 'PlayCards' ? <button disabled={followsuit(player, player.second[0])} onClick={() => handlePlayCard(player, player.second[0], 'second')}>{renderCard(player.second[0].suit, player.second[0].value)}</button> : null}
                 <span>{player.second.length === 2 ? renderCover() : null}</span>
-                {(player.third.length === 1 || player.third.length === 2) && game.status === 'PlayCards' ? disableCards ? <button disabled={followsuit(player, player.first[0])}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : <button disabled={followsuit(player, player.third[0])} onClick={() => handlePlayCard(player, player.third[0], 'third')}>{renderCard(player.third[0].suit, player.third[0].value)}</button> : null}
+                {(player.third.length === 1 || player.third.length === 2) && game.status === 'PlayCards' ? <button disabled={followsuit(player, player.third[0])} onClick={() => handlePlayCard(player, player.third[0], 'third')}>{renderCard(player.third[0].suit, player.third[0].value)}</button> : null}
                 <span>{player.third.length === 2 ? renderCover() : null}</span>
             </div>
             <div className="firstRow">
-                {player.hand.map((card, i) => (!disableCards && <span style={{ width: '83px', display: 'inline-block' }}><button key={i} disabled={followsuit(player, card)} onClick={() => handlePlayCard(player, card, 'hand')}>{renderCard(card.suit, card.value)}</button></span>))}
+                {player.hand.map((card, i) => (!disableCards && <button key={i} disabled={followsuit(player, card)} onClick={() => handlePlayCard(player, card, 'hand')}>{renderCard(card.suit, card.value)}</button>))}
             </div>
         </div>
     );
@@ -313,6 +369,7 @@ export const Game = ({ game }) => {
 
     return (
         <div>
+
             {
                 error ? (
                     <p>{error.reason}</p>
@@ -334,7 +391,7 @@ export const Game = ({ game }) => {
             {game.status === 'Make' && <Make game={game} updateGame={updateGame} renderSuit={renderSuit} userId={userId} />}
             {game.status === 'StickDealer' && <StickDealer game={game} updateGame={updateGame} renderSuit={renderSuit} userId={userId} />}
             {game.status === 'PlayCards' && <PlayCards game={game} renderCard={renderCard} />}
-            {game.status === 'Over' && <Over game={game} updateGame={updateGame} userId={userId} />}
+            {game.status === 'Over' && <Over game={game} updateGame={updateGame} userId={userId} recordHand={recordHand} />}
             {game.status === 'Final' && <Final game={game} endGame={endGame} />}
             <div className='bottomCards'>
                 {renderBottomCards(currentPlayer)}
@@ -343,6 +400,9 @@ export const Game = ({ game }) => {
                 {renderBottomResults(currentPlayer)}
             </div>
             <button onClick={() => deleteGame({ _id: game._id })}>delete</button>
+            <div className="diamond circled">
+                <div className="square"></div>
+            </div>
         </div>
 
     );

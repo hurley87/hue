@@ -1,7 +1,9 @@
 import React from 'react';
 
-export const Over = ({ game, updateGame, userId }) => {
+export const Over = ({ game, updateGame, userId, recordHand }) => {
     const nextHand = () => {
+        recordHand();
+
         const newGame = game;
         if (newGame.playerOne.trick > newGame.playerTwo.trick) {
             const points = newGame.playerOne.trick - newGame.playerTwo.trick;
@@ -60,6 +62,7 @@ export const Over = ({ game, updateGame, userId }) => {
             newGame.status = 'Deal';
         }
         updateGame(newGame);
+
     };
 
     const renderPlayerOneOver = () => {

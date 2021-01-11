@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Deal = ({ game, updateGame, userId }) => {
+export const Suit = ({ suit }) => {
 
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {

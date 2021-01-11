@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { useState } from 'react';
+import { Suit } from "./Game/Suit";
 
 export const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -20,6 +21,7 @@ export const LoginForm = () => {
                     <p>{error.reason}</p>
                 ) : null
             }
+            <Suit size={0.5} suit={"S"} />
             <form onSubmit={submit} className="login-form">
                 <label htmlFor="username">Username</label>
 

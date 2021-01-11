@@ -8,16 +8,12 @@ Meteor.methods({
         winner: String,
         loser: String,
         winnerScore: Number,
-        loserScore: Number,
         gameId: String,
     });
 
     if (!this.userId) {
         throw new Meteor.Error('Not authorized.');
     }
-
-    let wins = 0;
-    if (score.winner) wins = 1;
 
     try {
         Meteor.users.update(
@@ -44,7 +40,6 @@ Meteor.methods({
                     updatedAt: (new Date()).toISOString(),
                 },
                 $inc: {
-                    "profile.score": score.loserScore,
                     "profile.losses": 1,
                 }
             }
@@ -59,6 +54,7 @@ Meteor.methods({
             loser: score.loser,
             winnerScore: score.winnerScore,
             loserScore: score.loserScore,
+            gameId: score.gameId,
             createdAt: (new Date()).toISOString(),
         });
     } catch(e) {
