@@ -21,7 +21,10 @@ export const LoginForm = () => {
                     <p>{error.reason}</p>
                 ) : null
             }
-            <Suit size={0.5} suit={"S"} />
+            <Suit size={1} suit={"C"} />
+            <Suit size={1} suit={"D"} />
+            <Suit size={1} suit={"S"} />
+            <Suit size={1} suit={"H"} />
             <form onSubmit={submit} className="login-form">
                 <label htmlFor="username">Username</label>
 
