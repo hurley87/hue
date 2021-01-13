@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { useState } from 'react';
-import { Suit } from "./Game/Suit";
+import { Card } from "./Game/Card";
 
 export const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -21,10 +21,15 @@ export const LoginForm = () => {
                     <p>{error.reason}</p>
                 ) : null
             }
-            <Suit size={1} suit={"C"} />
-            <Suit size={1} suit={"D"} />
-            <Suit size={1} suit={"S"} />
-            <Suit size={1} suit={"H"} />
+            <Card size={1.5} suit={'D'} value={15} />
+            <p style={{ textAlign: 'center' }}>
+                <span style={{ fontSize: '10em', color: "#c41010" }}>🃍</span>
+                <span style={{ fontSize: '10em', color: "#c41010" }}>🃍</span>
+                <span style={{ fontSize: '10em', color: "#c41010" }}>🃍</span>
+                <span style={{ fontSize: '10em', color: "#c41010" }}>🃍</span>
+                <span style={{ fontSize: '10em', color: "#c41010" }}>🃍</span>
+            </p>
+
             <form onSubmit={submit} className="login-form">
                 <label htmlFor="username">Username</label>
 
