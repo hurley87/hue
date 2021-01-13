@@ -1,6 +1,54 @@
 import { Meteor } from 'meteor/meteor';
 import React, { useState } from 'react';
-import { Card } from "./Game/Card";
+import styled from 'styled-components';
+
+const Form = styled.form`
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 700px;
+    display: flex;
+
+    input {
+        padding: 15px 10px;
+        font-size: 14px;
+        color: #333333;
+        border: 0px none #000;
+        border-radius: 2px;
+        background: #ffffff;
+        font-family: 'Montserrat', sans-serif;
+        float: left;
+        position: relative;
+        z-index: 11;
+        flex: 2;
+        margin: 5px;
+    }
+
+    button {
+        color: white;
+        border: 0;
+        line-height: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 3px;
+        background-color: #020202;
+        font-family: 'Montserrat', sans-serif;
+        flex: 1;
+        padding: 15px 0px;
+        font-size: 14px;
+        z-index: 14;
+        margin: 5px;
+    }
+`;
+
+const Error = styled.div`
+    display: inline-block;
+    margin: auto;
+    font-size: 15px;
+    color: #c41010;
+    text-align: center;
+    width: 100%;
+`;
+
 
 export const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -18,21 +66,10 @@ export const LoginForm = () => {
         <div>
             {
                 error ? (
-                    <p>{error.reason}</p>
+                    <Error>{error.reason}</Error>
                 ) : null
             }
-            <Card size={1.5} suit={'D'} value={15} />
-            <p style={{ textAlign: 'center' }}>
-                <span style={{ fontSize: '10em', color: "#c41010" }}>🃍</span>
-                <span style={{ fontSize: '10em', color: "#c41010" }}>🃍</span>
-                <span style={{ fontSize: '10em', color: "#c41010" }}>🃍</span>
-                <span style={{ fontSize: '10em', color: "#c41010" }}>🃍</span>
-                <span style={{ fontSize: '10em', color: "#c41010" }}>🃍</span>
-            </p>
-
-            <form onSubmit={submit} className="login-form">
-                <label htmlFor="username">Username</label>
-
+            <Form onSubmit={submit} className="login-form">
                 <input
                     type="text"
                     placeholder="Username"
@@ -40,8 +77,6 @@ export const LoginForm = () => {
                     required
                     onChange={e => setUsername(e.target.value)}
                 />
-
-                <label htmlFor="password">Password</label>
 
                 <input
                     type="password"
@@ -52,7 +87,7 @@ export const LoginForm = () => {
                 />
 
                 <button type="submit">Log In</button>
-            </form>
+            </Form>
         </div>
 
     );

@@ -11,6 +11,8 @@ import { StickDealer } from "./Game/StickDealer";
 import { PlayCards } from "./Game/PlayCards";
 import { Over } from "./Game/Over";
 import { Final } from "./Game/Final";
+import { Deck } from "./Game/Deck";
+import { Suit } from "./Game/Suit";
 import _ from 'lodash';
 
 export const Game = ({ game }) => {
@@ -18,27 +20,9 @@ export const Game = ({ game }) => {
     const [disableCards, setDisableCards] = useState(null);
     const [startTime, setStartTime] = useState(null);
     const deleteGame = ({ _id }) => Meteor.call('games.remove', _id);
-    function convertValue(value) {
-        switch (value) {
-            case 14:
-                return 'A';
-            case 13:
-                return 'K';
-            case 12:
-                return 'Q';
-            case 11:
-                return 'J';
-            case 10:
-                return '10';
-            case 9:
-                return '9';
-            default:
-                return 'Joker';
-        }
-    }
-    const renderCard = (suit, value) => <span>{convertValue(value)} {suit !== "J" ? suit : null}</span>;
-    const renderSuit = suit => <img height="20px" src={`https://adsgen.s3.amazonaws.com/${suit}.png`} />;
-    const renderCover = () => <button disabled={true}>----</button>;
+    const renderCard = (suit, value) => <Deck suit={suit} value={value} />
+    const renderSuit = suit => <Suit suit={suit} />
+    const renderCover = () => <Deck suit={'FD'} value={99} />
     const dealer = () => (<span>Dealer</span>);
     const yourTurn = () => (<span>Your { game.handCount % 2 === 0 ? 'lead' : 'turn'}</span>);
     const userId = Meteor.userId();
@@ -122,6 +106,7 @@ export const Game = ({ game }) => {
     }
 
     const updateGame = (game) => {
+        console.log(game)
         Meteor.call('games.update', game, (err) => {
             if (err) setError(err)
         });

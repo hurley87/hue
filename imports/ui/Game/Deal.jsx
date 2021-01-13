@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Suit = ({ suit }) => {
+export const Deal = ({ game, userId, updateGame }) => {
 
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -42,7 +42,12 @@ export const Suit = ({ suit }) => {
 
         newGame.currentPlayer === newGame.playerOne.id ? newGame.currentPlayer = newGame.playerTwo.id : newGame.currentPlayer = newGame.playerOne.id;
         newGame.deck = shuffledDeck;
-        updateGame(newGame);
+        try {
+            updateGame(newGame);
+        } catch (e) {
+            console.log(e)
+        }
+
     }
 
     return (
