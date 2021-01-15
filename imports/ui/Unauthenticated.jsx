@@ -46,7 +46,7 @@ export const Unauthenticated = () => {
             <div>
                 <Headline>
                     <h1>hue</h1>
-                    <p>Challenge a friend to a game of <b>h</b>eads <b>u</b>p <b>e</b>uchre.</p>
+                    <p>Challenge a friend to a game of <b>h</b>eads <b>u</b>p <b>e</b>uchre</p>
                 </Headline>
                 {
                     showLogin ? <LoginForm setLoading={setLoading} /> : <SignupForm setLoading={setLoading} />
