@@ -57,8 +57,9 @@ const Main = styled.div`
         background: #ffffff;
         font-family: 'Montserrat', sans-serif;
         margin: 5px;
-        width: 100%;
+        width: 62%;
         text-align: center;
+        flex: 1;
     }
     button {
         color: white;
