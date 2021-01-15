@@ -7,4 +7,5 @@ export default ErrorStyle = css`
     color: #c41010;
     text-align: center;
     width: 100%;
+    padding-top: 5px;
 `;

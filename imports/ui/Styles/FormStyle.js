@@ -11,6 +11,13 @@ export default FormStyle = css`
         flex-direction: column;
     }
 
+    label {
+        display: block;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        padding: 20px;
+    }
+
     input {
         padding: 15px 10px;
         font-size: 14px;

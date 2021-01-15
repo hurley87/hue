@@ -19,8 +19,9 @@ export const SignupForm = ({ setLoading }) => {
             username,
             password,
         }, function (err) {
-            if (err) setError(err)
+            if (err) setError(err);
         });
+        setLoading(false);
     };
 
     function updateUsername(e) {
@@ -36,7 +37,6 @@ export const SignupForm = ({ setLoading }) => {
                 ) : null
             }
             <Form onSubmit={submit} className="login-form">
-
                 <input
                     type="text"
                     placeholder="Username"

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SignupForm } from './SignupForm';
 import { LoginForm } from './LoginForm';
+import SwitchStyle from './Styles/SwitchStyle';
 import styled from 'styled-components';
 import { Loading } from './Loading';
 
@@ -29,43 +30,25 @@ const Headline = styled.div`
     }
 `;
 
-const Button = styled.div`
-    font-size: inherit;
-    color: #141414;
-    text-decoration: underline;
-    background: none;
-    font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
-    margin: auto;
-    display: block;
-    position: relative;
-    text-align: center;
-    width: 100%;
-    cursor: pointer;
-    margin-top: 30px;
-`;
+const Switch = styled.div`${SwitchStyle}`;
 
 export const Unauthenticated = () => {
     const [showLogin, setShowLogin] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    return (
-        <>
-            {loading ? <Loading /> : (
-                <div>
-                    <Headline>
-                        <h1>Hue</h1>
-                        <p>Challenge a friend to a game of heads up euchre.</p>
-                    </Headline>
-                    {
-                        showLogin ? <LoginForm setLoading={setLoading} /> : <SignupForm setLoading={setLoading} />
-                    }
-                    <Button onClick={() => setShowLogin(!showLogin)}>
-                        {showLogin ? "Need an account?" : "Already have an account?"}
-                    </Button>
-                </div>
-            )}
-        </>
-
-    );
+    return loading ? <Loading />
+        : (
+            <div>
+                <Headline>
+                    <h1>Hue</h1>
+                    <p>Challenge a friend to a game of heads up euchre.</p>
+                </Headline>
+                {
+                    showLogin ? <LoginForm setLoading={setLoading} /> : <SignupForm setLoading={setLoading} />
+                }
+                <Switch onClick={() => setShowLogin(!showLogin)}>
+                    {showLogin ? "Need an account?" : "Already have an account?"}
+                </Switch>
+            </div>
+        )
 };

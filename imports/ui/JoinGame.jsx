@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
+import FormStyle from './Styles/FormStyle';
+import styled from 'styled-components';
+import ErrorStyle from './Styles/ErrorStyle';
 
-export const JoinGame = () => {
+const Error = styled.div`${ErrorStyle}`;
+const Form = styled.form`
+    ${FormStyle}
+    input {
+        text-align: center;
+    }
+`;
+
+export const JoinGame = ({ setLoading }) => {
     const [code, setCode] = useState('');
     const [gameId, setGameId] = useState(null);
 
@@ -20,28 +31,30 @@ export const JoinGame = () => {
     }
 
     function joinGame(gameId) {
+        setLoading(true);
         Meteor.call('games.joinGame', gameId, (error, result) => {
             if (result) console.log(result)
         });
     }
 
     return (
-        <div>
-            <div>
-                <label htmlFor="code">Enter 5-character invite code</label>
-                <input
-                    type="text"
-                    placeholder="00000"
-                    name="code"
-                    required
-                    value={code}
-                    onChange={e => updateCode(e)}
-                />
-                {
-                    !gameId ? null : gameId === 'no match' ? <span>no match</span> : <button onClick={() => joinGame(gameId)}>join game</button>
-                }
-            </div>
-        </div>
+        <>
+            {
+                gameId && gameId === 'no match' && <Error>no match</Error>
+            }
+            <p htmlFor="code">Enter 5-character invite code</p>
+            <input
+                type="text"
+                placeholder="00000"
+                name="code"
+                required
+                value={code}
+                onChange={e => updateCode(e)}
+            />
+            {
+                gameId && gameId === 'no match' && <button onClick={() => joinGame(gameId)}>join game</button>
+            }
+        </>
 
     );
 };
