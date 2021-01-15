@@ -49,11 +49,11 @@ export const JoinGame = ({ setLoading }) => {
                 name="code"
                 required
                 value={code}
-                style={{ width: gameId && gameId !== 'no match' ? '60%' : '100%' }}
+                style={{ width: gameId && gameId !== 'no match' ? '58%' : '90%' }}
                 onChange={e => updateCode(e)}
             />
             {
-                gameId && gameId !== 'no match' && <button disabled={true} onClick={() => joinGame(gameId)}>join game</button>
+                gameId && gameId !== 'no match' && <button onClick={() => joinGame(gameId)}>join game</button>
             }
         </>
 
