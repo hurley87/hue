@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SignupForm } from './SignupForm';
 import { LoginForm } from './LoginForm';
 import styled from 'styled-components';
+import { Loading } from './Loading';
 
 const Headline = styled.div`
     margin: auto;
@@ -33,7 +34,7 @@ const Button = styled.div`
     color: #141414;
     text-decoration: underline;
     background: none;
-    font-size: 20px;
+    font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     margin: auto;
     display: block;
@@ -46,19 +47,25 @@ const Button = styled.div`
 
 export const Unauthenticated = () => {
     const [showLogin, setShowLogin] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     return (
-        <div>
-            <Headline>
-                <h1>Hue</h1>
-                <p>Challenge a friend to a game of heads up euchre.</p>
-            </Headline>
-            {
-                showLogin ? <LoginForm /> : <SignupForm />
-            }
-            <Button onClick={() => setShowLogin(!showLogin)}>
-                {showLogin ? "Need an account?" : "Already have an account?"}
-            </Button>
-        </div>
+        <>
+            {loading ? <Loading /> : (
+                <div>
+                    <Headline>
+                        <h1>Hue</h1>
+                        <p>Challenge a friend to a game of heads up euchre.</p>
+                    </Headline>
+                    {
+                        showLogin ? <LoginForm setLoading={setLoading} /> : <SignupForm setLoading={setLoading} />
+                    }
+                    <Button onClick={() => setShowLogin(!showLogin)}>
+                        {showLogin ? "Need an account?" : "Already have an account?"}
+                    </Button>
+                </div>
+            )}
+        </>
+
     );
 };

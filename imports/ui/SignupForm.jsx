@@ -7,13 +7,14 @@ import styled from 'styled-components';
 const Form = styled.form`${FormStyle}`;
 const Error = styled.div`${ErrorStyle}`;
 
-export const SignupForm = () => {
+export const SignupForm = ({ setLoading }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
     const submit = e => {
         e.preventDefault();
+        setLoading(true);
         Accounts.createUser({
             username,
             password,

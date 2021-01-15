@@ -36,7 +36,7 @@ export const App = () => {
               game ? <Game game={game} /> : <NoGame user={user} />
             }
           </div>
-        ) : <Unauthenticated />
+        ) : <Unauthenticated setL />
       }
     </Main>
   )
