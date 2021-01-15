@@ -27,6 +27,11 @@ const Headline = styled.div`
         @media (max-width: 800px) {
             font-size: 24px;
         }
+
+        b {
+            background: #2f2c2a;
+            color: #fff;
+        }
     }
 `;
 
@@ -40,8 +45,8 @@ export const Unauthenticated = () => {
         : (
             <div>
                 <Headline>
-                    <h1>Hue</h1>
-                    <p>Challenge a friend to a game of heads up euchre.</p>
+                    <h1>hue</h1>
+                    <p>Challenge a friend to a game of <b>h</b>eads <b>u</b>p <b>e</b>uchre.</p>
                 </Headline>
                 {
                     showLogin ? <LoginForm setLoading={setLoading} /> : <SignupForm setLoading={setLoading} />
