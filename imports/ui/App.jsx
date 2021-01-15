@@ -4,7 +4,13 @@ import { Unauthenticated } from './Unauthenticated';
 import { Loading } from './Loading';
 import { NoGame } from './NoGame';
 import { Game } from './Game';
-import { GamesCollection } from "../db/GamesCollection"
+import { GamesCollection } from "../db/GamesCollection";
+import styled from 'styled-components';
+
+export default Main = styled.div`
+    width: 95%;
+    margin: auto;
+`;
 
 export const App = () => {
   const { user, game, isLoading } = useTracker(() => {
@@ -22,7 +28,7 @@ export const App = () => {
   });
 
   return (
-    <div className='main'>
+    <Main>
       {
         isLoading ? <Loading /> : user ? (
           <div>
@@ -32,7 +38,7 @@ export const App = () => {
           </div>
         ) : <Unauthenticated />
       }
-    </div>
+    </Main>
   )
 }
 

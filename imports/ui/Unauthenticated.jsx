@@ -21,6 +21,10 @@ const Headline = styled.div`
         font-size: 28px;
         line-height: 150%;
         font-family: 'Montserrat', sans-serif;
+
+        @media (max-width: 800px) {
+            font-size: 24px;
+        }
     }
 `;
 
@@ -35,14 +39,10 @@ const Button = styled.div`
     display: block;
     position: relative;
     text-align: center;
-    width: 100%auto;
+    width: 100%;
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: 30px;
 `;
-
-
-
-
 
 export const Unauthenticated = () => {
     const [showLogin, setShowLogin] = useState(false);
@@ -51,7 +51,7 @@ export const Unauthenticated = () => {
         <div>
             <Headline>
                 <h1>Hue</h1>
-                <p>Challenge your friend to a game of heads up euchre online.</p>
+                <p>Challenge a friend to a game of heads up euchre.</p>
             </Headline>
             {
                 showLogin ? <LoginForm /> : <SignupForm />
