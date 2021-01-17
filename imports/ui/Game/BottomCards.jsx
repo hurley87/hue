@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export const BottomCards = ({ player, renderCover, followsuit, game, handlePlayCard, renderCard, disableCards }) => {
     return (
         <div>

@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export const TopResults = ({ player, dealer, renderSuit, game }) => {
     return (
         <div>

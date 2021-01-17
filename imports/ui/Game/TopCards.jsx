@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export const TopCards = ({ player, renderCover, renderCard, game }) => {
     return (
         <div>
