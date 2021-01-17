@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
-import FormStyle from './Styles/FormStyle';
-import styled from 'styled-components';
 import ErrorStyle from './Styles/ErrorStyle';
+import styled from 'styled-components';
 
 const Error = styled.div`${ErrorStyle}`;
-const Form = styled.form`
-    ${FormStyle}
-    input {
-        text-align: center;
-    }
-`;
 
 export const JoinGame = ({ setLoading }) => {
     const [code, setCode] = useState('');

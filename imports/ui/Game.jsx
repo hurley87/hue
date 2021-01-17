@@ -13,10 +13,13 @@ import { Over } from "./Game/Over";
 import { Final } from "./Game/Final";
 import { Deck } from "./Game/Deck";
 import { Suit } from "./Game/Suit";
+import { TopCards } from "./Game/TopCards";
+import { TopResults } from "./Game/TopResults";
+import { BottomCards } from "./Game/BottomCards";
+import { BottomResults } from "./Game/BottomResults";
 import _ from 'lodash';
 
 export const Game = ({ game }) => {
-    const [error, setError] = useState(null);
     const [disableCards, setDisableCards] = useState(null);
     const [startTime, setStartTime] = useState(null);
     const deleteGame = ({ _id }) => Meteor.call('games.remove', _id);
@@ -68,11 +71,9 @@ export const Game = ({ game }) => {
         };
 
         try {
-            Meteor.call('hand.insert', hand, (error) => {
-                if (error) setError(error)
-            })
+            Meteor.call('hand.insert', hand)
         } catch (e) {
-            setError(e)
+            alert(e);
         }
     }
 
@@ -97,20 +98,13 @@ export const Game = ({ game }) => {
         };
 
         try {
-            Meteor.call('scores.insert', score, (error) => {
-                if (error) setError(error)
-            })
+            Meteor.call('scores.insert', score)
         } catch (e) {
-            setError(e)
+            alert(e)
         }
     }
 
-    const updateGame = (game) => {
-        console.log(game)
-        Meteor.call('games.update', game, (err) => {
-            if (err) setError(err)
-        });
-    };
+    const updateGame = (game) => Meteor.call('games.update', game);
 
     const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -306,67 +300,10 @@ export const Game = ({ game }) => {
         return false;
     };
 
-    const renderTopCards = (player) => (
-        <div>
-            <div className="firstRow">
-                {player.hand.map((card, i) => <span key={i}>{renderCover()}</span>)}
-            </div>
-            <div className="secondRow">
-                {(player.first.length === 1 || player.first.length === 2) && game.status === 'PlayCards' ? <span>{renderCard(player.first[0].suit, player.first[0].value)}</span> : null}
-                <span>{player.first.length === 2 ? renderCover() : null}</span>
-                {(player.second.length === 1 || player.second.length === 2) && game.status === 'PlayCards' ? <span>{renderCard(player.second[0].suit, player.second[0].value)}</span> : null}
-                <span>{player.second.length === 2 ? renderCover() : null}</span>
-                {(player.third.length === 1 || player.third.length === 2) && game.status === 'PlayCards' ? <span>{renderCard(player.third[0].suit, player.third[0].value)}</span> : null}
-                <span>{player.third.length === 2 ? renderCover() : null}</span>
-            </div>
-        </div>
-    );
-
-    const renderBottomCards = (player) => (
-        <div>
-            <div className="secondRow">
-                {(player.first.length === 1 || player.first.length === 2) && game.status === 'PlayCards' ? <button disabled={followsuit(player, player.first[0])} onClick={() => handlePlayCard(player, player.first[0], 'first')}>{renderCard(player.first[0].suit, player.first[0].value)}</button> : null}
-                <span>{player.first.length === 2 ? renderCover() : null}</span>
-                {(player.second.length === 1 || player.second.length === 2) && game.status === 'PlayCards' ? <button disabled={followsuit(player, player.second[0])} onClick={() => handlePlayCard(player, player.second[0], 'second')}>{renderCard(player.second[0].suit, player.second[0].value)}</button> : null}
-                <span>{player.second.length === 2 ? renderCover() : null}</span>
-                {(player.third.length === 1 || player.third.length === 2) && game.status === 'PlayCards' ? <button disabled={followsuit(player, player.third[0])} onClick={() => handlePlayCard(player, player.third[0], 'third')}>{renderCard(player.third[0].suit, player.third[0].value)}</button> : null}
-                <span>{player.third.length === 2 ? renderCover() : null}</span>
-            </div>
-            <div className="firstRow">
-                {player.hand.map((card, i) => (!disableCards && <button key={i} disabled={followsuit(player, card)} onClick={() => handlePlayCard(player, card, 'hand')}>{renderCard(card.suit, card.value)}</button>))}
-            </div>
-        </div>
-    );
-
-    const renderTopResults = (player) => (
-        <div>
-            <h5>{player.username} {game.dealer === player.id ? dealer() : null} {game.maker === player.id && game.trump !== "" ? (<span>{renderSuit(game.trump)}</span>) : null}</h5>
-            <h1>{player.score} <small>{player.trick}</small></h1>
-        </div>
-    );
-
-    const renderBottomResults = (player) => (
-        <div>
-            <h1>{player.score} <small>{player.trick} {game.currentPlayer === player.id && game.status === 'PlayCards' ? yourTurn() : null}</small></h1>
-            <h5>{player.username} {game.dealer === player.id ? dealer() : null} {game.maker === player.id && game.trump !== "" ? (<span>{renderSuit(game.trump)}</span>) : null}</h5>
-        </div>
-    );
-
     return (
-        <div>
-
-            {
-                error ? (
-                    <p>{error.reason}</p>
-                ) : null
-            }
-            game up to {game.limit} - {game.status}
-            <div className="resultsTop">
-                {renderTopResults(opposingPlayer)}
-            </div>
-            <div className='topCards'>
-                {renderTopCards(opposingPlayer)}
-            </div>
+        <>
+            <TopResults player={opposingPlayer} renderSuit={renderSuit} dealer={dealer} game={game} />
+            <TopCards player={opposingPlayer} renderCover={renderCover} renderCard={renderCard} game={game} />
             {game.status === 'InviteSent' && <InviteSent game={game} />}
             {game.status === 'Deal' && <Deal game={game} updateGame={updateGame} userId={userId} />}
             {game.status === 'Order' && <Order game={game} updateGame={updateGame} renderCard={renderCard} userId={userId} />}
@@ -378,17 +315,10 @@ export const Game = ({ game }) => {
             {game.status === 'PlayCards' && <PlayCards game={game} renderCard={renderCard} />}
             {game.status === 'Over' && <Over game={game} updateGame={updateGame} userId={userId} recordHand={recordHand} />}
             {game.status === 'Final' && <Final game={game} endGame={endGame} />}
-            <div className='bottomCards'>
-                {renderBottomCards(currentPlayer)}
-            </div>
-            <div className="resultsBottom">
-                {renderBottomResults(currentPlayer)}
-            </div>
+            <BottomCards player={currentPlayer} renderCover={renderCover} followsuit={followsuit} game={game} handlePlayCard={handlePlayCard} renderCard={renderCard} disableCards={disableCards} />
+            <BottomResults player={currentPlayer} game={game} dealer={dealer} renderSuit={renderSuit} yourTurn={yourTurn} />
             <button onClick={() => deleteGame({ _id: game._id })}>delete</button>
-            <div className="diamond circled">
-                <div className="square"></div>
-            </div>
-        </div>
+        </>
 
     );
 };

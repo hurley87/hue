@@ -14,11 +14,9 @@ export const LoginForm = ({ setLoading }) => {
 
     const submit = e => {
         e.preventDefault();
-        setLoading(true);
         Meteor.loginWithPassword(username, password, function (err) {
             if (err) {
                 setError(err);
-                setLoading(false);
             }
         });
     };
