@@ -17,17 +17,84 @@ import { TopCards } from "./Game/TopCards";
 import { TopResults } from "./Game/TopResults";
 import { BottomCards } from "./Game/BottomCards";
 import { BottomResults } from "./Game/BottomResults";
+import styled from 'styled-components';
+import TransparantBtnStyle from './Styles/TransparantBtnStyle';
 import _ from 'lodash';
+
+const EndGame = styled.button`${TransparantBtnStyle}`;
+
+const GameStyle = styled.div`
+    height: 99vh;
+    padding-top: 9px;
+`;
+
+const Main = styled.div`
+    width: 95%;
+    margin: auto;
+    max-width: 500px;
+    font-size: 14px;
+    text-align: center;
+
+
+    p {
+        color: #2f2c2a;
+        font-size: 18px;
+        line-height: 150%;
+        font-family: 'Montserrat', sans-serif;
+        text-align: center;
+
+    }
+
+    input {
+        padding: 15px 10px;
+        font-size: 14px;
+        color: #333333;
+        border: 0px none #000;
+        border-radius: 2px;
+        background: #ffffff;
+        font-family: 'Montserrat', sans-serif;
+        margin: 5px;
+        width: 62%;
+        text-align: center;
+        flex: 1;
+    }
+    button {
+        color: white;
+        border: 0;
+        line-height: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 3px;
+        background-color: #020202;
+        font-family: 'Montserrat', sans-serif;
+        flex: 1;
+        padding: 15px 0px;
+        font-size: 14px;
+        z-index: 14;
+        margin: 5px;
+        width: 30%;
+    }
+`;
+
 
 export const Game = ({ game }) => {
     const [disableCards, setDisableCards] = useState(null);
     const [startTime, setStartTime] = useState(null);
-    const deleteGame = ({ _id }) => Meteor.call('games.remove', _id);
+    const deleteGame = ({ _id }) => {
+        const confirmed = window.confirm(
+            "Are you sure you want to end this game?"
+          );
+      
+          if (!confirmed) {
+            return;
+          }
+      
+        Meteor.call('games.remove', _id);
+    } 
     const renderCard = (suit, value) => <Deck suit={suit} value={value} />
     const renderSuit = suit => <Suit suit={suit} />
     const renderCover = () => <Deck suit={'FD'} value={99} />
-    const dealer = () => (<span>Dealer</span>);
-    const yourTurn = () => (<span>Your { game.handCount % 2 === 0 ? 'lead' : 'turn'}</span>);
+    const yourTurn = () => (<b>Your { game.handCount % 2 === 0 ? 'lead' : 'turn'}</b>);
     const userId = Meteor.userId();
     let currentPlayer = game.playerOne;
     let opposingPlayer = game.playerTwo;
@@ -301,9 +368,11 @@ export const Game = ({ game }) => {
     };
 
     return (
-        <>
-            <TopResults player={opposingPlayer} renderSuit={renderSuit} dealer={dealer} game={game} />
+        <GameStyle>
+            <EndGame onClick={() => deleteGame({ _id: game._id })}>end game</EndGame>
+            <TopResults player={opposingPlayer} renderSuit={renderSuit} game={game} yourTurn={yourTurn} />
             <TopCards player={opposingPlayer} renderCover={renderCover} renderCard={renderCard} game={game} />
+            <Main>
             {game.status === 'InviteSent' && <InviteSent game={game} />}
             {game.status === 'Deal' && <Deal game={game} updateGame={updateGame} userId={userId} />}
             {game.status === 'Order' && <Order game={game} updateGame={updateGame} renderCard={renderCard} userId={userId} />}
@@ -315,10 +384,10 @@ export const Game = ({ game }) => {
             {game.status === 'PlayCards' && <PlayCards game={game} renderCard={renderCard} />}
             {game.status === 'Over' && <Over game={game} updateGame={updateGame} userId={userId} recordHand={recordHand} />}
             {game.status === 'Final' && <Final game={game} endGame={endGame} />}
+            </Main>
             <BottomCards player={currentPlayer} renderCover={renderCover} followsuit={followsuit} game={game} handlePlayCard={handlePlayCard} renderCard={renderCard} disableCards={disableCards} />
-            <BottomResults player={currentPlayer} game={game} dealer={dealer} renderSuit={renderSuit} yourTurn={yourTurn} />
-            <button onClick={() => deleteGame({ _id: game._id })}>delete</button>
-        </>
+            <BottomResults player={currentPlayer} game={game} renderSuit={renderSuit} yourTurn={yourTurn} />
+        </GameStyle>
 
     );
 };

@@ -1,4 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const DealStyle = styled.div`
+    padding-top: 100px;
+
+    button {
+        margin: auto;
+        display: block;
+    }
+}
+`;
 
 export const Deal = ({ game, userId, updateGame }) => {
 
@@ -51,29 +62,19 @@ export const Deal = ({ game, userId, updateGame }) => {
     }
 
     return (
-        <div>
+        <DealStyle>
             {
                 game.currentPlayer === userId ? (
                     <div>
-                        {
-                            game.currentPlayer === game.playerOne.id ? (
-                                <div>
-                                    <h5>Deal the cards to start the game</h5>
-                                </div>
-                            ) : (
-                                    <div>
-                                        <h5>Deal the cards to start the game</h5>
-                                    </div>
-                                )
-                        }
-                        <button onClick={() => handleDeal()}>Deal</button>
+                        { game.currentPlayer === game.playerOne.id ? <p>Deal the cards to start the game</p> : <p>Deal the cards to start the game</p>}
+                        <button style={{display: 'block', margin: 'auto'}} onClick={() => handleDeal()}>Deal</button>
                     </div>
                 ) : (
                         <div>
-                            <h5>Waiting on  {game.currentPlayer === game.playerOne.id ? game.playerOne.username : game.playerTwo.username} to deal the cards</h5>
+                            <p>Waiting on  {game.currentPlayer === game.playerOne.id ? game.playerOne.username : game.playerTwo.username} to deal the cards</p>
                         </div>
                     )}
-        </div>
+        </DealStyle>
 
     );
 };

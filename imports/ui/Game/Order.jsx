@@ -1,4 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Main = styled.div`
+    text-align: center;
+`;
+
 
 export const Order = ({ game, updateGame, renderCard, userId }) => {
 
@@ -38,15 +44,14 @@ export const Order = ({ game, updateGame, renderCard, userId }) => {
     };
 
     return (
-        <div>
-            <p>{game.status}</p>
+        <Main>
             {
                 game.currentPlayer === userId ?
                     userId === game.playerOne.id ? orderCurrentUi() : orderCurrentUi()
                     :
                     userId === game.playerOne.id ? orderOpposingUi() : orderOpposingUi()
             }
-        </div>
+        </Main>
 
     );
 };

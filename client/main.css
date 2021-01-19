@@ -4,4 +4,12 @@ body {
   background-color: #fbf6f1;
   position: relative;
   overflow-x: hidden;
+  font-family: "Montserrat", sans-serif;
+}
+
+h2,
+h3,
+h4,
+h5 {
+  margin: 0px;
 }

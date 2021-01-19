@@ -42,9 +42,9 @@ export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId
                         <div>
                             Discard:
                             {
-                                player.hand.map((card, i) => (<button key={i} onClick={() => handleOrderDiscard(card.suit, card.value)}>{renderCard(card.suit, card.value)}</button>))
+                                player.hand.map((card, i) => (<span key={i} onClick={() => handleOrderDiscard(card.suit, card.value)}>{renderCard(card.suit, card.value)}</span>))
                             }
-                            <button onClick={() => handleOrderDiscard(game.deck[0].suit, game.deck[0].value)}>{renderCard(game.deck[0].suit, game.deck[0].value)}</button>
+                            <span onClick={() => handleOrderDiscard(game.deck[0].suit, game.deck[0].value)}>{renderCard(game.deck[0].suit, game.deck[0].value)}</span>
                         </div>
                     )
             }

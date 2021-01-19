@@ -3,6 +3,7 @@ import { JoinGame } from './JoinGame';
 import { NewGame } from './NewGame';
 import styled from 'styled-components';
 import SwitchStyle from './Styles/SwitchStyle';
+import TransparantBtnStyle from './Styles/TransparantBtnStyle';
 import { Loading } from './Loading';
 
 const Nav = styled.div`
@@ -21,16 +22,7 @@ const Nav = styled.div`
     }
 
     button {
-        float: right;
-        color: #141414;
-        padding: 5px 10px;
-        border: 2px solid #e8e2dc;
-        text-decoration: none;
-        border-radius: 3px;
-        font-family: 'Montserrat', sans-serif;
-        display: block;
-        background-color: transparent;
-        cursor: pointer;
+        ${TransparantBtnStyle}
     }
 `;
 
@@ -98,7 +90,7 @@ export const NoGame = ({ user }) => {
                     showNewGame ? <NewGame setLoading={setLoading} /> : <JoinGame setLoading={setLoading} />
                 }
             </Main>
-            <Switch onClick={() => setShowNewGame(!showNewGame)}>{showNewGame ? "Have a code?" : "Create your own game"}</Switch>
+            <Switch onClick={() => setShowNewGame(!showNewGame)}>{showNewGame ? "Have an invite code?" : "Create your own game"}</Switch>
         </div>
     );
 };
