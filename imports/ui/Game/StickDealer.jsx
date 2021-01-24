@@ -1,4 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
+import MagicRainbowButton from '../MagicRainbowButton';
+
+const WrappedButton = styled(MagicRainbowButton)`
+    width: 20% !important;
+`;
 
 
 export const StickDealer = ({ game, updateGame, renderSuit, userId }) => {
@@ -22,16 +28,16 @@ export const StickDealer = ({ game, updateGame, renderSuit, userId }) => {
 
     const stdCurrentUi = () => (
         <div>
-            <h5>What suit do you want to make it?</h5>
+            <p>What suit do you want to make it?</p>
             {
-                ['H', 'S', 'C', 'D'].map((suit, i) => (<button key={i} onClick={() => handleStdMake(suit)}>{renderSuit(suit)}</button>))
+                ['H', 'S', 'C', 'D'].map((suit, i) => (<WrappedButton style={{backgroundColor: ['H','D'].includes(suit) ? 'red' : null}} key={i} onClick={() => handleStdMake(suit)}>{renderSuit(suit)}</WrappedButton>))
             }
         </div>
     );
 
     const stdOpposingUi = (player) => (
         <div>
-            <h5>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} to make it</h5>
+            <p>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} to make it</p>
         </div>
     );
 

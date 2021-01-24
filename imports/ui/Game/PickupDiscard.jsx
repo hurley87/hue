@@ -1,5 +1,14 @@
 import React from 'react';
 import _ from 'lodash';
+import styled from 'styled-components';
+import MagicRainbowButton from '../MagicRainbowButton';
+
+const WrappedButton = styled(MagicRainbowButton)`
+    background-color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+`;
+
 
 export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId }) => {
 
@@ -33,18 +42,18 @@ export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId
             {
                 game.trump === 'J' ? (
                     <div>
-                        <h5>Make it trump!</h5>
+                        <p>Make it trump!</p>
                         {
                             ['H', 'S', 'C', 'D'].map((suit, i) => (<button key={i} onClick={() => handleMakeTrump(suit)}>{renderSuit(suit)}</button>))
                         }
                     </div>
                 ) : (
                         <div>
-                            Discard:
+                            Choose a card to discard: <br />
                             {
-                                player.hand.map((card, i) => (<span key={i} onClick={() => handleOrderDiscard(card.suit, card.value)}>{renderCard(card.suit, card.value)}</span>))
+                                player.hand.map((card, i) => (<WrappedButton key={i} onClick={() => handleOrderDiscard(card.suit, card.value)}>{renderCard(card.suit, card.value)}</WrappedButton>))
                             }
-                            <span onClick={() => handleOrderDiscard(game.deck[0].suit, game.deck[0].value)}>{renderCard(game.deck[0].suit, game.deck[0].value)}</span>
+                            <WrappedButton onClick={() => handleOrderDiscard(game.deck[0].suit, game.deck[0].value)}>{renderCard(game.deck[0].suit, game.deck[0].value)}</WrappedButton>
                         </div>
                     )
             }
@@ -53,7 +62,7 @@ export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId
 
     const pickupDiscardOpposingUi = (player) => (
         <div>
-            <h5>Waiting on {player.id === game.playerOne.id ? game.playerOne.username : game.playerTwo.username} to discard</h5>
+            <p>Waiting on {player.id === game.playerOne.id ? game.playerOne.username : game.playerTwo.username} to discard</p>
         </div>
     );
 

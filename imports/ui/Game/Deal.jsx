@@ -1,14 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import MagicRainbowButton from '../MagicRainbowButton';
 
-const DealStyle = styled.div`
-    padding-top: 100px;
-
-    button {
-        margin: auto;
-        display: block;
-    }
-}
+const WrappedButton = styled(MagicRainbowButton)`
+    margin: auto !important;
 `;
 
 export const Deal = ({ game, userId, updateGame }) => {
@@ -62,19 +57,19 @@ export const Deal = ({ game, userId, updateGame }) => {
     }
 
     return (
-        <DealStyle>
+        <div>
             {
                 game.currentPlayer === userId ? (
                     <div>
                         { game.currentPlayer === game.playerOne.id ? <p>Deal the cards to start the game</p> : <p>Deal the cards to start the game</p>}
-                        <button style={{display: 'block', margin: 'auto'}} onClick={() => handleDeal()}>Deal</button>
+                        <WrappedButton style={{display: 'block', margin: 'auto'}} onClick={() => handleDeal()}>Deal</WrappedButton>
                     </div>
                 ) : (
                         <div>
                             <p>Waiting on  {game.currentPlayer === game.playerOne.id ? game.playerOne.username : game.playerTwo.username} to deal the cards</p>
                         </div>
                     )}
-        </DealStyle>
+        </div>
 
     );
 };

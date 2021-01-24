@@ -1,4 +1,10 @@
 import React from 'react';
+import MagicRainbowButton from '../MagicRainbowButton';
+import styled from 'styled-components';
+
+const WrappedButton = styled(MagicRainbowButton)`
+`;
+
 
 export const Over = ({ game, updateGame, userId, recordHand }) => {
     const nextHand = () => {
@@ -70,24 +76,24 @@ export const Over = ({ game, updateGame, userId, recordHand }) => {
             if (game.maker === game.playerOne.id) {
                 const points = game.playerOne.trick - game.playerTwo.trick;
                 return (
-                    <h5>You win and earn {points} {points === 1 ? 'point' : 'points'}</h5>
+                    <p>You win and earn {points} {points === 1 ? 'point' : 'points'}</p>
                 );
             }
             const points = (game.playerOne.trick - game.playerTwo.trick) * 2;
             return (
-                <h5>You euchred {game.playerTwo.username} and earned {points} {points === 1 ? 'point' : 'points'}</h5>
+                <p>You euchred {game.playerTwo.username} and earned {points} {points === 1 ? 'point' : 'points'}</p>
             );
 
         } else {
             if (game.maker === game.playerTwo.id) {
                 const points = game.playerTwo.trick - game.playerOne.trick;
                 return (
-                    <h5>{game.playerTwo.username} wins and earns {points} {points === 1 ? 'point' : 'points'}</h5>
+                    <p>{game.playerTwo.username} wins and earns {points} {points === 1 ? 'point' : 'points'}</p>
                 );
             } else {
                 const points = (game.playerTwo.trick - game.playerOne.trick) * 2;
                 return (
-                    <h5>{game.playerTwo.username} euchred you and earned {points} {points === 1 ? 'point' : 'points'}</h5>
+                    <p>{game.playerTwo.username} euchred you and earned {points} {points === 1 ? 'point' : 'points'}</p>
                 );
             }
         }
@@ -99,24 +105,24 @@ export const Over = ({ game, updateGame, userId, recordHand }) => {
             if (game.maker === game.playerTwo.id) {
                 const points = game.playerTwo.trick - game.playerOne.trick;
                 return (
-                    <h5>You win and earned {points} {points === 1 ? 'point' : 'points'}</h5>
+                    <p>You win and earned {points} {points === 1 ? 'point' : 'points'}</p>
                 );
             }
             const points = (game.playerTwo.trick - game.playerOne.trick) * 2;
             return (
-                <h5>You euchred {game.playerOne.username} and earned {points} {points === 1 ? 'point' : 'points'}</h5>
+                <p>You euchred {game.playerOne.username} and earned {points} {points === 1 ? 'point' : 'points'}</p>
             );
 
         } else {
             if (game.maker === game.playerOne.id) {
                 const points = game.playerOne.trick - game.playerTwo.trick;
                 return (
-                    <h5>{game.playerOne.username} wins and earns {points} {points === 1 ? 'point' : 'points'}</h5>
+                    <p>{game.playerOne.username} wins and earns {points} {points === 1 ? 'point' : 'points'}</p>
                 );
             } else {
                 const points = (game.playerOne.trick - game.playerTwo.trick) * 2;
                 return (
-                    <h5>{game.playerOne.username} euchred you and earned {points} {points === 1 ? 'point' : 'points'}</h5>
+                    <p>{game.playerOne.username} euchred you and earned {points} {points === 1 ? 'point' : 'points'}</p>
                 );
             }
         }
@@ -125,7 +131,7 @@ export const Over = ({ game, updateGame, userId, recordHand }) => {
     return (
         <div>
             {userId === game.playerOne.id ? renderPlayerOneOver() : renderPlayerTwoOver()}
-            <button onClick={() => nextHand()}>Next Hand</button>
+            <WrappedButton onClick={() => nextHand()}>Next Hand</WrappedButton>
         </div>
 
     );

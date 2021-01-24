@@ -3,6 +3,12 @@ import { Accounts } from 'meteor/accounts-base';
 import ErrorStyle from './Styles/ErrorStyle';
 import FormStyle from './Styles/FormStyle';
 import styled from 'styled-components';
+import MagicRainbowButton from './MagicRainbowButton';
+
+const WrappedButton = styled(MagicRainbowButton)`
+
+`;
+
 
 const Form = styled.form`${FormStyle}`;
 const Error = styled.div`${ErrorStyle}`;
@@ -53,7 +59,7 @@ export const SignupForm = ({ setLoading }) => {
                     onChange={e => setPassword(e.target.value)}
                 />
 
-                <button type="submit">Sign Up</button>
+                <WrappedButton type="submit">Sign Up</WrappedButton>
             </Form>
         </div>
 

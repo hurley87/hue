@@ -1,5 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
+import MagicRainbowButton from '../MagicRainbowButton';
 
+const WrappedButton = styled(MagicRainbowButton)`
+    width: 20% !important;
+`;
+
+const PassButton = styled(WrappedButton)`
+    height: 62px;
+    position: relative;
+    bottom: 2px;
+`;
 
 export const Make = ({ game, updateGame, renderSuit, userId }) => {
 
@@ -32,17 +43,17 @@ export const Make = ({ game, updateGame, renderSuit, userId }) => {
 
     const makeCurrentUi = () => (
         <div>
-            <h5>What suit do you want to make it?</h5>
+            <p>What suit do you want to make it?</p>
             {
-                ['H', 'S', 'C', 'D'].map((suit, i) => suit !== game.deck[0].suit ? (<button key={i} onClick={() => handleMakeSuit(suit)}>{renderSuit(suit)}</button>) : null)
+                ['H', 'S', 'C', 'D'].map((suit, i) => suit !== game.deck[0].suit ? (<WrappedButton key={i} onClick={() => handleMakeSuit(suit)}>{renderSuit(suit)}</WrappedButton>) : null)
             }
-            <button onClick={() => handleMakeSuit('pass')}>pass</button>
+            <PassButton onClick={() => handleMakeSuit('pass')}>pass</PassButton>
         </div>
     );
 
     const makeOpposingUi = (player) => (
         <div>
-            <h5>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} to make it</h5>
+            <p>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} to make it</p>
         </div>
     );
 

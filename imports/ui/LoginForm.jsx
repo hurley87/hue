@@ -3,6 +3,11 @@ import React, { useState } from 'react';
 import ErrorStyle from './Styles/ErrorStyle';
 import FormStyle from './Styles/FormStyle';
 import styled from 'styled-components';
+import MagicRainbowButton from './MagicRainbowButton';
+
+const WrappedButton = styled(MagicRainbowButton)`
+
+`;
 
 const Form = styled.form`${FormStyle}`;
 const Error = styled.div`${ErrorStyle}`;
@@ -45,7 +50,7 @@ export const LoginForm = ({ setLoading }) => {
                     onChange={e => setPassword(e.target.value)}
                 />
 
-                <button type="submit">Log In</button>
+                <WrappedButton type="submit">Log In</WrappedButton>
             </Form>
         </div>
 

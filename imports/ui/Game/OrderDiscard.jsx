@@ -1,5 +1,13 @@
 import React from 'react';
 import _ from 'lodash';
+import styled from 'styled-components';
+import MagicRainbowButton from '../MagicRainbowButton';
+
+const WrappedButton = styled(MagicRainbowButton)`
+    background-color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+`;
 
 export const OrderDiscard = ({ game, updateGame, renderCard, userId }) => {
 
@@ -26,9 +34,9 @@ export const OrderDiscard = ({ game, updateGame, renderCard, userId }) => {
         <div>
             You were ordered to pickup! Discard:
             {
-                player.hand.map((card, i) => (<button key={i} onClick={() => handleOrderDiscard(card.suit, card.value)}>{renderCard(card.suit, card.value)}</button>))
+                player.hand.map((card, i) => (<WrappedButton key={i} onClick={() => handleOrderDiscard(card.suit, card.value)}>{renderCard(card.suit, card.value)}</WrappedButton>))
             }
-            <button onClick={() => handleOrderDiscard(game.deck[0].suit, game.deck[0].value)}>{renderCard(game.deck[0].suit, game.deck[0].value)}</button>
+            <WrappedButton onClick={() => handleOrderDiscard(game.deck[0].suit, game.deck[0].value)}>{renderCard(game.deck[0].suit, game.deck[0].value)}</WrappedButton>
         </div>
     );
 

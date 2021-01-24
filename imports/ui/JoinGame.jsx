@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import ErrorStyle from './Styles/ErrorStyle';
 import styled from 'styled-components';
+import MagicRainbowButton from './MagicRainbowButton';
+
+const WrappedButton = styled(MagicRainbowButton)`
+
+`;
 
 const Error = styled.div`${ErrorStyle}`;
 
@@ -46,7 +51,7 @@ export const JoinGame = ({ setLoading }) => {
                 onChange={e => updateCode(e)}
             />
             {
-                gameId && gameId !== 'no match' && <button onClick={() => joinGame(gameId)}>join game</button>
+                gameId && gameId !== 'no match' && <WrappedButton onClick={() => joinGame(gameId)}>join game</WrappedButton>
             }
         </>
 

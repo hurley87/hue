@@ -1,11 +1,18 @@
 import React  from 'react';
 import useClipboard from "react-use-clipboard";
+import styled from 'styled-components';
+import MagicRainbowButton from '../MagicRainbowButton';
+
+const WrappedButton = styled(MagicRainbowButton)`
+
+`;
+
 
 export const InviteSent = ({ game }) => {
     const [isCopied, setCopied] = useClipboard(game.inviteCode);
 
     return (
-        <div style={{paddingTop: "100px"}}>
+        <div>
             <p>Share this code with a friend</p>
             <input
                 type="text"
@@ -14,7 +21,7 @@ export const InviteSent = ({ game }) => {
                 defaultValue={game.inviteCode}
                 style={{ width: "58%"}}
             />
-            { document.queryCommandSupported('copy') && <button onClick={setCopied}>{isCopied ? "copied!" : "copy"}</button> }
+            { document.queryCommandSupported('copy') && <WrappedButton onClick={setCopied}>{isCopied ? "copied!" : "copy"}</WrappedButton> }
             
         </div>
 

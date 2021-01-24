@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import FormStyle from './Styles/FormStyle';
-import styled from 'styled-components';
 import ErrorStyle from './Styles/ErrorStyle';
+import styled from 'styled-components';
+import MagicRainbowButton from './MagicRainbowButton';
 
-const Error = styled.div`${ErrorStyle}`;
-const Form = styled.form`
-    ${FormStyle}
-    input {
-        text-align: center;
-    }
+const WrappedButton = styled(MagicRainbowButton)`
+
 `;
 
+
+const Error = styled.div`${ErrorStyle}`;
 
 export const NewGame = ({ setLoading }) => {
     const [error, setError] = useState(null);
@@ -36,9 +34,9 @@ export const NewGame = ({ setLoading }) => {
                 ) : null
             }
             <p>How many points to win?</p>
-            <button onClick={() => createGame(40)}>40</button>
-            <button onClick={() => createGame(80)}>80</button>
-            <button onClick={() => createGame(120)}>120</button>
+            <WrappedButton onClick={() => createGame(40)}>40</WrappedButton>
+            <WrappedButton onClick={() => createGame(80)}>80</WrappedButton>
+            <WrappedButton onClick={() => createGame(120)}>120</WrappedButton>
         </div>
 
     );

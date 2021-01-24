@@ -24,25 +24,33 @@ import _ from 'lodash';
 const EndGame = styled.button`${TransparantBtnStyle}`;
 
 const GameStyle = styled.div`
-    height: 99vh;
-    padding-top: 9px;
+    height: 97.5vh;
+    padding-top: 12px;
 `;
 
 const Main = styled.div`
     width: 95%;
     margin: auto;
     max-width: 500px;
-    font-size: 14px;
     text-align: center;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 3px;
+    font-weight: 700;
+    z-index: 1;
+    position: relative;
+    bottom: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+    @media only screen and (max-width: 600px) {
+        bottom: 0px;
+    }
 
     p {
         color: #2f2c2a;
-        font-size: 18px;
         line-height: 150%;
         font-family: 'Montserrat', sans-serif;
         text-align: center;
-
     }
 
     input {
@@ -78,7 +86,6 @@ const Main = styled.div`
 
 
 export const Game = ({ game }) => {
-    const [disableCards, setDisableCards] = useState(null);
     const [startTime, setStartTime] = useState(null);
     const deleteGame = ({ _id }) => {
         const confirmed = window.confirm(
@@ -94,7 +101,6 @@ export const Game = ({ game }) => {
     const renderCard = (suit, value) => <Deck suit={suit} value={value} />
     const renderSuit = suit => <Suit suit={suit} />
     const renderCover = () => <Deck suit={'FD'} value={99} />
-    const yourTurn = () => (<b>Your { game.handCount % 2 === 0 ? 'lead' : 'turn'}</b>);
     const userId = Meteor.userId();
     let currentPlayer = game.playerOne;
     let opposingPlayer = game.playerTwo;
@@ -105,7 +111,6 @@ export const Game = ({ game }) => {
 
     useEffect(() => {
         async function onLoad() {
-            setDisableCards(false)
             setStartTime(new Date())
         }
         onLoad();
@@ -173,10 +178,7 @@ export const Game = ({ game }) => {
 
     const updateGame = (game) => Meteor.call('games.update', game);
 
-    const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
     async function handlePlayCard(player, card, hand) {
-        setDisableCards(true)
 
         const newGame = game;
         if (game.handCount % 2 !== 0) {
@@ -291,8 +293,6 @@ export const Game = ({ game }) => {
             newGame.handCount = game.handCount + 1;
         }
         updateGame(newGame);
-        await pause(200);
-        setDisableCards(false);
     };
 
     const convertCard = (trump, card) => {
@@ -370,7 +370,7 @@ export const Game = ({ game }) => {
     return (
         <GameStyle>
             <EndGame onClick={() => deleteGame({ _id: game._id })}>end game</EndGame>
-            <TopResults player={opposingPlayer} renderSuit={renderSuit} game={game} yourTurn={yourTurn} />
+            <TopResults player={opposingPlayer} renderSuit={renderSuit} game={game} />
             <TopCards player={opposingPlayer} renderCover={renderCover} renderCard={renderCard} game={game} />
             <Main>
             {game.status === 'InviteSent' && <InviteSent game={game} />}
@@ -381,12 +381,12 @@ export const Game = ({ game }) => {
             {game.status === 'PickupDiscard' && <PickupDiscard game={game} updateGame={updateGame} renderCard={renderCard} renderSuit={renderSuit} userId={userId} />}
             {game.status === 'Make' && <Make game={game} updateGame={updateGame} renderSuit={renderSuit} userId={userId} />}
             {game.status === 'StickDealer' && <StickDealer game={game} updateGame={updateGame} renderSuit={renderSuit} userId={userId} />}
-            {game.status === 'PlayCards' && <PlayCards game={game} renderCard={renderCard} />}
+            {game.status === 'PlayCards' && <PlayCards game={game} renderCard={renderCard} player={currentPlayer} opposingPlayer={opposingPlayer} />}
             {game.status === 'Over' && <Over game={game} updateGame={updateGame} userId={userId} recordHand={recordHand} />}
             {game.status === 'Final' && <Final game={game} endGame={endGame} />}
             </Main>
-            <BottomCards player={currentPlayer} renderCover={renderCover} followsuit={followsuit} game={game} handlePlayCard={handlePlayCard} renderCard={renderCard} disableCards={disableCards} />
-            <BottomResults player={currentPlayer} game={game} renderSuit={renderSuit} yourTurn={yourTurn} />
+            <BottomCards player={currentPlayer} followsuit={followsuit} game={game} handlePlayCard={handlePlayCard} renderCard={renderCard} />
+            <BottomResults player={currentPlayer} game={game} renderSuit={renderSuit}/>
         </GameStyle>
 
     );

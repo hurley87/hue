@@ -1,5 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import MagicRainbowButton from '../MagicRainbowButton';
+
+const WrappedButton = styled(MagicRainbowButton)`
+
+`;
 
 const Main = styled.div`
     text-align: center;
@@ -10,9 +15,9 @@ export const Order = ({ game, updateGame, renderCard, userId }) => {
 
     const orderCurrentUi = () => (
         <div>
-            Do you want to order up the {game.deck[0].value === 15 ? renderCard(game.deck[1].suit, game.deck[1].value) : renderCard(game.deck[0].suit, game.deck[0].value)} or pass?
-            <button onClick={() => handleOrderPickup()}>Order</button>
-            <button onClick={() => handleOrderPass()}>Pass</button>
+            Order up the {game.deck[0].value === 15 ? renderCard(game.deck[1].suit, game.deck[1].value) : renderCard(game.deck[0].suit, game.deck[0].value)} or pass? <br/>
+            <WrappedButton onClick={() => handleOrderPickup()}>Order</WrappedButton>
+            <WrappedButton onClick={() => handleOrderPass()}>Pass</WrappedButton>
         </div>
     );
 
