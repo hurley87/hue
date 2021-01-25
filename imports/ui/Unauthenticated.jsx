@@ -8,6 +8,7 @@ import ConfettiGenerator from "canvas-confetti";
 
 const Headline = styled.div`
     margin: auto;
+    width: 95%;
     max-width: 1000px;
     text-align: center;
 
@@ -43,10 +44,14 @@ const Canvas = styled.canvas`
 `;
 
 const Content = styled.div`
-    width: 95%auto;
+    width: 95%;
     max-width: 800px;
     margin: auto;
     margin-top: 100px;
+
+    a {
+        color: #2f2c2a;
+    }
 `;
 
 var duration = 2 * 1000;
@@ -105,9 +110,8 @@ export const Unauthenticated = () => {
                 </Switch>
                 <Content>
                     <p>Welcome! 👋</p>
-                    <p>My parents taught my brother and me how to play Euchre when we were young. I have fond memories of the four of us playing. They taught us unwritten rules like “don’t trump your partner’s ace” and “kill as you go”. Since then, I’ve never really had to think about what card to play next. When playing becomes second nature, socializing becomes the focus and cards are played periphery of the chatter. </p>
-                    <p>I moved home shortly after university to learn how to code. That’s what happens when you’re part of the boomerang generation and can’t put your degree directly to use. While living at home, my Mom and I invented a two person Euchre game, one that we still play, years later. It's called Hue. It's almost the same as the 4-person version with these differences,</p>
-                    <br/>
+                    <p>My parents taught my brother and me how to play Euchre when we were young. I have fond memories of the four of us playing. They taught us unwritten rules like “don’t trump your partner’s ace” and “kill as you go”. Since then, I’ve always been on the lookout for a game.</p>
+                    <p>I moved home shortly after university to learn how to code and while I was there, my Mom and I invented a two person Euchre game, one that we still play, years later. It's called Hue. It's almost the same as the 4-person version with these differences,</p>
                     <ol>
                         <li>Each player is dealt 11 cards as follows. The first 5 cards are hand held and remain hidden from the opponent. Next, each player is dealt a row of three cards, face down, with another row of three cards on top, facing up.</li>
                         <br/>
@@ -117,15 +121,13 @@ export const Unauthenticated = () => {
                         <br/>
                         <li>Out of convenience we used an old cribbage board to keep score. One player wins when they get 120 points.</li>
                     </ol>
-                    <br/>
-                    <p>What we ended up creating was a version we actually enjoyed more than the original. It’s slightly more complex and certainly more intimate. The combination makes for a more addictive experience. Before I left home I tried to build an online version of the game but didn’t get very far. I just didn’t have the skills to create a one-on-one real-time online game at the time.</p>
-                    <p>However, years later, I did have the skills and finally found the time to build it. I finished the first version just in time for Christmas but, like most MVPs, it was buggy and the user experience made it hard to play. Mom and I did end up playing a few games online but quickly went back to playing in person. It may always be a game that is more fun when played offline. The cards typically become background noise when I’m playing a game of Hue with her. </p>
-                    <p>Fast forward another couple of years and I haven’t been able to play a game with my Mom since the pandemic started. I have to admit, I have the urge to play a game with her at Christmas and hopefully, this time it’s better. The goal is to bring Heads Up Euchre online in a way that creates a similar experience to the one played in real life. Not easy but it’s possible. </p>
-                    <p>We never called it Hue (short for Heads Up Euchre). After all these years we never did find a name for it. I’d like to one day use the data I collect from the game to create an artificially intelligent euchre player named Hue that can’t be beaten. That’ll be tough though, because my Mom’s pretty good. </p>
+                    <p>What we ended up creating was a version we actually enjoyed more than the original. It’s slightly more complex and certainly more intimate. The combination makes for a more addictive experience. Before I left home I tried to build an online version of the game but didn’t get very far. I just didn’t have the skills to create a one-on-one real-time online.</p>
+                    <p>However, years later, I did have the skills and finally found the time to build it. I finished the first version just in time for Christmas but it was buggy and the user experience made it hard to play. Mom and I did end up playing a few games online but quickly went back to playing in person. It may always be a game that is more fun when played offline. The cards typically become background noise when I’m playing a game of Hue with her. </p>
+                    <p>Fast forward another couple of years and I haven’t been able to play a game with my Mom since the pandemic started. This is my latest attempt at bringing Heads Up Euchre online in a way that creates a similar experience to the one played in real life. </p>
                     <p>Enjoy!</p>
                     <br/>
                     <br/>
-                    <p style={{textAlign: 'center'}}>Made with ❤️ in Kinston, Ontario</p>
+                    <p style={{textAlign: 'center'}}>Created by <a href="https://www.davidhurley.ca/">David Hurley</a></p>
                 </Content>
             </div>
         )
