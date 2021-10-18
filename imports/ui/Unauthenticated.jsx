@@ -89,7 +89,7 @@ export const Unauthenticated = () => {
             <div>
                 <Canvas id="my-canvas"></Canvas>
                 <Headline>
-                    <h1>hue</h1>
+                    <h1>Hue</h1>
                     <p>Challenge a friend to a game of <b>h</b>eads <b>u</b>p <b>e</b>uchre</p>
                 </Headline>
                 {
