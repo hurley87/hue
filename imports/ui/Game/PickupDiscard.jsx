@@ -3,9 +3,14 @@ import _ from 'lodash';
 import styled from 'styled-components';
 
 const WrappedButton = styled.span`
-    background-color: #fff;
     border-radius: 3px;
     cursor: pointer;
+`;
+
+const TrumpButton = styled.button`
+    background-color: #fff !important;
+    border: 1px solid #000 !important;
+    width: 20% !important;
 `;
 
 
@@ -43,7 +48,7 @@ export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId
                     <div>
                         <p>Make it trump!</p>
                         {
-                            ['H', 'S', 'C', 'D'].map((suit, i) => (<button key={i} onClick={() => handleMakeTrump(suit)}>{renderSuit(suit)}</button>))
+                            ['H', 'S', 'C', 'D'].map((suit, i) => (<TrumpButton key={i} onClick={() => handleMakeTrump(suit)}>{renderSuit(suit)}</TrumpButton>))
                         }
                     </div>
                 ) : (
