@@ -3,16 +3,11 @@ import React, { useState } from 'react';
 import ErrorStyle from './Styles/ErrorStyle';
 import FormStyle from './Styles/FormStyle';
 import styled from 'styled-components';
-import MagicRainbowButton from './MagicRainbowButton';
-
-const WrappedButton = styled(MagicRainbowButton)`
-
-`;
 
 const Form = styled.form`${FormStyle}`;
 const Error = styled.div`${ErrorStyle}`;
 
-export const LoginForm = ({ setLoading }) => {
+export const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -50,7 +45,7 @@ export const LoginForm = ({ setLoading }) => {
                     onChange={e => setPassword(e.target.value)}
                 />
 
-                <WrappedButton type="submit">Log In</WrappedButton>
+                <button type="submit">Log In</button>
             </Form>
         </div>
 

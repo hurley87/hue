@@ -1,10 +1,4 @@
 import React from 'react';
-import MagicRainbowButton from '../MagicRainbowButton';
-import styled from 'styled-components';
-
-const WrappedButton = styled(MagicRainbowButton)`
-`;
-
 
 export const Over = ({ game, updateGame, userId, recordHand }) => {
     const nextHand = () => {
@@ -131,7 +125,7 @@ export const Over = ({ game, updateGame, userId, recordHand }) => {
     return (
         <div>
             {userId === game.playerOne.id ? renderPlayerOneOver() : renderPlayerTwoOver()}
-            <WrappedButton onClick={() => nextHand()}>Next Hand</WrappedButton>
+            <button onClick={() => nextHand()}>Next Hand</button>
         </div>
 
     );

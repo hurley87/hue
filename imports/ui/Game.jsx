@@ -33,14 +33,13 @@ const Main = styled.div`
     margin: auto;
     max-width: 500px;
     text-align: center;
-    padding: 10px;
+    padding: 30px;
     background-color: #fff;
     border-radius: 3px;
     font-weight: 700;
     z-index: 1;
     position: relative;
     bottom: 25px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     @media only screen and (max-width: 600px) {
         bottom: 0px;

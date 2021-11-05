@@ -1,9 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 import styled from 'styled-components';
-import MagicRainbowButton from '../MagicRainbowButton';
 
-const WrappedButton = styled(MagicRainbowButton)`
+const WrappedButton = styled.span`
     background-color: #fff;
     border-radius: 3px;
     cursor: pointer;

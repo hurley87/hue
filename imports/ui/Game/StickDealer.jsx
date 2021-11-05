@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import MagicRainbowButton from '../MagicRainbowButton';
 
-const WrappedButton = styled(MagicRainbowButton)`
+const WrappedButton = styled.button`
     width: 20% !important;
+    background-color: #fff !important;
+    border: 1px solid #000 !important;
 `;
 
 

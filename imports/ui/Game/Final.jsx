@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import MagicRainbowButton from '../MagicRainbowButton';
 
-const WrappedButton = styled(MagicRainbowButton)`
+const WrappedButton = styled.button`
     margin: auto !important;
 `;
-
 
 export const Final = ({ game, endGame }) => {
     return (

@@ -24,6 +24,8 @@ const Results = styled.div`
         color: white;
         padding: 2px 4px;
         border-radius: 3px;
+        margin-right: 3px;
+
     }
 }
 `;
