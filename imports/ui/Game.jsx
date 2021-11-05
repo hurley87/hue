@@ -33,7 +33,7 @@ const Main = styled.div`
     margin: auto;
     max-width: 500px;
     text-align: center;
-    padding: 30px;
+    padding: 20px;
     background-color: #fff;
     border-radius: 3px;
     font-weight: 700;
@@ -153,11 +153,13 @@ export const Game = ({ game }) => {
         let winner = game.playerOne.id;
         let loser = game.playerTwo.id;
         let winnerScore = game.playerOne.score;
+        let loserScore = game.playerTwo.score;
 
         if (game.playerTwo.score > game.playerOne.score) {
             winner = game.playerTwo.id;
             loser = game.playerOne.id;
             winnerScore = game.playerTwo.score;
+            loserScore = game.playerOne.score;
         }
 
         const score = {
