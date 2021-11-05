@@ -2,9 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import styled from 'styled-components';
 
-const WrappedButton = styled.button`
-    background-color: #fff;
-    border-radius: 3px;
+const WrappedButton = styled.span`
     cursor: pointer;
 `;
 

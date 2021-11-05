@@ -66,7 +66,7 @@ export const BottomResults = ({ player, game, renderSuit }) => {
                 <br />
                 <div>
                     <ol>
-                        <li>Each player is dealt 11 cards as follows. The first 5 cards are hand held and remain hidden from the opponent. Next, each player is dealt a row of three cards, face down, with another row of three cards on top, facing up.</li>
+                        <li>Each player is dealt 11 cards. The first 5 cards are hand held and remain hidden from the opponent. Next, each player is dealt a row of three cards, face down, with another row of three cards on top, facing up.</li>
                         <br />
                         <li>You get one trick for each exchange you win. That’s 11 possible tricks you can win each hand. Points are calculated as the difference between the higher score and lower score. If I won 8 tricks and you won 3, I would get 5 points in that hand. That’s if I made it trump. If you made it trump I’d get 10 points. You double the amount of points on a Euchre. </li>
                         <br />
