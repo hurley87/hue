@@ -29,7 +29,7 @@ export const OrderDiscard = ({ game, updateGame, renderCard, userId }) => {
 
     const orderDiscardCurrentUi = (player) => (
         <div>
-            <p>You were ordered to pickup! Discard:</p>
+            <p style={{marginBottom: '0px'}}>You were ordered to pickup! Discard:</p>
             {
                 player.hand.map((card, i) => (<WrappedButton key={i} onClick={() => handleOrderDiscard(card.suit, card.value)}>{renderCard(card.suit, card.value)}</WrappedButton>))
             }
