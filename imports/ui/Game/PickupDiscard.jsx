@@ -5,11 +5,12 @@ import styled from 'styled-components';
 const WrappedButton = styled.span`
     border-radius: 3px;
     cursor: pointer;
+    margin: 2px;
 `;
 
 const TrumpButton = styled.button`
     background-color: #fff !important;
-    border: 1px solid #000 !important;
+    border: 1px solid #1A0033 !important;
     width: 20% !important;
 `;
 

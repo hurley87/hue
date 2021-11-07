@@ -31,15 +31,15 @@ const GameStyle = styled.div`
 const Main = styled.div`
     width: 95%;
     margin: auto;
-    max-width: 500px;
+    max-width: 600px;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     background-color: #fff;
     border-radius: 3px;
     font-weight: 700;
     z-index: 1;
     position: relative;
-    bottom: 25px;
+    bottom: 50px;
 
     @media only screen and (max-width: 600px) {
         bottom: 0px;
@@ -56,7 +56,7 @@ const Main = styled.div`
         padding: 15px 10px;
         font-size: 14px;
         color: #333333;
-        border: 0px none #000;
+        border: 0px none #1A0033;
         border-radius: 2px;
         background: #ffffff;
         font-family: 'Montserrat', sans-serif;

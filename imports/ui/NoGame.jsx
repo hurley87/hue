@@ -44,7 +44,7 @@ const Main = styled.div`
         padding: 15px 10px;
         font-size: 14px;
         color: #333333;
-        border: 0px none #000;
+        border: 0px none #1A0033;
         border-radius: 2px;
         background: #ffffff;
         font-family: 'Montserrat', sans-serif;

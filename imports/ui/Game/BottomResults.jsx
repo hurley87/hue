@@ -15,19 +15,18 @@ const Close = styled.button`
 
 const Results = styled.div`
     position: absolute;
-    bottom: 10px;
+    bottom: 0px;
     width: 95%;
     margin: auto;
 
     b {
-        background-color:#2f2c2a;
+        background-color:#B366FF;
         color: white;
         padding: 2px 4px;
         border-radius: 3px;
         margin-right: 3px;
 
     }
-}
 `;
 
 const customStyles = {

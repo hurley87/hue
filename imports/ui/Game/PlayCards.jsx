@@ -11,12 +11,24 @@ export const PlayCards = ({ game, renderCard, player, opposingPlayer }) => {
             {
                 game.handCount === 0 ? null :
                     game.handCount % 2 === 0 ? (
+                        <>
                         <p>
-                            {renderCard(game.deck[game.deck.length - 2].suit, game.deck[game.deck.length - 2].value)} lead and
+                            {renderCard(game.deck[game.deck.length - 2].suit, game.deck[game.deck.length - 2].value)} lead and{" "}
                             {renderCard(game.deck[game.deck.length - 1].suit, game.deck[game.deck.length - 1].value)} played
                         </p>
+                        <p>
+                            {game.currentPlayer === player.id ? yourTurn(game) : `Waiting on ${opposingPlayer.username} to play a card.`}
+                        </p>
+                        </>
+
                     ) : (
-                            <p>{renderCard(game.deck[game.deck.length - 1].suit, game.deck[game.deck.length - 1].value)} lead</p>
+                        <>
+                        <p>{renderCard(game.deck[game.deck.length - 1].suit, game.deck[game.deck.length - 1].value)} lead</p>
+                        <p>
+                            {game.currentPlayer === player.id ? yourTurn(game) : `Waiting on ${opposingPlayer.username} to play a card.`}
+                        </p>
+                        </>
+                            
                         )
             }
         </div>

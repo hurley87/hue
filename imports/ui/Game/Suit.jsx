@@ -2,7 +2,7 @@ import React from 'react';
 
 const red = "#c41010";
 const black = "#444444";
-const fontSize = "1.5em";
+const fontSize = "1.2em";
 
 
 export const Suit = ({ suit }) => (

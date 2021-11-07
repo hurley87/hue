@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Results = styled.div`
     b {
-        background-color:#2f2c2a;
+        background-color:#B366FF;
         color: white;
         padding: 2px 4px;
         border-radius: 3px;
@@ -11,11 +11,9 @@ const Results = styled.div`
     }
     h5 {
         position: relative;
-        top: 4px;
+        top: 0px;
         pointer-events: none;
-    }
-}
-`;
+    }`;
 
 export const TopResults = ({ player, renderSuit, game }) => {
     return (

@@ -73,7 +73,7 @@ export const Unauthenticated = () => {
                 x: Math.random(),
                 y: (Math.random() * skew) - 0.2
               },
-              colors: ['#000'],
+              colors: ['#1A0033'],
               shapes: ['circle'],
               scalar: randomInRange(0.4, 1)
             });
