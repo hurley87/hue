@@ -4,6 +4,10 @@ import styled from 'styled-components';
 const WrappedButton = styled.button`
     width: 20% !important;
     background-color: #fff !important;
+    
+    &:hover {
+        border: 1px solid #B366FF !important;
+    }
 `;
 
 const PassButton = styled.button`
