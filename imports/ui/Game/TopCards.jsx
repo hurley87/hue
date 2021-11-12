@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Top = styled.div`
     text-align: center;
-    width: 95%;
+    width: 75%;
     margin: auto;
     min-height: 200px;
     position: relative;
