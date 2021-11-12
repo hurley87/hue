@@ -16,6 +16,7 @@ export const PlayCards = ({ game, renderCard, player, opposingPlayer }) => {
                             {renderCard(game.deck[game.deck.length - 2]?.suit, game.deck[game.deck.length - 2]?.value)} lead and{" "}
                             {renderCard(game.deck[game.deck.length - 1]?.suit, game.deck[game.deck.length - 1]?.value)} played
                         </p>
+                        <br/>
                         <p>
                             {game.currentPlayer === player.id ? yourTurn(game) : `Waiting on ${opposingPlayer.username} to play a card.`}
                         </p>
@@ -24,6 +25,7 @@ export const PlayCards = ({ game, renderCard, player, opposingPlayer }) => {
                     ) : (
                         <>
                         <p>{renderCard(game.deck[game.deck.length - 1]?.suit, game.deck[game.deck.length - 1]?.value)} lead</p>
+                        <br/>
                         <p>
                             {game.currentPlayer === player.id ? yourTurn(game) : `Waiting on ${opposingPlayer.username} to play a card.`}
                         </p>

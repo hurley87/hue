@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const WrappedButton = styled.button`
     width: 20% !important;
     background-color: #fff !important;
-    
+    border: 1px solid #fff !important;
     &:hover {
         border: 1px solid #B366FF !important;
     }
