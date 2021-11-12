@@ -9,7 +9,7 @@ export const JoinGame = ({ setLoading }) => {
     const [gameId, setGameId] = useState(null);
 
     function updateCode(e) {
-        const codeInput = e.target.value;
+        const codeInput = e.target?.value;
         if (codeInput.length === 5) {
             Meteor.call('games.findGameUsingCode', codeInput, (error, result) => {
                 if (result) setGameId(result)

@@ -27,17 +27,17 @@ export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId
         const newGame = game;
 
         if (newGame.currentPlayer === newGame.playerOne.id) {
-            newGame.playerOne.hand.push({ suit: game.deck[0].suit, value: game.deck[0].value });
+            newGame.playerOne.hand.push({ suit: game.deck[0]?.suit, value: game.deck[0]?.value });
             const index = _.findIndex(newGame.playerOne.hand, { suit, value });
             newGame.playerOne.hand.splice(index, 1);
         } else {
-            newGame.playerTwo.hand.push({ suit: game.deck[0].suit, value: game.deck[0].value });
+            newGame.playerTwo.hand.push({ suit: game.deck[0]?.suit, value: game.deck[0]?.value });
             const index = _.findIndex(newGame.playerTwo.hand, { suit, value });
             newGame.playerTwo.hand.splice(index, 1);
         }
 
         newGame.dealer === newGame.playerOne.id ? newGame.currentPlayer = newGame.playerTwo.id : newGame.currentPlayer = newGame.playerOne.id;
-        if (newGame.deck[0].suit !== 'J') newGame.trump = newGame.deck[0].suit;
+        if (newGame.deck[0]?.suit !== 'J') newGame.trump = newGame.deck[0]?.suit;
         newGame.status = 'PlayCards';
         updateGame(newGame);
     };
@@ -56,9 +56,9 @@ export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId
                         <div>
                             Choose a card to discard: <br />
                             {
-                                player.hand.map((card, i) => (<WrappedButton key={i} onClick={() => handleOrderDiscard(card.suit, card.value)}>{renderCard(card.suit, card.value)}</WrappedButton>))
+                                player.hand.map((card, i) => (<WrappedButton key={i} onClick={() => handleOrderDiscard(card?.suit, card?.value)}>{renderCard(card?.suit, card?.value)}</WrappedButton>))
                             }
-                            <WrappedButton onClick={() => handleOrderDiscard(game.deck[0].suit, game.deck[0].value)}>{renderCard(game.deck[0].suit, game.deck[0].value)}</WrappedButton>
+                            <WrappedButton onClick={() => handleOrderDiscard(game.deck[0]?.suit, game.deck[0]?.value)}>{renderCard(game.deck[0]?.suit, game.deck[0]?.value)}</WrappedButton>
                         </div>
                     )
             }

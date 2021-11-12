@@ -34,7 +34,7 @@ export const LoginForm = () => {
                     placeholder="Username"
                     name="username"
                     required
-                    onChange={e => setUsername(e.target.value)}
+                    onChange={e => setUsername(e.target?.value)}
                 />
 
                 <input
@@ -42,7 +42,7 @@ export const LoginForm = () => {
                     placeholder="Password"
                     name="password"
                     required
-                    onChange={e => setPassword(e.target.value)}
+                    onChange={e => setPassword(e.target?.value)}
                 />
 
                 <button type="submit">Log In</button>

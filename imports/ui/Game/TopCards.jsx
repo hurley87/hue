@@ -33,11 +33,11 @@ export const TopCards = ({ player, renderCover, renderCard, game }) => {
                 <p>{player.hand.map((card, i) => <Button key={i}>{renderCover()}</Button>)}</p>
             </div>
             <SecondRow className="secondRow">
-                {(player.first.length === 1 || player.first.length === 2) && game.status === 'PlayCards' ? <Button style={{position: 'relative', left: '60px'}}>{renderCard(player.first[0].suit, player.first[0].value)}</Button> : null}
+                {(player.first.length === 1 || player.first.length === 2) && game.status === 'PlayCards' ? <Button style={{position: 'relative', left: '60px'}}>{renderCard(player.first[0]?.suit, player.first[0]?.value)}</Button> : null}
                 {player.first.length === 2 ? <Button>{renderCover()}</Button> : null}
-                {(player.second.length === 1 || player.second.length === 2) && game.status === 'PlayCards' ? <Button style={{position: 'relative', left: '60px'}}>{renderCard(player.second[0].suit, player.second[0].value)}</Button> : null}
+                {(player.second.length === 1 || player.second.length === 2) && game.status === 'PlayCards' ? <Button style={{position: 'relative', left: '60px'}}>{renderCard(player.second[0]?.suit, player.second[0]?.value)}</Button> : null}
                 {player.second.length === 2 ? <Button>{renderCover()}</Button> : null}
-                {(player.third.length === 1 || player.third.length === 2) && game.status === 'PlayCards' ? <Button style={{position: 'relative', left: '60px'}}>{renderCard(player.third[0].suit, player.third[0].value)}</Button> : null}
+                {(player.third.length === 1 || player.third.length === 2) && game.status === 'PlayCards' ? <Button style={{position: 'relative', left: '60px'}}>{renderCard(player.third[0]?.suit, player.third[0]?.value)}</Button> : null}
                 {player.third.length === 2 ? <Button>{renderCover()}</Button> : null}
             </SecondRow>
         </Top>

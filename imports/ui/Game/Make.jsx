@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const WrappedButton = styled.button`
     width: 20% !important;
     background-color: #fff !important;
-    border: 1px solid #B366FF !important;
 `;
 
 const PassButton = styled.button`
@@ -46,7 +45,7 @@ export const Make = ({ game, updateGame, renderSuit, userId }) => {
         <div>
             <p>What suit do you want to make it?</p>
             {
-                ['H', 'S', 'C', 'D'].map((suit, i) => suit !== game.deck[0].suit ? (<WrappedButton key={i} onClick={() => handleMakeSuit(suit)}>{renderSuit(suit)}</WrappedButton>) : null)
+                ['H', 'S', 'C', 'D'].map((suit, i) => suit !== game.deck[0]?.suit ? (<WrappedButton key={i} onClick={() => handleMakeSuit(suit)}>{renderSuit(suit)}</WrappedButton>) : null)
             }
             <PassButton onClick={() => handleMakeSuit('pass')}>pass</PassButton>
         </div>

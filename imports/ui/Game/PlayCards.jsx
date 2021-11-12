@@ -13,8 +13,8 @@ export const PlayCards = ({ game, renderCard, player, opposingPlayer }) => {
                     game.handCount % 2 === 0 ? (
                         <>
                         <p>
-                            {renderCard(game.deck[game.deck.length - 2].suit, game.deck[game.deck.length - 2].value)} lead and{" "}
-                            {renderCard(game.deck[game.deck.length - 1].suit, game.deck[game.deck.length - 1].value)} played
+                            {renderCard(game.deck[game.deck.length - 2]?.suit, game.deck[game.deck.length - 2]?.value)} lead and{" "}
+                            {renderCard(game.deck[game.deck.length - 1]?.suit, game.deck[game.deck.length - 1]?.value)} played
                         </p>
                         <p>
                             {game.currentPlayer === player.id ? yourTurn(game) : `Waiting on ${opposingPlayer.username} to play a card.`}
@@ -23,7 +23,7 @@ export const PlayCards = ({ game, renderCard, player, opposingPlayer }) => {
 
                     ) : (
                         <>
-                        <p>{renderCard(game.deck[game.deck.length - 1].suit, game.deck[game.deck.length - 1].value)} lead</p>
+                        <p>{renderCard(game.deck[game.deck.length - 1]?.suit, game.deck[game.deck.length - 1]?.value)} lead</p>
                         <p>
                             {game.currentPlayer === player.id ? yourTurn(game) : `Waiting on ${opposingPlayer.username} to play a card.`}
                         </p>

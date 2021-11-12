@@ -26,7 +26,7 @@ export const SignupForm = ({ setLoading }) => {
     };
 
     function updateUsername(e) {
-        setUsername(e.target.value);
+        setUsername(e.target?.value);
         setError(null);
     }
 
@@ -51,7 +51,7 @@ export const SignupForm = ({ setLoading }) => {
                     placeholder="Password"
                     name="password"
                     required
-                    onChange={e => setPassword(e.target.value)}
+                    onChange={e => setPassword(e.target?.value)}
                 />
 
                 <button type="submit">Sign Up</button>
