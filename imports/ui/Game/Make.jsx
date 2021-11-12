@@ -5,13 +5,14 @@ const WrappedButton = styled.button`
     width: 20% !important;
     background-color: #fff !important;
     border: 1px solid #fff !important;
+    padding: 6px !important;
+
     &:hover {
         border: 1px solid #B366FF !important;
     }
 `;
 
 const PassButton = styled.button`
-    height: 57px;
     position: relative;
     bottom: 2px;
 `;
@@ -46,8 +47,8 @@ export const Make = ({ game, updateGame, renderSuit, userId }) => {
     };
 
     const makeCurrentUi = () => (
-        <div>
-            <p>What suit do you want to make it?</p>
+        <div style={{paddingTop: "30px"}}>
+            What suit do you want to make it?
             {
                 ['H', 'S', 'C', 'D'].map((suit, i) => suit !== game.deck[0]?.suit ? (<WrappedButton key={i} onClick={() => handleMakeSuit(suit)}>{renderSuit(suit)}</WrappedButton>) : null)
             }

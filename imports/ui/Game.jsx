@@ -31,9 +31,9 @@ const GameStyle = styled.div`
 const Main = styled.div`
     width: 95%;
     margin: auto;
-    max-width: 600px;
+    max-width: 800px;
     text-align: center;
-    padding: 10px;
+    padding: 30px;
     border-radius: 3px;
     font-weight: 700;
     z-index: 1;
@@ -71,14 +71,15 @@ const Main = styled.div`
         text-decoration: none;
         cursor: pointer;
         border-radius: 3px;
-        background-color: #020202;
+        background-color: #B366FF;
         font-family: 'Montserrat', sans-serif;
         flex: 1;
-        padding: 15px 0px;
+        padding: 10px 0px;
         font-size: 14px;
         z-index: 14;
         margin: 5px;
         width: 30%;
+        max-width: 100px;
     }
     img {
         position: relative;

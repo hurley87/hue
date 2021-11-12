@@ -99,24 +99,24 @@ export const Over = ({ game, updateGame, userId, recordHand }) => {
             if (game.maker === game.playerTwo.id) {
                 const points = game.playerTwo.trick - game.playerOne.trick;
                 return (
-                    <p>You win and earned {points} {points === 1 ? 'point' : 'points'}</p>
+                    <p>You win and earned {points} {points === 1 ? 'point' : 'points'}.</p>
                 );
             }
             const points = (game.playerTwo.trick - game.playerOne.trick) * 2;
             return (
-                <p>You euchred {game.playerOne.username} and earned {points} {points === 1 ? 'point' : 'points'}</p>
+                <p>You euchred {game.playerOne.username} and earned {points} {points === 1 ? 'point' : 'points'}.</p>
             );
 
         } else {
             if (game.maker === game.playerOne.id) {
                 const points = game.playerOne.trick - game.playerTwo.trick;
                 return (
-                    <p>{game.playerOne.username} wins and earns {points} {points === 1 ? 'point' : 'points'}</p>
+                    <p>{game.playerOne.username} wins and earns {points} {points === 1 ? 'point' : 'points'}.</p>
                 );
             } else {
                 const points = (game.playerOne.trick - game.playerTwo.trick) * 2;
                 return (
-                    <p>{game.playerOne.username} euchred you and earned {points} {points === 1 ? 'point' : 'points'}</p>
+                    <p>{game.playerOne.username} euchred you and earned {points} {points === 1 ? 'point' : 'points'}.</p>
                 );
             }
         }

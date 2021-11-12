@@ -1,4 +1,5 @@
 import React from 'react';
+import { Suit } from "./Suit";
 
 export const Pickup = ({ game, updateGame, renderCard, userId }) => {
 
@@ -17,7 +18,7 @@ export const Pickup = ({ game, updateGame, renderCard, userId }) => {
 
     const pickupCurrentUi = () => (
         <div>
-            Want to pick up the {renderCard(game.deck[0]?.suit, game.deck[0]?.value)} or pass? <br/ ><br/ >
+            Pick up the {renderCard(game.deck[0]?.suit, game.deck[0]?.value)} and make trump <Suit suit={game.deck[0]?.suit} />  or pass?{" "}
             <button onClick={() => handlePickup('make')}>Make</button>
             <button onClick={() => handlePickup('pass')}>Pass</button>
         </div>

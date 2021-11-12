@@ -54,7 +54,7 @@ export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId
                     </div>
                 ) : (
                         <div>
-                            Choose a card to discard: <br />
+                            Choose a card to discard:
                             {
                                 player.hand.map((card, i) => (<WrappedButton key={i} onClick={() => handleOrderDiscard(card?.suit, card?.value)}>{renderCard(card?.suit, card?.value)}</WrappedButton>))
                             }

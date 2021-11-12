@@ -5,6 +5,8 @@ const WrappedButton = styled.button`
     width: 20% !important;
     background-color: #fff !important;
     border: 1px solid #fff !important;
+    padding: 6px !important;
+
     &:hover {
         border: 1px solid #B366FF !important;
     }
@@ -31,8 +33,8 @@ export const StickDealer = ({ game, updateGame, renderSuit, userId }) => {
     };
 
     const stdCurrentUi = () => (
-        <div>
-            <p>What suit do you want to make it?</p>
+        <div style={{paddingTop: "30px"}}>
+            Choose a suit:{" "}
             {
                 ['H', 'S', 'C', 'D'].map((suit, i) => (<WrappedButton style={{backgroundColor: ['H','D'].includes(suit) ? 'red' : null}} key={i} onClick={() => handleStdMake(suit)}>{renderSuit(suit)}</WrappedButton>))
             }
