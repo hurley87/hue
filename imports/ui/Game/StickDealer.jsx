@@ -43,7 +43,7 @@ export const StickDealer = ({ game, updateGame, renderSuit, userId }) => {
 
     const stdOpposingUi = (player) => (
         <div>
-            <p>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} to make it</p>
+            <p style={{paddingTop: "30px"}}>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} .</p>
         </div>
     );
 

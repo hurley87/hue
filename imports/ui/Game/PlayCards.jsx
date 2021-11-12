@@ -21,7 +21,7 @@ export const PlayCards = ({ game, renderCard, player, opposingPlayer }) => {
 
                     ) : (
                         
-                        <p>
+                        <p style={{paaddingTop: "30px"}}>
                             {renderCard(game.deck[game.deck.length - 1]?.suit, game.deck[game.deck.length - 1]?.value)} lead.{" "}
                             {game.currentPlayer === player.id ? yourTurn(game) : `It's ${opposingPlayer.username}'${opposingPlayer.username.slice(-1) !== 's' ? "s" : " "} turn.`}
                         </p>
