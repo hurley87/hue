@@ -17,7 +17,7 @@ export const Pickup = ({ game, updateGame, renderCard, userId }) => {
 
     const pickupCurrentUi = () => (
         <div>
-            Want to pick up the {renderCard(game.deck[0].suit, game.deck[0].value)} or pass? <br/ >
+            Want to pick up the {renderCard(game.deck[0].suit, game.deck[0].value)} or pass? <br/ ><br/ >
             <button onClick={() => handlePickup('make')}>Make</button>
             <button onClick={() => handlePickup('pass')}>Pass</button>
         </div>

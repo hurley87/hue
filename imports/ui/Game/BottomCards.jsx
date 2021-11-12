@@ -10,20 +10,21 @@ const Bottom = styled.div`
 `;
 
 const Button = styled.button`
-    background-color: #fff;
+    
     border-radius: 5px;
     cursor: pointer;
     margin: 5px;
     padding: 0px;
     border: none;
     z-index: 2;
-    border: 5px solid #B366FF;
+    border: 1px solid #B366FF;
     padding: 2.8px;
     padding-bottom: 0px;
+    background-color: #B366FF;
 
     &:disabled {
         background-color: #fbf6f1;
-        border: 5px solid #1A0033;
+        border: 1px solid #1A0033;
         cursor: default;
     }
 `;

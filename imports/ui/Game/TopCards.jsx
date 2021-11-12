@@ -21,7 +21,7 @@ const Button = styled.button`
     border-radius: 3px;
     margin: 5px;
     padding: 0px;
-    border: 5px solid #1A0033;
+    border: 1px solid #1A0033;
     padding: 2.8px;
     padding-bottom: 0px;
 `;

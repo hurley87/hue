@@ -34,7 +34,6 @@ const Main = styled.div`
     max-width: 600px;
     text-align: center;
     padding: 10px;
-    background-color: #fff;
     border-radius: 3px;
     font-weight: 700;
     z-index: 1;
@@ -80,6 +79,10 @@ const Main = styled.div`
         z-index: 14;
         margin: 5px;
         width: 30%;
+    }
+    img {
+        position: relative;
+        top: 10px;
     }
 `;
 
