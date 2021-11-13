@@ -28,8 +28,8 @@ export const NewGame = ({ setLoading }) => {
                 ) : null
             }
             <p>How many points to win?</p>
-            <button onClick={() => createGame(40)}>40</button>
-            <button onClick={() => createGame(80)}>80</button>
+            <button onClick={() => createGame(10)}>10</button>
+            <button onClick={() => createGame(80)}>60</button>
             <button onClick={() => createGame(120)}>120</button>
         </div>
 

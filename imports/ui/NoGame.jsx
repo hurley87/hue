@@ -18,7 +18,7 @@ const Nav = styled.div`
         float: left;
         font-weight: 700;
         margin: 0px;
-        font-size: 26px;
+        font-size: 16px;
     }
 
     button {
@@ -41,7 +41,7 @@ const Main = styled.div`
 
     }
     input {
-        padding: 15px 10px;
+        padding: 10px;
         font-size: 14px;
         color: #333333;
         border: 0px none #1A0033;
@@ -60,14 +60,15 @@ const Main = styled.div`
         text-decoration: none;
         cursor: pointer;
         border-radius: 3px;
-        background-color: #020202;
+        background-color: #B366FF;
         font-family: 'Montserrat', sans-serif;
         flex: 1;
-        padding: 15px 0px;
+        padding: 10px 0px;
         font-size: 14px;
         z-index: 14;
         margin: 5px;
         width: 30%;
+        max-width: 300px;
     }
 `;
 

@@ -19,7 +19,7 @@ export default FormStyle = css`
   }
 
   input {
-    padding: 15px 10px;
+    padding: 10px;
     font-size: 14px;
     color: #333333;
     border: 0px none #1a0033;

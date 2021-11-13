@@ -5,9 +5,11 @@ const yourTurn = (game) => (<b>Your { game.handCount % 2 === 0 ? 'lead.' : 'turn
 export const PlayCards = ({ game, renderCard, player, opposingPlayer }) => {
     return (
         <div>
+            <p>
             {
                 game.handCount === 0 && <p>{game.currentPlayer === player.id ? yourTurn(game) : `It's ${opposingPlayer.username}'${opposingPlayer.username.slice(-1) !== 's' ? "s" : " "} turn.`}</p>
             }
+            </p>
             {
                 game.handCount === 0 ? null :
                     game.handCount % 2 === 0 ? (

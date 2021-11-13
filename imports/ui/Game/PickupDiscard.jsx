@@ -6,8 +6,15 @@ const WrappedButton = styled.span`
     border-radius: 3px;
     cursor: pointer;
     margin: 2px;
+    border: 3px solid #B366FF !important;
+    display: inline-block;
+    padding-top: 0px;
+    padding-bottom: 3px;
+    &:hover {
+        background-color: #B366FF;
+    }
 `;
-
+ 
 const TrumpButton = styled.button`
     background-color: #fff !important;
     border: 1px solid #1A0033 !important;
@@ -66,7 +73,7 @@ export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId
     );
 
     const pickupDiscardOpposingUi = (player) => (
-        <div>
+        <div style={{paddingTop: "30px"}}>
             <p>Waiting on {player.id === game.playerOne.id ? game.playerOne.username : game.playerTwo.username} to discard</p>
         </div>
     );
