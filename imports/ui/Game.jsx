@@ -33,7 +33,7 @@ const Main = styled.div`
     margin: auto;
     max-width: 800px;
     text-align: center;
-    padding: 30px;
+    padding: 60px;
     border-radius: 3px;
     font-weight: 700;
     z-index: 1;

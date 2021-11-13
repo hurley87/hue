@@ -47,7 +47,7 @@ export const Make = ({ game, updateGame, renderSuit, userId }) => {
     };
 
     const makeCurrentUi = () => (
-        <div style={{paddingTop: "30px"}}>
+        <div style={{paddingTop: "60px"}}>
             What suit do you want to make it?
             {
                 ['H', 'S', 'C', 'D'].map((suit, i) => suit !== game.deck[0]?.suit ? (<WrappedButton key={i} onClick={() => handleMakeSuit(suit)}>{renderSuit(suit)}</WrappedButton>) : null)
@@ -58,7 +58,7 @@ export const Make = ({ game, updateGame, renderSuit, userId }) => {
 
     const makeOpposingUi = (player) => (
         <div>
-            <p  style={{paddingTop: "30px"}}>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} to make it.</p>
+            <p  style={{paddingTop: "60px"}}>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} to make it.</p>
         </div>
     );
 

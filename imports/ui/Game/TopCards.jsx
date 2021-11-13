@@ -12,7 +12,6 @@ const Top = styled.div`
 
 const SecondRow = styled.div`
     position: relative;
-    bottom: 20px;
     right: 50px;
 `;
 

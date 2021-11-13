@@ -33,7 +33,7 @@ export const StickDealer = ({ game, updateGame, renderSuit, userId }) => {
     };
 
     const stdCurrentUi = () => (
-        <div style={{paddingTop: "30px"}}>
+        <div style={{paddingTop: "60px"}}>
             Choose a suit:{" "}
             {
                 ['H', 'S', 'C', 'D'].map((suit, i) => (<WrappedButton style={{backgroundColor: ['H','D'].includes(suit) ? 'red' : null}} key={i} onClick={() => handleStdMake(suit)}>{renderSuit(suit)}</WrappedButton>))
@@ -43,7 +43,7 @@ export const StickDealer = ({ game, updateGame, renderSuit, userId }) => {
 
     const stdOpposingUi = (player) => (
         <div>
-            <p style={{paddingTop: "30px"}}>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} .</p>
+            <p style={{paddingTop: "60px"}}>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} .</p>
         </div>
     );
 

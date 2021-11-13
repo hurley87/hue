@@ -16,7 +16,7 @@ const Headline = styled.div`
         font-size: 80px;
         line-height: 96px;
         font-family: "Domine";
-        margin-bottom: 30px;
+        margin-bottom: 60px;
         color: #292827;
         margin-top: 0px;
     }
