@@ -73,7 +73,7 @@ export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId
     );
 
     const pickupDiscardOpposingUi = (player) => (
-        <div style={{paddingTop: "30px"}}>
+        <div style={{paddingTop: "60px"}}>
             <p>Waiting on {player.id === game.playerOne.id ? game.playerOne.username : game.playerTwo.username} to discard</p>
         </div>
     );

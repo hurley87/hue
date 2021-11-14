@@ -31,7 +31,7 @@ const Button = styled.button`
 
 const SecondRow = styled.div`
     position: relative;
-    right: 60px;
+    right: 32px;
 `;
 
 export const BottomCards = ({ player, followsuit, game, handlePlayCard, renderCard }) => {

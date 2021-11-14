@@ -12,7 +12,7 @@ const Top = styled.div`
 
 const SecondRow = styled.div`
     position: relative;
-    right: 50px;
+    right: 32px;
 `;
 
 const Button = styled.button`
