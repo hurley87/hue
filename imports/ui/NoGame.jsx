@@ -83,7 +83,7 @@ export const NoGame = ({ user }) => {
     return loading ? <Loading /> : (
         <div>
             <Nav>
-                <p>{user.username.includes(".eth") ? user.username : user.usernam.slice(0, 4) + "... " + user.usernam.slice(-4)}</p>
+                <p>{user.username.includes(".eth") ? user.username : user.username.slice(0, 4) + "... " + user.username.slice(-4)}</p>
                 <button className='btn' onClick={logout}>logout</button>
             </Nav>
             <Main>

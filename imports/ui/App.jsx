@@ -114,7 +114,7 @@ export const App = () => {
   const [assets, setAssets] = useState(null);
   const { user, game, isLoading } = useTracker(() => {
     const noDataAvailable = { game: null, isLoading: true };
-    const handler = Meteor.subscribe('games', address);
+    const handler = Meteor.subscribe('games');
 
     if (!handler.ready()) {
       return { ...noDataAvailable };
