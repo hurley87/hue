@@ -3,7 +3,16 @@ import _ from 'lodash';
 import styled from 'styled-components';
 
 const WrappedButton = styled.span`
+    border-radius: 3px;
     cursor: pointer;
+    margin: 2px;
+    border: 3px solid #B366FF !important;
+    display: inline-block;
+    padding-top: 0px;
+    padding-bottom: 3px;
+    &:hover {
+        background-color: #B366FF;
+    }
 `;
 
 export const OrderDiscard = ({ game, updateGame, renderCard, userId }) => {
