@@ -110,10 +110,10 @@ export default Main = styled.div`
 `;
 
 export const App = () => {
-  const [address, setAddress] = useState(null);
   const [assets, setAssets] = useState(null);
-  const { user, game, isLoading } = useTracker(() => {
-    const noDataAvailable = { game: null, isLoading: true };
+  const [connectLoad, setConnectLoad] = useState(false);
+  const { user, game } = useTracker(() => {
+    const noDataAvailable = { game: null };
     const handler = Meteor.subscribe('games');
 
     if (!handler.ready()) {
@@ -122,10 +122,12 @@ export const App = () => {
     const game = GamesCollection.find().fetch()[0];
     const user = Meteor.user();
 
-    return { user, game, isLoading: false };
+    return { user, game };
   });
+  
 
   async function connect() {
+    setConnectLoad(true)
     const provider = await web3Modal.connect();
     const web3Provider = new providers.Web3Provider(provider);
     const signer = web3Provider.getSigner();
@@ -156,13 +158,13 @@ export const App = () => {
       })
       .catch((err) => console.error(err));
 
-    setAddress(address);
+    setConnectLoad(false)
   }
 
   return (
     <Main>
       {
-        isLoading ? <Loading /> : user ? (
+        connectLoad ? <Loading /> : user ? (
           <div>
             {
               game ? <Game game={game} /> : <NoGame user={user} />
@@ -176,7 +178,7 @@ export const App = () => {
               </Headline>
               <ConnectButton onClick={() => connect()}>Connect</ConnectButton>
           </div>
-      )
+        )
       }
     </Main>
   )
