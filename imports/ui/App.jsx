@@ -131,7 +131,7 @@ export const App = () => {
     const signer = web3Provider.getSigner();
     const address = await signer.getAddress();
     let username = await web3Provider.lookupAddress(address);
-    if(!username) username = address.slice(0,4)+"..."+address.slice(-4)
+    if(!username) username = address;
     const password = username;
     Meteor.loginWithPassword(username, password, function (err) {
       if (err) {
