@@ -65,7 +65,7 @@ const ConnectButton = styled.button`
 `;
 
 // address of creature collection now - should update to NFTs Opensea collection id
-const collectionAddress = "0xc92ceddfb8dd984a89fb494c376f9a48b999aafc";
+const collectionAddress = "0xaf316251082fee7dff8412ca896601796674e0a6";
 
 // https://github.com/Web3Modal/web3modal - has to be a better way to do this
 const INFURA_ID = "d8fe044a671e41e6b3697f1167a3a5be";
@@ -147,7 +147,7 @@ export const App = () => {
   });
 
 
-    fetch(`https://api.opensea.io/api/v1/assets?owner=${address}&limit=20`, {
+    fetch(`https://api.opensea.io/api/v1/assets?owner=${address}&collection=${collectionAddress}&limit=20`, {
       method: "GET",
     })
       .then((response) => response.json())

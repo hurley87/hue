@@ -35,7 +35,7 @@ export const JoinGame = ({ setLoading }) => {
             {
                 gameId && gameId === 'no match' && <Error>no match</Error>
             }
-            <p htmlFor="code">Enter 5-character invite code</p>
+            <p htmlFor="code">Enter 5-character invite code sent to you.</p>
             <input
                 type="text"
                 placeholder="00000"
