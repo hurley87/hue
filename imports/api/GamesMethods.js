@@ -103,7 +103,7 @@ Meteor.methods({
     const newGame = GamesCollection.findOne(gameId);
     let username = Meteor.users.findOne(this.userId).username;
     if (!username.includes(".eth"))
-      username = address.slice(0, 4) + "... " + address.slice(-4);
+      username = username.slice(0, 4) + "... " + username.slice(-4);
     newGame.playerTwo.username = username;
     newGame.playerTwo.id = this.userId;
     newGame.status = "Deal";
