@@ -157,7 +157,6 @@ export const App = () => {
       .catch((err) => console.error(err));
 
     setAddress(address);
-    setUsername(username);
   }
 
   return (
