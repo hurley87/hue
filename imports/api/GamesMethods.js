@@ -37,8 +37,8 @@ Meteor.methods({
       );
     }
 
-    let usernmame = Meteor.users.findOne(this.userId).username;
-    if (!usernmame.includes(".eth"))
+    let username = Meteor.users.findOne(this.userId).username;
+    if (!username.includes(".eth"))
       username = address.slice(0, 4) + "... " + address.slice(-4);
 
     try {
@@ -101,8 +101,8 @@ Meteor.methods({
     check(gameId, String);
 
     const newGame = GamesCollection.findOne(gameId);
-    let usernmame = Meteor.users.findOne(this.userId).username;
-    if (!usernmame.includes(".eth"))
+    let username = Meteor.users.findOne(this.userId).username;
+    if (!username.includes(".eth"))
       username = address.slice(0, 4) + "... " + address.slice(-4);
     newGame.playerTwo.username = username;
     newGame.playerTwo.id = this.userId;
