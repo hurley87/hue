@@ -65,7 +65,7 @@ export const Deal = ({ game, userId, updateGame }) => {
                     </div>
                 ) : (
                         <div>
-                            <p>Waiting on  {game.currentPlayer === game.playerOne.id ? game.playerOne.username : game.playerTwo.username} to deal the cards</p>
+                            <p>Waiting on  {game.currentPlayer === game.playerOne.id ? game.playerOne.username : game.playerTwo.username} to deal the cards.</p>
                         </div>
                     )}
         </div>

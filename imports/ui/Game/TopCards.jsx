@@ -7,7 +7,7 @@ const Top = styled.div`
     margin: auto;
     min-height: 200px;
     position: relative;
-    bottom: 40px;
+    bottom: 55px;
 `;
 
 const SecondRow = styled.div`

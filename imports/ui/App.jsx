@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { providers } from "ethers";
 import WalletLink from "walletlink";
 import Web3Modal from "web3modal";
@@ -9,6 +9,7 @@ import { NoGame } from './NoGame';
 import { Game } from './Game';
 import { GamesCollection } from "../db/GamesCollection";
 import styled from 'styled-components';
+import { NoAssets } from './NoAssets';
 
 const Headline = styled.div`
     margin: auto;
@@ -64,10 +65,6 @@ const ConnectButton = styled.button`
   display: block;
 `;
 
-// address of creature collection now - should update to NFTs Opensea collection id
-const collectionAddress = "0xaf316251082fee7dff8412ca896601796674e0a6";
-
-// https://github.com/Web3Modal/web3modal - has to be a better way to do this
 const INFURA_ID = "d8fe044a671e41e6b3697f1167a3a5be";
 const providerOptions = {
   "custom-walletlink": {
@@ -110,10 +107,9 @@ export default Main = styled.div`
 `;
 
 export const App = () => {
-  const [assets, setAssets] = useState(null);
   const [connectLoad, setConnectLoad] = useState(false);
   const { user, game } = useTracker(() => {
-    const noDataAvailable = { game: null };
+    const noDataAvailable = { user: null, game: null};
     const handler = Meteor.subscribe('games');
 
     if (!handler.ready()) {
@@ -135,6 +131,7 @@ export const App = () => {
     let username = await web3Provider.lookupAddress(address);
     if(!username) username = address;
     const password = username;
+
     Meteor.loginWithPassword(username, password, function (err) {
       if (err) {
           Accounts.createUser({
@@ -144,19 +141,7 @@ export const App = () => {
             if (err) console.log(err)
         });
       }
-  });
-
-
-    fetch(`https://api.opensea.io/api/v1/assets?owner=${address}&collection=${collectionAddress}&limit=20`, {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        const assetIds = response.assets.map((asset) => asset.id);
-        setAssets(assetIds);
-      })
-      .catch((err) => console.error(err));
+    });
 
     setConnectLoad(false)
   }
@@ -167,7 +152,7 @@ export const App = () => {
         connectLoad ? <Loading /> : user ? (
           <div>
             {
-              game ? <Game game={game} /> : <NoGame user={user} />
+              game ? <Game user={user} game={game} /> : user.profile.avatar ? <NoGame user={user} /> : <NoAssets user={user} />
             }
           </div>
         ) : (

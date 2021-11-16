@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Bottom = styled.div`
     position: absolute;
-    bottom: 0px;
+    bottom: 10px;
     text-align: center;
     width: 95%;
     margin: auto;

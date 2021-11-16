@@ -88,7 +88,7 @@ const Main = styled.div`
 `;
 
 
-export const Game = ({ game }) => {
+export const Game = ({ game, user }) => {
     const [startTime, setStartTime] = useState(null);
     const deleteGame = ({ _id }) => {
         const confirmed = window.confirm(
@@ -391,7 +391,7 @@ export const Game = ({ game }) => {
             {game.status === 'Final' && <Final game={game} endGame={endGame} />}
             </Main>
             <BottomCards player={currentPlayer} followsuit={followsuit} game={game} handlePlayCard={handlePlayCard} renderCard={renderCard} />
-            <BottomResults player={currentPlayer} game={game} renderSuit={renderSuit}/>
+            <BottomResults user={user} player={currentPlayer} game={game} renderSuit={renderSuit}/>
         </GameStyle>
 
     );

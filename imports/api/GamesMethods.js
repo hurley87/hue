@@ -40,6 +40,7 @@ Meteor.methods({
     let username = Meteor.users.findOne(this.userId).username;
     if (!username.includes(".eth"))
       username = address.slice(0, 4) + "..." + address.slice(-4);
+    const avatar = Meteor.users.findOne(this.userId).profile.avatar;
 
     try {
       return GamesCollection.insert({
@@ -48,6 +49,7 @@ Meteor.methods({
         playerOne: {
           id: this.userId,
           username,
+          avatar,
           score: 0,
           trick: 0,
           hand: [],
@@ -58,6 +60,7 @@ Meteor.methods({
         playerTwo: {
           id: "",
           username: "",
+          avatar: "",
           score: 0,
           trick: 0,
           hand: [],
@@ -104,6 +107,10 @@ Meteor.methods({
     let username = Meteor.users.findOne(this.userId).username;
     if (!username.includes(".eth"))
       username = username.slice(0, 4) + "..." + username.slice(-4);
+
+    const avatar = Meteor.users.findOne(this.userId).profile.avatar;
+
+    newGame.playerTwo.avatar = avatar;
     newGame.playerTwo.username = username;
     newGame.playerTwo.id = this.userId;
     newGame.status = "Deal";
@@ -127,5 +134,14 @@ Meteor.methods({
     });
 
     GamesCollection.update(game._id, { $set: game });
+  },
+  "games.updateAvatar"(avatar) {
+    check(avatar, String);
+
+    Meteor.users.update(this.userId, {
+      $set: {
+        "profile.avatar": avatar,
+      },
+    });
   },
 });

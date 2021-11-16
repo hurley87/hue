@@ -4,11 +4,11 @@ import styled from 'styled-components';
 const WrappedButton = styled.button`
     width: 20% !important;
     background-color: #fff !important;
-    border: 1px solid #fff !important;
+    border: 3px solid #fff !important;
     padding: 6px !important;
 
     &:hover {
-        border: 1px solid #B366FF !important;
+        border: 3px solid #B366FF !important;
     }
 `;
 
@@ -43,7 +43,7 @@ export const StickDealer = ({ game, updateGame, renderSuit, userId }) => {
 
     const stdOpposingUi = (player) => (
         <div>
-            <p style={{paddingTop: "60px"}}>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} .</p>
+            <p style={{paddingTop: "60px"}}>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username}.</p>
         </div>
     );
 

@@ -23,9 +23,9 @@ export const NewGame = ({ setLoading }) => {
     return (
         <div>
             {
-                error ? (
+                error && (
                     <Error>{error.reason}</Error>
-                ) : null
+                )
             }
             <p>How many points do you need to win your game?</p>
             <button onClick={() => createGame(10)}>10</button>

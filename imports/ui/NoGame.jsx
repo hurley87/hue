@@ -13,16 +13,26 @@ const Nav = styled.div`
     clear: both;
     margin-bottom: 100px;
 
+    img {
+        height: 40px;   
+        width: auto;
+        border-radius: 40px;
+        float: left;
+        margin-right: 5px;
+    }
+
     p {
         font-family: "Domine";
         float: left;
         font-weight: 700;
         margin: 0px;
         font-size: 16px;
+        line-height: 40px;
     }
 
     button {
         ${TransparantBtnStyle}
+        margin-top: 5px;
     }
 `;
 
@@ -83,7 +93,7 @@ export const NoGame = ({ user }) => {
     return loading ? <Loading /> : (
         <div>
             <Nav>
-                <p>{user.username.includes(".eth") ? user.username : user.username.slice(0, 4) + "..." + user.username.slice(-4)}</p>
+                <p><img src={user.profile.avatar} /> {user.username.includes(".eth") ? user.username : user.username.slice(0, 4) + "..." + user.username.slice(-4)}</p>
                 <button className='btn' onClick={logout}>logout</button>
             </Nav>
             <Main>

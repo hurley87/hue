@@ -7,6 +7,8 @@ Modal.setAppElement('#react-target')
 
 const Rules = styled.button`
     ${TransparantBtnStyle}
+    position: relative;
+    top: 10px;
 `;
 
 const Close = styled.button`
@@ -19,6 +21,10 @@ const Results = styled.div`
     width: 95%;
     margin: auto;
 
+    h5 {
+        line-height: 40px;
+    }
+
     b {
         background-color:#B366FF;
         color: white;
@@ -26,6 +32,14 @@ const Results = styled.div`
         border-radius: 3px;
         margin-right: 3px;
 
+    }
+
+    img {
+        height: 40px;   
+        width: auto;
+        border-radius: 40px;
+        float: left;
+        margin-right: 5px;
     }
 `;
 
@@ -51,6 +65,7 @@ export const BottomResults = ({ player, game, renderSuit }) => {
     return (
         <Results>
             <h5>
+                <img src={player.avatar} />
                 {player.username} {game.dealer === player.id ? <b>Dealer</b>  : null} 
                 {game.maker === player.id && game.trump !== "" ? (<span>{renderSuit(game.trump)}</span>) : null}
                 <span><b>{player.score} / {game.limit}</b> {" "} Tricks: {player.trick}</span>
