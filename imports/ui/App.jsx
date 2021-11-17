@@ -153,7 +153,6 @@ const customStyles = {
 };
 
 export const App = () => {
-  const [connectLoad, setConnectLoad] = useState(false);
   const [error, setError] = useState(false);
   const [modalIsOpen,setIsOpen] = useState(false);
   const { user, game } = useTracker(() => {
@@ -171,8 +170,7 @@ export const App = () => {
   
 
   async function connect() {
-    setConnectLoad(true)
-    setError(true)
+    setError(false);
 
     try {
       const provider = await web3Modal.connect();
@@ -196,13 +194,12 @@ export const App = () => {
     } catch {
       setError(true)
     }
-    setConnectLoad(false)
   }
 
   return (
     <Main>
       {
-        connectLoad ? <Loading /> : user ? (
+        user ? (
           <>
             {
               game ? <Game user={user} game={game} /> : user.profile && user.profile.avatar ? <NoGame user={user} /> : <NoAssets user={user} />
