@@ -27,7 +27,7 @@ export const NewGame = ({ setLoading }) => {
                     <Error>{error.reason}</Error>
                 )
             }
-            <p>How many points do you need to win your game?</p>
+            <p>How many points would you like to play up to?</p>
             <button onClick={() => createGame(10)}>10</button>
             <button onClick={() => createGame(80)}>60</button>
             <button onClick={() => createGame(120)}>120</button>

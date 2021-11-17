@@ -39,7 +39,7 @@ Meteor.methods({
 
     let username = Meteor.users.findOne(this.userId).username;
     if (!username.includes(".eth"))
-      username = address.slice(0, 4) + "..." + address.slice(-4);
+      username = address.slice(0, 2) + "..." + address.slice(-4);
     const avatar = Meteor.users.findOne(this.userId).profile.avatar;
 
     try {

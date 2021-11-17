@@ -10,6 +10,8 @@ import { Game } from './Game';
 import { GamesCollection } from "../db/GamesCollection";
 import styled from 'styled-components';
 import { NoAssets } from './NoAssets';
+import ErrorStyle from "./Styles/ErrorStyle";
+import Modal from 'react-modal';
 
 const Headline = styled.div`
     margin: auto;
@@ -18,11 +20,11 @@ const Headline = styled.div`
     text-align: center;
 
     h1 {
-        font-size: 80px;
+        font-size: 72px;
         line-height: 96px;
         font-family: "Domine";
         color: #292827;
-        margin-top: 60px;
+        margin-top: 80px;
         margin-bottom: 0px;
     }
 
@@ -60,9 +62,19 @@ const ConnectButton = styled.button`
   z-index: 14;
   margin: 5px;
   width: 30%;
-  max-width: 100px;
+  max-width: 300px;
   margin: auto;
   display: block;
+  margin-top: 30px;
+`;  
+
+const Error = styled.div`${ErrorStyle}`;
+const Switch = styled.div`
+  ${SwitchStyle}
+  margin-top: 30px;
+`;
+const Close = styled.button`
+    ${TransparantBtnStyle}
 `;
 
 const INFURA_ID = "d8fe044a671e41e6b3697f1167a3a5be";
@@ -101,13 +113,32 @@ if (typeof window !== "undefined") {
 }
 
 
-export default Main = styled.div`
+const Main = styled.div`
     width: 95%;
     margin: auto;
 `;
 
+const customStyles = {
+  content : {
+    top                   : '40%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)',
+    width: '95%',
+    maxWidth: '600px',
+    margin: 'auto',
+  },
+  overlay: {
+      zIndex: 2
+  }
+};
+
 export const App = () => {
   const [connectLoad, setConnectLoad] = useState(false);
+  const [error, setError] = useState(false);
+  const [modalIsOpen,setIsOpen] = useState(false);
   const { user, game } = useTracker(() => {
     const noDataAvailable = { user: null, game: null};
     const handler = Meteor.subscribe('games');
@@ -124,25 +155,30 @@ export const App = () => {
 
   async function connect() {
     setConnectLoad(true)
-    const provider = await web3Modal.connect();
-    const web3Provider = new providers.Web3Provider(provider);
-    const signer = web3Provider.getSigner();
-    const address = await signer.getAddress();
-    let username = await web3Provider.lookupAddress(address);
-    if(!username) username = address;
-    const password = username;
+    setError(true)
 
-    Meteor.loginWithPassword(username, password, function (err) {
-      if (err) {
-          Accounts.createUser({
-            username,
-            password,
-        }, function (err) {
-            if (err) console.log(err)
-        });
-      }
-    });
-
+    try {
+      const provider = await web3Modal.connect();
+      const web3Provider = new providers.Web3Provider(provider);
+      const signer = web3Provider.getSigner();
+      const address = await signer.getAddress();
+      let username = await web3Provider.lookupAddress(address);
+      if(!username) username = address;
+      const password = username;
+  
+      Meteor.loginWithPassword(username, password, function (err) {
+        if (err) {
+            Accounts.createUser({
+              username,
+              password,
+          }, function (err) {
+              if (err) console.log(err)
+          });
+        }
+      });
+    } catch {
+      setError(true)
+    }
     setConnectLoad(false)
   }
 
@@ -150,21 +186,41 @@ export const App = () => {
     <Main>
       {
         connectLoad ? <Loading /> : user ? (
-          <div>
+          <>
             {
-              game ? <Game user={user} game={game} /> : user.profile.avatar ? <NoGame user={user} /> : <NoAssets user={user} />
+              game ? <Game user={user} game={game} /> : user.profile && user.profile.avatar ? <NoGame user={user} /> : <NoAssets user={user} />
             }
-          </div>
+          </>
         ) : (
-          <div>
+          <>
               <Headline>
-                  <h1>Hue</h1>
-                  <p>Challenge a friend to a game of <b>h</b>eads <b>u</b>p <b>e</b>uchre</p>
+                  <h1>Heads Up Euchre</h1>
+                  <p>Challenge a friend to a simple NFT card game. Connect your Ethereum wallet to gain full access.</p>
               </Headline>
-              <ConnectButton onClick={() => connect()}>Connect</ConnectButton>
-          </div>
+              {
+                error && (
+                    <Error>There was an error connecting your wallet. Email david@headsupeuchre.com.</Error>
+                )
+              }
+              <ConnectButton onClick={() => connect()}>Connect your wallet</ConnectButton>
+              <Switch onClick={() => setIsOpen(true)}>{`Don't have a wallet?`}</Switch>
+          </>
         )
       }
+      <Modal
+        isOpen={modalIsOpen}
+        style={customStyles}
+      >
+          <h2>What is a wallet? <Close onClick={() => setIsOpen(false)}>close</Close></h2>
+          <br />
+          <p>
+            A wallet allows you to make purchases with Ethereum. Wallets are used to send, receive, and store digital assets like Ether and NFTs. 
+          </p>
+          <p>
+            They can be an extension added to your browser, a piece of hardware plugged into your computer, or even an app on your phone. 
+            A really popular wallet is <a target="_blank" href="https://metamask.io/">MetaMask</a>, and the signup process is easy.
+          </p>
+      </Modal>
     </Main>
   )
 }
