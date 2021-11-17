@@ -125,7 +125,7 @@ export const NoAssets = ({ user }) => {
           gm,{" "}
           {user.username.includes(".eth")
             ? user.username
-            : user.username.slice(0, 4) + "..." + user.username.slice(-4)}
+            : user.username.slice(0, 2) + "..." + user.username.slice(-4)}
         </p>
         <button className="btn" onClick={logout}>
           logout

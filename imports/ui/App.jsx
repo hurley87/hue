@@ -61,7 +61,7 @@ const ConnectButton = styled.button`
   font-size: 14px;
   z-index: 14;
   margin: 5px;
-  width: 30%;
+  width: 90%;
   max-width: 300px;
   margin: auto;
   display: block;
@@ -83,7 +83,7 @@ const providerOptions = {
     display: {
       logo: "https://play-lh.googleusercontent.com/PjoJoG27miSglVBXoXrxBSLveV6e3EeBPpNY55aiUUBM9Q1RCETKCOqdOkX2ZydqVf0",
       name: "Coinbase",
-      description: "Connect to Coinbase Wallet",
+      description: "Connect to your Coinbase Wallet",
     },
     options: {
       appName: "Coinbase",
@@ -117,6 +117,23 @@ const Main = styled.div`
     width: 95%;
     margin: auto;
 `;
+
+const Desktop = styled.div`
+  @media only screen and (max-width: 992px) {
+    display: none;
+  }
+`;
+
+const Mobile = styled.div`
+  @media only screen and (min-width: 480px) {
+    display: block;
+  }
+  @media only screen and (min-width: 992px) {
+    display: none;
+  }
+`;
+
+
 
 const customStyles = {
   content : {
@@ -202,8 +219,13 @@ export const App = () => {
                     <Error>There was an error connecting your wallet. Email david@headsupeuchre.com.</Error>
                 )
               }
-              <ConnectButton onClick={() => connect()}>Connect your wallet</ConnectButton>
-              <Switch onClick={() => setIsOpen(true)}>{`Don't have a wallet?`}</Switch>
+              <Desktop>
+                <ConnectButton onClick={() => connect()}>Connect your wallet</ConnectButton>
+                <Switch onClick={() => setIsOpen(true)}>{`Don't have a wallet?`}</Switch>
+              </Desktop>
+              <Mobile>
+                <Error>This game is only available on desktop.</Error>
+              </Mobile>
           </>
         )
       }
@@ -214,11 +236,8 @@ export const App = () => {
           <h2>What is a wallet? <Close onClick={() => setIsOpen(false)}>close</Close></h2>
           <br />
           <p>
-            A wallet allows you to make purchases with Ethereum. Wallets are used to send, receive, and store digital assets like Ether and NFTs. 
-          </p>
-          <p>
-            They can be an extension added to your browser, a piece of hardware plugged into your computer, or even an app on your phone. 
-            A really popular wallet is <a target="_blank" href="https://metamask.io/">MetaMask</a>, and the signup process is easy.
+            Wallets are used to send, receive, and store digital assets like NFTs, tokens and cryptocurrencies. 
+            We recommend signing up for <a target="_blank" href="https://metamask.io/">MetaMask</a> or <a target="_blank" href="https://wallet.coinbase.com/">Coinbase</a> and installing their browser extension. 
           </p>
       </Modal>
     </Main>
