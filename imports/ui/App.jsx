@@ -4,7 +4,6 @@ import { providers } from "ethers";
 import WalletLink from "walletlink";
 import Web3Modal from "web3modal";
 import { useTracker } from 'meteor/react-meteor-data';
-import { Loading } from './Loading';
 import { NoGame } from './NoGame';
 import { Game } from './Game';
 import { GamesCollection } from "../db/GamesCollection";

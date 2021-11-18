@@ -1,10 +1,11 @@
 import { Meteor } from "meteor/meteor";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import TransparantBtnStyle from "./Styles/TransparantBtnStyle";
 import ErrorStyle from "./Styles/ErrorStyle";
 import { Loading } from "./Loading";
 import { ethers } from "ethers";
+import Modal from "react-modal";
 
 const Nav = styled.div`
   width: 95%;
@@ -29,7 +30,7 @@ const Nav = styled.div`
 const Main = styled.div`
   width: 95%;
   margin: auto;
-  max-width: 500px;
+  max-width: 520px;
 
   p {
     color: #2f2c2a;
@@ -65,8 +66,10 @@ const Main = styled.div`
     padding: 10px 0px;
     font-size: 14px;
     z-index: 14;
-    margin: 3px;
-    width: 48%;
+    width: 90%;
+    max-width: 300px;
+    margin: auto;
+    display: block;
   }
 `;
 
@@ -78,17 +81,51 @@ const Avatar = styled.img`
   border-radius: 100px;
   cursor: pointer;
   border: 5px solid #fff;
+  display: block;
+  margin: auto;
   &:hover {
     border: 5px solid #b366ff;
   }
 `;
 
+const Switch = styled.div`
+  ${SwitchStyle}
+  margin-top: 30px;
+`;
+
+const customStyles = {
+  content: {
+    top: "40%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    width: "95%",
+    maxWidth: "600px",
+    margin: "auto",
+  },
+  overlay: {
+    zIndex: 2,
+  },
+};
+
+const Close = styled.button`
+  ${TransparantBtnStyle}
+`;
+
 export const NoAssets = ({ user }) => {
   const logout = () => Meteor.logout();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [pickAvatar, setPickAvatar] = useState(false);
   const [assets, setAssets] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    checkWallet();
+    setLoading(false);
+  }, []);
 
   async function checkWallet() {
     setLoading(true);
@@ -133,7 +170,7 @@ export const NoAssets = ({ user }) => {
       </Nav>
       {pickAvatar ? (
         <Main>
-          <p>Pick an NFT you'd like to make your avatar.</p>
+          <p>Choose your avatar.</p>
           {assets.map((asset, i) => (
             <Avatar
               onClick={() =>
@@ -148,26 +185,42 @@ export const NoAssets = ({ user }) => {
         <Main>
           {error && (
             <Error>
-              There's no 2545 NFT in your wallet. You'll need to buy one first.
+              You don't have the right NFT. Refresh the page to check again.
             </Error>
           )}
           <p>
             You'll need to have a 2545 NFT in your{" "}
             {user.username.includes(".eth")
               ? user.username
-              : user.username.slice(0, 4) +
+              : user.username.slice(0, 2) +
                 "..." +
                 user.username.slice(-4)}{" "}
-            wallet to get access to Hue.
+            wallet to get access the game.
           </p>
           <button
             onClick={() =>
-              window.open("https://opensea.io/collection/2545bygr4y", "_blank")
+              window.open(
+                "https://opensea.io/collection/2545bygr4y?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW",
+                "_blank"
+              )
             }
           >
-            I need to buy one first
+            Buy one on OpenSea
           </button>
-          <button onClick={() => checkWallet()}>I have one in my wallet</button>
+          <Switch onClick={() => setIsOpen(true)}>What is OpenSea?</Switch>
+          <Modal isOpen={modalIsOpen} style={customStyles}>
+            <h2>
+              What is OpenSea?{" "}
+              <Close onClick={() => setIsOpen(false)}>close</Close>
+            </h2>
+            <br />
+            <p>
+              OpenSea is the largest peer-to-peer marketplace for NFTs. You can
+              think of NFTs as collectable digital assets that you can own like
+              art in the real world. On OpenSea, anyone can buy or sell these
+              assets using their crypto wallet.
+            </p>
+          </Modal>
         </Main>
       )}
     </div>

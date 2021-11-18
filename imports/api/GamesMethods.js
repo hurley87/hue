@@ -106,7 +106,7 @@ Meteor.methods({
     const newGame = GamesCollection.findOne(gameId);
     let username = Meteor.users.findOne(this.userId).username;
     if (!username.includes(".eth"))
-      username = username.slice(0, 4) + "..." + username.slice(-4);
+      username = username.slice(0, 2) + "..." + username.slice(-4);
 
     const avatar = Meteor.users.findOne(this.userId).profile.avatar;
 
