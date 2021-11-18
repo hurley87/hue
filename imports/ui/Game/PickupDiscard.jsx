@@ -59,7 +59,7 @@ export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId
             {
                 game.trump === 'J' ? (
                     <div>
-                        <p>Make it trump!</p>
+                        <p>Make it trump.</p>
                         {
                             ['H', 'S', 'C', 'D'].map((suit, i) => (<TrumpButton key={i} onClick={() => handleMakeTrump(suit)}>{renderSuit(suit)}</TrumpButton>))
                         }
