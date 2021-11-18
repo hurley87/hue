@@ -16,9 +16,14 @@ const WrappedButton = styled.span`
 `;
  
 const TrumpButton = styled.button`
-    background-color: #fff !important;
-    border: 1px solid #1A0033 !important;
     width: 20% !important;
+    background-color: #fff !important;
+    border: 3px solid #fff !important;
+    padding: 6px !important;
+
+    &:hover {
+        border: 3px solid #B366FF !important;
+    }
 `;
 
 
