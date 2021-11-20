@@ -73,7 +73,9 @@ Meteor.methods({
       Meteor.call(
         "games.discord",
         "911394414025383936",
-        `${winnerUsername} won a hand against ${loserUsername} with a score of ${hand.winnerScore} to ${hand.loserScore}`
+        `${winnerUsername} won a hand against ${loserUsername} and earned ${
+          hand.winnerScore
+        } ${hand.winnerScore === 1 ? "point" : "points"}`
       );
     } catch (e) {
       console.log("Updating udpating Discord", e);
