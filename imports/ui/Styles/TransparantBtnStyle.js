@@ -7,7 +7,7 @@ export default TransparantBtnStyle = css`
   font-weight: 1px;
   background: #e8e2dc;
   border: none;
-  border-bottom: 2px solid #e8e2dc;
+  border-bottom: 4px solid #e8e2dc;
   text-decoration: none;
   font-family: "Montserrat", sans-serif;
   display: block;
@@ -16,7 +16,7 @@ export default TransparantBtnStyle = css`
   font-weight: 500;
   margin-left: 30px;
   &:hover {
-    border-bottom: 2px solid #b366ff;
+    border-bottom: 4px solid #b366ff;
     transition: 0.5s ease all;
   }
 `;
