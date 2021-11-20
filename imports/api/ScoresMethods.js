@@ -56,6 +56,18 @@ Meteor.methods({
       console.log("Updating score collection error", e);
     }
 
+    const winnerUsername = Meteor.users.findOne(score.winner).username;
+    const loserUsername = Meteor.users.findOne(score.loser).username;
+    try {
+      Meteor.call(
+        "games.discord",
+        "911394133631963186",
+        `${winnerUsername} just beat ${loserUsername} with a score of ${score.winnerScore} to ${score.loserScore}`
+      );
+    } catch (e) {
+      console.log("Updating udpating Discord", e);
+    }
+
     GamesCollection.remove(score.gameId);
   },
 });

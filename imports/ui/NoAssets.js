@@ -3,29 +3,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import TransparantBtnStyle from "./Styles/TransparantBtnStyle";
 import ErrorStyle from "./Styles/ErrorStyle";
+import ModalStyle from "./Styles/ModalStyle";
 import { Loading } from "./Loading";
+import { Nav } from "./Nav";
 import { ethers } from "ethers";
 import Modal from "react-modal";
-
-const Nav = styled.div`
-  width: 95%;
-  margin: auto;
-  padding: 10px;
-  clear: both;
-  margin-bottom: 100px;
-
-  p {
-    font-family: "Domine";
-    float: left;
-    font-weight: 700;
-    margin: 0px;
-    font-size: 16px;
-  }
-
-  button {
-    ${TransparantBtnStyle}
-  }
-`;
 
 const Main = styled.div`
   width: 95%;
@@ -93,29 +75,11 @@ const Switch = styled.div`
   margin-top: 30px;
 `;
 
-const customStyles = {
-  content: {
-    top: "40%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    width: "95%",
-    maxWidth: "600px",
-    margin: "auto",
-  },
-  overlay: {
-    zIndex: 2,
-  },
-};
-
 const Close = styled.button`
   ${TransparantBtnStyle}
 `;
 
 export const NoAssets = ({ user }) => {
-  const logout = () => Meteor.logout();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [pickAvatar, setPickAvatar] = useState(false);
@@ -156,26 +120,21 @@ export const NoAssets = ({ user }) => {
   return loading ? (
     <Loading />
   ) : (
-    <div>
-      <Nav>
-        <p>
-          gm,{" "}
-          {user.username.includes(".eth")
-            ? user.username
-            : user.username.slice(0, 2) + "..." + user.username.slice(-4)}
-        </p>
-        <button className="btn" onClick={logout}>
-          logout
-        </button>
-      </Nav>
+    <>
+      <Nav user={user} />
       {pickAvatar ? (
         <Main>
           <p>Choose your avatar.</p>
           {assets.map((asset, i) => (
             <Avatar
-              onClick={() =>
-                Meteor.call("games.updateAvatar", asset.image_thumbnail_url)
-              }
+              onClick={() => {
+                Meteor.call("games.updateAvatar", asset.image_thumbnail_url);
+                Meteor.call(
+                  "games.discord",
+                  "911391777955659819",
+                  `${user.username} chose their avatar ${asset.image_thumbnail_url}`
+                );
+              }}
               key={i}
               src={asset.image_thumbnail_url}
             />
@@ -208,7 +167,7 @@ export const NoAssets = ({ user }) => {
             Buy one on OpenSea
           </button>
           <Switch onClick={() => setIsOpen(true)}>What is OpenSea?</Switch>
-          <Modal isOpen={modalIsOpen} style={customStyles}>
+          <Modal isOpen={modalIsOpen} style={ModalStyle}>
             <h2>
               What is OpenSea?{" "}
               <Close onClick={() => setIsOpen(false)}>close</Close>
@@ -223,6 +182,6 @@ export const NoAssets = ({ user }) => {
           </Modal>
         </Main>
       )}
-    </div>
+    </>
   );
 };

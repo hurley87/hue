@@ -10,6 +10,8 @@ import { GamesCollection } from "../db/GamesCollection";
 import styled from 'styled-components';
 import { NoAssets } from './NoAssets';
 import ErrorStyle from "./Styles/ErrorStyle";
+import ModalStyle from "./Styles/ModalStyle"; 
+import MainCTAStyle from "./Styles/MainCTAStyle"; 
 import Modal from 'react-modal';
 
 const Headline = styled.div`
@@ -46,26 +48,7 @@ const Headline = styled.div`
     }
 `;
 
-const ConnectButton = styled.button`
-  color: white;
-  border: 0;
-  line-height: inherit;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 3px;
-  background-color: #B366FF;
-  font-family: 'Montserrat', sans-serif;
-  flex: 1;
-  padding: 10px 0px;
-  font-size: 14px;
-  z-index: 14;
-  margin: 5px;
-  width: 90%;
-  max-width: 300px;
-  margin: auto;
-  display: block;
-  margin-top: 30px;
-`;  
+const ConnectButton = styled.button`${MainCTAStyle}`;  
 
 const Error = styled.div`${ErrorStyle}`;
 const Switch = styled.div`
@@ -74,6 +57,7 @@ const Switch = styled.div`
 `;
 const Close = styled.button`
     ${TransparantBtnStyle}
+
 `;
 
 const INFURA_ID = "d8fe044a671e41e6b3697f1167a3a5be";
@@ -132,25 +116,6 @@ const Mobile = styled.div`
   }
 `;
 
-
-
-const customStyles = {
-  content : {
-    top                   : '40%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    width: '95%',
-    maxWidth: '600px',
-    margin: 'auto',
-  },
-  overlay: {
-      zIndex: 2
-  }
-};
-
 export const App = () => {
   const [error, setError] = useState(false);
   const [modalIsOpen,setIsOpen] = useState(false);
@@ -186,7 +151,11 @@ export const App = () => {
               username,
               password,
           }, function (err) {
-              if (err) console.log(err)
+              if (err) {
+                console.log(err)
+              } else {
+                Meteor.call("games.discord", "911391777955659819", `${username} connected their wallet`)
+              }
           });
         }
       });
@@ -208,7 +177,7 @@ export const App = () => {
           <>
               <Headline>
                   <h1>Heads Up Euchre</h1>
-                  <p>Challenge a friend to a simple NFT card game. Connect your Ethereum wallet to gain full access.</p>
+                  <p>Challenge a friend to a simple NFT card game. Connect your Ethereum wallet to get started.</p>
               </Headline>
               {
                 error && (
@@ -227,13 +196,13 @@ export const App = () => {
       }
       <Modal
         isOpen={modalIsOpen}
-        style={customStyles}
+        style={ModalStyle}
       >
           <h2>What is a wallet? <Close onClick={() => setIsOpen(false)}>close</Close></h2>
           <br />
           <p>
             Wallets are used to send, receive, and store digital assets like NFTs, tokens and cryptocurrencies. 
-            We recommend signing up for <a target="_blank" href="https://metamask.io/">MetaMask</a> or <a target="_blank" href="https://wallet.coinbase.com/">Coinbase</a> and installing their browser extension. 
+            We recommend signing up for <a target="_blank" href="https://metamask.io/">MetaMask</a> or <a target="_blank" href="https://wallet.coinbase.com/">Coinbase</a> and using their browser extension. 
           </p>
       </Modal>
     </Main>

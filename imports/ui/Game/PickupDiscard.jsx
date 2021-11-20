@@ -55,26 +55,26 @@ export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId
     };
 
     const pickupDiscardCurrentUi = (player) => (
-        <div>
+        <>
             {
                 game.trump === 'J' ? (
-                    <div>
+                    <>
                         <p>Make it trump.</p>
                         {
                             ['H', 'S', 'C', 'D'].map((suit, i) => (<TrumpButton key={i} onClick={() => handleMakeTrump(suit)}>{renderSuit(suit)}</TrumpButton>))
                         }
-                    </div>
+                    </>
                 ) : (
-                        <div>
+                        <>
                             Choose a card to discard:
                             {
                                 player.hand.map((card, i) => (<WrappedButton key={i} onClick={() => handleOrderDiscard(card?.suit, card?.value)}>{renderCard(card?.suit, card?.value)}</WrappedButton>))
                             }
                             <WrappedButton onClick={() => handleOrderDiscard(game.deck[0]?.suit, game.deck[0]?.value)}>{renderCard(game.deck[0]?.suit, game.deck[0]?.value)}</WrappedButton>
-                        </div>
+                        </>
                     )
             }
-        </div>
+        </>
     );
 
     const pickupDiscardOpposingUi = (player) => (
@@ -84,13 +84,13 @@ export const PickupDiscard = ({ game, updateGame, renderCard, renderSuit, userId
     );
 
     return (
-        <div>
+        <>
             {
                 game.currentPlayer === userId ?
                     userId === game.playerOne.id ? pickupDiscardCurrentUi(game.playerOne) : pickupDiscardCurrentUi(game.playerTwo)
                     :
                     userId === game.playerOne.id ? pickupDiscardOpposingUi(game.playerOne) : pickupDiscardOpposingUi(game.playerTwo)
             }
-        </div>
+        </>
     );
 };

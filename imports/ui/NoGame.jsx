@@ -1,40 +1,10 @@
 import React, { useState } from 'react';
 import { JoinGame } from './JoinGame';
 import { NewGame } from './NewGame';
+import { Nav } from './Nav';
 import styled from 'styled-components';
 import SwitchStyle from './Styles/SwitchStyle';
-import TransparantBtnStyle from './Styles/TransparantBtnStyle';
 import { Loading } from './Loading';
-
-const Nav = styled.div`
-    width: 95%;
-    margin: auto;
-    padding: 10px;
-    clear: both;
-    margin-bottom: 100px;
-
-    img {
-        height: 40px;   
-        width: auto;
-        border-radius: 40px;
-        float: left;
-        margin-right: 5px;
-    }
-
-    p {
-        font-family: "Domine";
-        float: left;
-        font-weight: 700;
-        margin: 0px;
-        font-size: 16px;
-        line-height: 40px;
-    }
-
-    button {
-        ${TransparantBtnStyle}
-        margin-top: 5px;
-    }
-`;
 
 const Main = styled.div`
 
@@ -87,21 +57,17 @@ const Switch = styled.div`${SwitchStyle}`;
 
 export const NoGame = ({ user }) => {
     const [showNewGame, setShowNewGame] = useState(false);
-    const logout = () => Meteor.logout();
     const [loading, setLoading] = useState(false);
 
     return loading ? <Loading /> : (
-        <div>
-            <Nav>
-                <p><img src={user.profile.avatar} /> {user.username.includes(".eth") ? user.username : user.username.slice(0, 2) + "..." + user.username.slice(-4)}</p>
-                <button className='btn' onClick={logout}>logout</button>
-            </Nav>
+        <>
+            <Nav user={user} />
             <Main>
                 {
-                    showNewGame ? <NewGame setLoading={setLoading} /> : <JoinGame setLoading={setLoading} />
+                    showNewGame ? <NewGame setLoading={setLoading} user={user} /> : <JoinGame setLoading={setLoading} />
                 }
             </Main>
             <Switch onClick={() => setShowNewGame(!showNewGame)}>{showNewGame ? "Have an invite code?" : "Create your own game"}</Switch>
-        </div>
+        </>
     );
 };

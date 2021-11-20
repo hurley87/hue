@@ -1,5 +1,22 @@
 import { check } from "meteor/check";
 import { GamesCollection } from "../db/GamesCollection";
+const Discord = require("discord.js.old");
+const client = new Discord.Client();
+
+client.on("ready", () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+  const newPlayers = client.channels.get("911391777955659819");
+});
+
+client.on("interactionCreate", async (interaction) => {
+  if (!interaction.isCommand()) return;
+
+  if (interaction.commandName === "ping") {
+    await interaction.reply("Pong!");
+  }
+});
+
+client.login("OTExNDE1MTQ4NzIyMzg5MDMy.YZhDgA.8VfexsX_PWAg7Llte2wRKjSgBJ0");
 
 Meteor.methods({
   "games.insert"(limit) {
@@ -88,6 +105,12 @@ Meteor.methods({
     }
 
     GamesCollection.remove(taskId);
+    const creatorUsername = Meteor.users.findOne(this.userId).username;
+    Meteor.call(
+      "games.discord",
+      "911394307095801866",
+      `${creatorUsername} ended their game`
+    );
   },
   "games.findGameUsingCode"(inviteCode) {
     check(inviteCode, String);
@@ -116,6 +139,13 @@ Meteor.methods({
     newGame.status = "Deal";
 
     GamesCollection.update(gameId, { $set: newGame });
+
+    const creatorUsername = Meteor.users.findOne(newGame.playerOne.id).username;
+    Meteor.call(
+      "games.discord",
+      "911394307095801866",
+      `${username} joined a game created by ${creatorUsername}`
+    );
   },
   "games.update"(game) {
     check(game, {
@@ -143,5 +173,12 @@ Meteor.methods({
         "profile.avatar": avatar,
       },
     });
+  },
+  "games.discord"(channelId, message) {
+    check(channelId, String);
+    check(message, String);
+
+    const channel = client.channels.get(channelId);
+    channel.send(message);
   },
 });
