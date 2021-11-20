@@ -1,6 +1,6 @@
 import React from 'react';
 
-const red = "#c41010";
+const red = "#E53E3E";
 const black = "#444444";
 const fontSize = "1.2em";
 

@@ -44,8 +44,6 @@ export const BottomResults = ({ player, game, renderSuit }) => {
                 <span><b>{player.score} / {game.limit}</b> {" "} Tricks: {player.trick}</span>
                 <Rules />
             </h5>
-
-            
         </Results>
     );
 };

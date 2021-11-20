@@ -5,7 +5,6 @@ const client = new Discord.Client();
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  const newPlayers = client.channels.get("911391777955659819");
 });
 
 client.on("interactionCreate", async (interaction) => {

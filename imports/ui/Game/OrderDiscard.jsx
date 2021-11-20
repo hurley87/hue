@@ -37,30 +37,30 @@ export const OrderDiscard = ({ game, updateGame, renderCard, userId }) => {
     };
 
     const orderDiscardCurrentUi = (player) => (
-        <div>
+        <>
             Choose one to discard:
             {
                 player.hand.map((card, i) => (<WrappedButton key={i} onClick={() => handleOrderDiscard(card?.suit, card?.value)}>{renderCard(card?.suit, card?.value)}</WrappedButton>))
             }
             <WrappedButton onClick={() => handleOrderDiscard(game.deck[0]?.suit, game.deck[0]?.value)}>{renderCard(game.deck[0]?.suit, game.deck[0]?.value)}</WrappedButton>
-        </div>
+        </>
     );
 
     const orderDiscardOpposingUi = () => (
-        <div>
+        <>
             You just ordered the {renderCard(game.deck[0]?.suit, game.deck[0]?.value)}
-        </div>
+        </>
     );
 
     return (
-        <div>
+        <>
             {
                 game.currentPlayer === userId ?
                     userId === game.playerOne.id ? orderDiscardCurrentUi(game.playerOne) : orderDiscardCurrentUi(game.playerTwo)
                     :
                     userId === game.playerOne.id ? orderDiscardOpposingUi() : orderDiscardOpposingUi()
             }
-        </div>
+        </>
 
     );
 };

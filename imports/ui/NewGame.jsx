@@ -22,7 +22,7 @@ export const NewGame = ({ setLoading, user }) => {
     }
 
     return (
-        <div>
+        <>
             {
                 error && (
                     <Error>{error.reason}</Error>
@@ -32,7 +32,7 @@ export const NewGame = ({ setLoading, user }) => {
             <button onClick={() => createGame(10)}>10</button>
             <button onClick={() => createGame(80)}>60</button>
             <button onClick={() => createGame(120)}>120</button>
-        </div>
+        </>
 
     );
 };

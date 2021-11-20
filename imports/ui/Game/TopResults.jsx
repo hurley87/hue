@@ -26,8 +26,10 @@ const Results = styled.div`
 export const TopResults = ({ player, renderSuit, game }) => {
     return (
         <Results>
-            <h5> <img src={player.avatar} /> {player.username} {game.dealer === player.id ? <b>Dealer</b>  : null} {game.maker === player.id && game.trump !== "" ? (<span>{renderSuit(game.trump)}</span>) : null} {" "}
-            {" "} <span><b>{player.score} / {game.limit}</b> {" "} Tricks: {player.trick}  </span>
+            <h5> 
+                <img src={player.avatar} /> {player.username} {game.dealer === player.id ? <b>Dealer</b>  : null}{" "}
+                {game.maker === player.id && game.trump !== "" ? (<span>{renderSuit(game.trump)}</span>) : null}{" "}
+                <span><b>{player.score} / {game.limit}</b>{" "}Tricks: {player.trick}</span>
             </h5>
         </Results>
     );

@@ -28,9 +28,7 @@ const Button = styled.button`
 export const TopCards = ({ player, renderCover, renderCard, game }) => {
     return (
         <Top>
-            <div className="firstRow">
-                <p>{player.hand.map((card, i) => <Button key={i}>{renderCover()}</Button>)}</p>
-            </div>
+            <p>{player.hand.map((card, i) => <Button key={i}>{renderCover()}</Button>)}</p>
             <SecondRow className="secondRow">
                 {(player.first.length === 1 || player.first.length === 2) && game.status === 'PlayCards' ? <Button style={{position: 'relative', left: '60px'}}>{renderCard(player.first[0]?.suit, player.first[0]?.value)}</Button> : null}
                 {player.first.length === 2 ? <Button>{renderCover()}</Button> : null}

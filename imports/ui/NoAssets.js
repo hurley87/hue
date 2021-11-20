@@ -107,7 +107,6 @@ export const NoAssets = ({ user }) => {
     )
       .then((response) => response.json())
       .then((response) => {
-        console.log(response.assets);
         const osAssets = response.assets;
         setAssets(osAssets);
         osAssets.length === 0 ? setError(true) : setPickAvatar(true);

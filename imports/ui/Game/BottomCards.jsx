@@ -45,9 +45,7 @@ export const BottomCards = ({ player, followsuit, game, handlePlayCard, renderCa
                 {(player.third.length === 1 || player.third.length === 2) && game.status === 'PlayCards' ? <Button style={{position: 'relative', left: '60px'}} disabled={followsuit(player, player.third[0])} onClick={() => handlePlayCard(player, player.third[0], 'third')}>{renderCard(player.third[0]?.suit, player.third[0]?.value)}</Button> : null}
                 <span>{player.third.length === 2 ? <Button disabled={true} >{renderCard("FD", 99)}</Button> : null}</span>
             </SecondRow>
-            <div className="firstRow">
-                {player.hand.map((card, i) => (<Button key={i} disabled={followsuit(player, card)} onClick={() => handlePlayCard(player, card, 'hand')}>{renderCard(card?.suit, card?.value)}</Button>))}
-            </div>
+            {player.hand.map((card, i) => (<Button key={i} disabled={followsuit(player, card)} onClick={() => handlePlayCard(player, card, 'hand')}>{renderCard(card?.suit, card?.value)}</Button>))}
         </Bottom>
     );
 };

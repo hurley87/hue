@@ -17,27 +17,27 @@ export const Pickup = ({ game, updateGame, renderCard, userId }) => {
     };
 
     const pickupCurrentUi = () => (
-        <div>
+        <>
             Pick up the {renderCard(game.deck[0]?.suit, game.deck[0]?.value)} and make trump <Suit suit={game.deck[0]?.suit} />  or pass?{" "}
             <button onClick={() => handlePickup('make')}>Make</button>
             <button onClick={() => handlePickup('pass')}>Pass</button>
-        </div>
+        </>
     );
 
     const pickupOpposingUi = (player) => (
-        <div>
+        <>
             { game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} is deciding wether or not to pick up {renderCard(game.deck[0]?.suit, game.deck[0]?.value)}
-        </div>
+        </>
     );
 
     return (
-        <div>
+        <>
             {
                 game.currentPlayer === userId ?
                     userId === game.playerOne.id ? pickupCurrentUi() : pickupCurrentUi()
                     :
                     userId === game.playerOne.id ? pickupOpposingUi(game.playerOne) : pickupOpposingUi(game.playerTwo)
             }
-        </div>
+        </>
     );
 };

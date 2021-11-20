@@ -56,19 +56,18 @@ export const Deal = ({ game, userId, updateGame }) => {
     }
 
     return (
-        <div>
+        <>
             {
                 game.currentPlayer === userId ? (
-                    <div>
+                    <>
                         { game.currentPlayer === game.playerOne.id ? <p>Deal the cards to start the game</p> : <p>Deal the cards to start the game</p>}
                         <WrappedButton style={{display: 'block', margin: 'auto'}} onClick={() => handleDeal()}>Deal</WrappedButton>
-                    </div>
+                    </>
                 ) : (
-                        <div>
-                            <p>Waiting on  {game.currentPlayer === game.playerOne.id ? game.playerOne.username : game.playerTwo.username} to deal the cards.</p>
-                        </div>
-                    )}
-        </div>
+                    <p>Waiting on  {game.currentPlayer === game.playerOne.id ? game.playerOne.username : game.playerTwo.username} to deal the cards.</p>
+                )
+            }
+        </>
 
     );
 };

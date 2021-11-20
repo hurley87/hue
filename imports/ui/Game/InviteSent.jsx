@@ -5,7 +5,7 @@ export const InviteSent = ({ game }) => {
     const [isCopied, setCopied] = useClipboard(game.inviteCode);
 
     return (
-        <div>
+        <>
             <p>Share this invite code with a friend.</p>
             <input
                 type="text"
@@ -15,7 +15,7 @@ export const InviteSent = ({ game }) => {
                 style={{ width: "58%"}}
             />
             <button onClick={setCopied}>{isCopied ? "copied!" : "copy"}</button>
-        </div>
+        </>
 
     );
 };

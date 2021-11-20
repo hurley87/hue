@@ -57,20 +57,18 @@ export const Make = ({ game, updateGame, renderSuit, userId }) => {
     );
 
     const makeOpposingUi = (player) => (
-        <div>
-            <p  style={{paddingTop: "60px"}}>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} to make it.</p>
-        </div>
+        <p  style={{paddingTop: "60px"}}>Waiting on {game.playerOne.id === player.id ? game.playerTwo.username : game.playerOne.username} to make it.</p>
     );
 
     return (
-        <div>
+        <>
             {
                 game.currentPlayer === userId ?
                     userId === game.playerOne.id ? makeCurrentUi() : makeCurrentUi()
                     :
                     userId === game.playerOne.id ? makeOpposingUi(game.playerOne) : makeOpposingUi(game.playerTwo)
             }
-        </div>
+        </>
 
     );
 };

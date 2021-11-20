@@ -9,17 +9,17 @@ const Main = styled.div`
 export const Order = ({ game, updateGame, renderCard, userId }) => {
 
     const orderCurrentUi = () => (
-        <div>
+        <>
             Order up the {game.deck[0]?.value === 15 ? renderCard(game.deck[1]?.suit, game.deck[1]?.value) : renderCard(game.deck[0]?.suit, game.deck[0]?.value)} or pass?{" "}
             <button onClick={() => handleOrderPickup()}>Order</button>
             <button onClick={() => handleOrderPass()}>Pass</button>
-        </div>
+        </>
     );
 
     const orderOpposingUi = () => (
-        <div>
+        <>
             {game.playerTwo.username} has option to order {game.deck[0]?.value === 15 ? renderCard(game.deck[1]?.suit, game.deck[1]?.value) : renderCard(game.deck[0]?.suit, game.deck[0]?.value)}
-        </div>
+        </>
     );
 
     const handleOrderPickup = () => {

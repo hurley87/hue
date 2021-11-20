@@ -36,12 +36,10 @@ const NavStyle = styled.div`
 
 
 export const Nav = ({ user }) => {
-    const logout = () => Meteor.logout();
-
     return (
         <NavStyle>
             <p> {user.profile ? <img src={user.profile.avatar} /> : "gm, "}  {user.username.includes(".eth") ? user.username : user.username.slice(0, 2) + "..." + user.username.slice(-4)}</p>
-            <button onClick={logout}>logout</button>
+            <button onClick={() => Meteor.logout()}>logout</button>
             <Rules />
             <About />
             <Discord />

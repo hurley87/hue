@@ -66,19 +66,5 @@ Meteor.methods({
     } catch (e) {
       console.log("Updating score collection error", e);
     }
-
-    const winnerUsername = Meteor.users.findOne(hand.winnerId).username;
-    const loserUsername = Meteor.users.findOne(hand.loserId).username;
-    try {
-      Meteor.call(
-        "games.discord",
-        "911394414025383936",
-        `${winnerUsername} won a hand against ${loserUsername} and earned ${
-          hand.winnerScore
-        } ${hand.winnerScore === 1 ? "point" : "points"}`
-      );
-    } catch (e) {
-      console.log("Updating udpating Discord", e);
-    }
   },
 });
