@@ -2,66 +2,24 @@ import React from 'react';
 
 export const Over = ({ game, updateGame, userId, recordHand }) => {
     const nextHand = () => {
-        recordHand();
-
         const newGame = game;
         if (newGame.playerOne.trick > newGame.playerTwo.trick) {
             const points = newGame.playerOne.trick - newGame.playerTwo.trick;
             if (newGame.playerOne.id === newGame.maker) {
                 newGame.playerOne.score += points;
-                try {
-                    Meteor.call(
-                      "games.discord",
-                      "911394414025383936",
-                      `${newGame.playerOne.username} won a hand against ${game.playerTwo.username} and earned ${
-                        points
-                      } ${points === 1 ? "point" : "points"}`
-                    );
-                } catch (e) {
-                    console.log("Updating udpating Discord", e);
-                }
+                recordHand(newGame.playerOne.id, newGame.playerTwo.id, points)
             } else {
                 newGame.playerOne.score += 2 * points;
-                try {
-                    Meteor.call(
-                      "games.discord",
-                      "911394414025383936",
-                      `${newGame.playerOne.username} euchred ${game.playerTwo.username} and earned ${
-                        points
-                      } ${points === 1 ? "point" : "points"}`
-                    );
-                } catch (e) {
-                    console.log("Updating udpating Discord", e);
-                }
+                recordHand(newGame.playerOne.id, newGame.playerTwo.id, 2 * points)
             }
         } else {
             const points = newGame.playerTwo.trick - newGame.playerOne.trick;
             if (newGame.playerTwo.id === newGame.maker) {
                 newGame.playerTwo.score += points;
-                try {
-                    Meteor.call(
-                      "games.discord",
-                      "911394414025383936",
-                      `${newGame.playerTwo.username} won a hand against ${game.playerOne.username} and earned ${
-                        points
-                      } ${points === 1 ? "point" : "points"}`
-                    );
-                } catch (e) {
-                    console.log("Updating udpating Discord", e);
-                }
+                recordHand(newGame.playerTwo.id, newGame.playerOne.id, points)
             } else {
                 newGame.playerTwo.score += 2 * points;
-                try {
-                    Meteor.call(
-                      "games.discord",
-                      "911394414025383936",
-                      `${newGame.playerTwo.username} euchred ${game.playerOne.username} and earned ${
-                        points
-                      } ${points === 1 ? "point" : "points"}`
-                    );
-                } catch (e) {
-                    console.log("Updating udpating Discord", e);
-                }
+                recordHand(newGame.playerTwo.id, newGame.playerOne.id, 2 * points)
             }
         }
 

@@ -8,8 +8,7 @@ Meteor.methods({
       loserId: String,
       gameId: String,
       maker: String,
-      winnerScore: Number,
-      loserScore: Number,
+      points: Number,
       timePlayed: Number,
     });
 
@@ -25,7 +24,7 @@ Meteor.methods({
         $inc: {
           "profile.handWins": 1,
           "profile.euchresFor": 1,
-          "profile.score": hand.winnerScore,
+          "profile.score": hand.points,
           "profile.makes": hand.winnerId === hand.maker ? 1 : 0,
           "profile.timePlayed": parseInt(hand.timePlayed),
         },
@@ -42,8 +41,6 @@ Meteor.methods({
         $inc: {
           "profile.handLosses": 1,
           "profile.euchresAgainst": 1,
-          "profile.score": hand.loserScore,
-          "profile.makes": hand.loserId === hand.maker ? 1 : 0,
           "profile.timePlayed": parseInt(hand.timePlayed),
         },
       });
@@ -56,8 +53,7 @@ Meteor.methods({
         gameId: hand.gameId,
         winnerId: hand.winnerId,
         loserId: hand.loserId,
-        winnerScore: hand.winnerScore,
-        loserScore: hand.loserScore,
+        points: hand.points,
         timePlayed: parseInt(hand.timePlayed),
         trump: hand.trump,
         maker: hand.maker,
@@ -65,6 +61,20 @@ Meteor.methods({
       });
     } catch (e) {
       console.log("Updating score collection error", e);
+    }
+
+    try {
+      const winnerUsername = Meteor.users.findOne(hand.winnerId).username;
+      const loserUsername = Meteor.users.findOne(hand.loserId).username;
+      Meteor.call(
+        "games.discord",
+        "911394414025383936",
+        `${winnerUsername} earned ${hand.points} ${
+          hand.points === 1 ? "point" : "points"
+        } against ${loserUsername} in ${parseInt(hand.timePlayed / 60)} minutes`
+      );
+    } catch (e) {
+      console.log("Updating udpating Discord", e);
     }
   },
 });

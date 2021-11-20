@@ -119,29 +119,15 @@ export const Game = ({ game, user }) => {
         onLoad();
     }, []);
 
-    function recordHand() {
-        let winnerId = game.playerOne.id;
-        let loserId = game.playerTwo.id;
-        let winnerScore = game.playerOne.score;
-        let loserScore = game.playerTwo.score;
-
-        if (game.playerTwo.score > game.playerOne.score) {
-            winnerId = game.playerTwo.id;
-            loserId = game.playerOne.id;
-            winnerScore = game.playerTwo.score;
-            loserScore = game.playerOne.score;
-        }
-
+    function recordHand(winnerId, loserId, points) {
         const endTime = new Date();
         const timePlayed = (endTime - startTime) / 1000;
-
         const hand = {
             winnerId,
             loserId,
             gameId: game._id,
             maker: game.maker,
-            winnerScore,
-            loserScore,
+            points,
             timePlayed,
         };
 
