@@ -71,7 +71,9 @@ Meteor.methods({
         "911394414025383936",
         `${winnerUsername} earned ${hand.points} ${
           hand.points === 1 ? "point" : "points"
-        } against ${loserUsername} in ${parseInt(hand.timePlayed / 60)} minutes`
+        } against ${loserUsername} in ${parseInt(hand.timePlayed / 60)} ${
+          parseInt(hand.timePlayed / 60) === 1 ? "minute" : "minutes"
+        }`
       );
     } catch (e) {
       console.log("Updating udpating Discord", e);
