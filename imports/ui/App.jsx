@@ -13,6 +13,7 @@ import ErrorStyle from "./Styles/ErrorStyle";
 import ModalStyle from "./Styles/ModalStyle"; 
 import MainCTAStyle from "./Styles/MainCTAStyle"; 
 import Modal from 'react-modal';
+import formatUsername from '../lib/formatUsername';
 
 const Headline = styled.div`
     margin: auto;
@@ -154,7 +155,7 @@ export const App = () => {
               if (err) {
                 console.log(err)
               } else {
-                Meteor.call("games.discord", "911391777955659819", `${username} connected their wallet`)
+                Meteor.call("games.discord", "911391777955659819", `${formatUsername(username)} connected their wallet`)
               }
           });
         }

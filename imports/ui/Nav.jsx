@@ -4,6 +4,7 @@ import TransparantBtnStyle from './Styles/TransparantBtnStyle';
 import { Rules } from './Rules';
 import { About } from './About';
 import { Discord } from './Discord';
+import formatUsername from '../lib/formatUsername';
 
 const NavStyle = styled.div`
     width: 95%;
@@ -38,7 +39,7 @@ const NavStyle = styled.div`
 export const Nav = ({ user }) => {
     return (
         <NavStyle>
-            <p> {user.profile ? <img src={user.profile.avatar} /> : "gm, "}  {user.username.includes(".eth") ? user.username : user.username.slice(0, 2) + "..." + user.username.slice(-4)}</p>
+            <p> {user.profile ? <img src={user.profile.avatar} /> : "gm, "}  {formatUsername(user.username)}</p>
             <button onClick={() => Meteor.logout()}>logout</button>
             <Rules />
             <About />

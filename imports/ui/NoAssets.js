@@ -8,6 +8,7 @@ import { Loading } from "./Loading";
 import { Nav } from "./Nav";
 import { ethers } from "ethers";
 import Modal from "react-modal";
+import formatUsername from "../lib/formatUsername";
 
 const Main = styled.div`
   width: 95%;
@@ -131,7 +132,9 @@ export const NoAssets = ({ user }) => {
                 Meteor.call(
                   "games.discord",
                   "911391777955659819",
-                  `${user.username} chose their avatar ${asset.image_thumbnail_url}`
+                  `${formatUsername(user.username)}'s avatar ${
+                    asset.image_thumbnail_url
+                  }`
                 );
               }}
               key={i}
@@ -143,17 +146,12 @@ export const NoAssets = ({ user }) => {
         <Main>
           {error && (
             <Error>
-              You don't have the right NFT. Refresh the page to check again.
+              You don't own the right NFT. Refresh the page to check again.
             </Error>
           )}
           <p>
             You'll need to have a 2545 NFT in your{" "}
-            {user.username.includes(".eth")
-              ? user.username
-              : user.username.slice(0, 2) +
-                "..." +
-                user.username.slice(-4)}{" "}
-            wallet to get access the game.
+            {formatUsername(user.username)} wallet to get access the game.
           </p>
           <button
             onClick={() =>

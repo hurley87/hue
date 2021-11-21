@@ -1,5 +1,6 @@
 import { check } from "meteor/check";
 import { GamesCollection } from "../db/GamesCollection";
+import formatUsername from "../lib/formatUsername";
 const Discord = require("discord.js.old");
 const client = new Discord.Client();
 
@@ -53,9 +54,7 @@ Meteor.methods({
       );
     }
 
-    let username = Meteor.users.findOne(this.userId).username;
-    if (!username.includes(".eth"))
-      username = address.slice(0, 2) + "..." + address.slice(-4);
+    const username = formatUsername(Meteor.users.findOne(this.userId).username);
     const avatar = Meteor.users.findOne(this.userId).profile.avatar;
 
     try {
@@ -126,10 +125,7 @@ Meteor.methods({
     check(gameId, String);
 
     const newGame = GamesCollection.findOne(gameId);
-    let username = Meteor.users.findOne(this.userId).username;
-    if (!username.includes(".eth"))
-      username = username.slice(0, 2) + "..." + username.slice(-4);
-
+    const username = formatUsername(Meteor.users.findOne(this.userId).username);
     const avatar = Meteor.users.findOne(this.userId).profile.avatar;
 
     newGame.playerTwo.avatar = avatar;
