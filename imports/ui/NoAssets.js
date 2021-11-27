@@ -97,8 +97,7 @@ export const NoAssets = ({ user }) => {
     setError(false);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const address = await provider.resolveName(user.username);
-    // address of creature collection now - should update to NFTs Opensea collection id
-    const collectionAddress = "0xaf316251082fee7dff8412ca896601796674e0a6";
+    const collectionAddress = "0xdb01de1d241d1e654b8344da9cda7dad1301f78a";
 
     fetch(
       `https://api.opensea.io/api/v1/assets?owner=${address}&asset_contract_address=${collectionAddress}&limit=20`,
@@ -156,7 +155,7 @@ export const NoAssets = ({ user }) => {
           <button
             onClick={() =>
               window.open(
-                "https://opensea.io/collection/2545bygr4y?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW",
+                "https://opensea.io/collection/headsupeuchre",
                 "_blank"
               )
             }
