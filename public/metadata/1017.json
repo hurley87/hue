@@ -1,0 +1,27 @@
+{
+  "name": "Heads Up Euchre #1017",
+  "description": "Heads Up Euchre is a collection of NFT playing cards that offer members access to an online game and private community.",
+  "image": "https://www.headsupeuchre.com/metadata/1017.png",
+  "dna": "8a92d0252bfe0639b5a0d3256ab8f1c711c2d49c",
+  "edition": 1017,
+  "date": 1637971528282,
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Rustic Oak"
+    },
+    {
+      "trait_type": "Card",
+      "value": "Silver"
+    },
+    {
+      "trait_type": "Value",
+      "value": "Ace"
+    },
+    {
+      "trait_type": "Suit",
+      "value": "Hearts"
+    }
+  ],
+  "compiler": "HashLips Art Engine"
+}

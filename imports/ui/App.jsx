@@ -6,6 +6,9 @@ import Web3Modal from "web3modal";
 import { useTracker } from 'meteor/react-meteor-data';
 import { NoGame } from './NoGame';
 import { Game } from './Game';
+import { About } from './About';
+import { Discord } from './Discord';
+import { Rules } from './Rules';
 import { GamesCollection } from "../db/GamesCollection";
 import styled from 'styled-components';
 import { NoAssets } from './NoAssets';
@@ -20,13 +23,40 @@ const Headline = styled.div`
     width: 95%;
     max-width: 1000px;
     text-align: center;
+    padding-top: 50px;
+
+    nav {
+      max-width: 300px;
+      margin: auto;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: stretch; /* Default */
+      justify-content: space-between;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul li {
+      display: block;
+      flex: 0 1 auto; /* Default */
+      list-style-type: none;
+      background: #fafafa;
+    }
+
+    ul li button{
+      margin: 0px;
+    }
+
 
     h1 {
         font-size: 72px;
         line-height: 96px;
         font-family: "Domine";
         color: #292827;
-        margin-top: 80px;
+        margin-top: 40px;
         margin-bottom: 0px;
     }
 
@@ -177,6 +207,13 @@ export const App = () => {
         ) : (
           <>
               <Headline>
+                  <nav>
+                    <ul>
+                      <li><Rules /></li>
+                      <li><About /></li>
+                      <li><Discord /></li>
+                    </ul>
+                  </nav>
                   <h1>Heads Up Euchre</h1>
                   <p>Challenge a friend to a simple NFT card game. Connect your Ethereum wallet to get started.</p>
               </Headline>
