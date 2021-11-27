@@ -16,7 +16,7 @@ const NavStyle = styled.div`
     img {
         height: 40px;   
         width: auto;
-        border-radius: 40px;
+        border-radius: 5px;
         float: left;
         margin-right: 5px;
     }

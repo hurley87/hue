@@ -61,11 +61,13 @@ const Error = styled.div`
 `;
 
 const Avatar = styled.img`
-  border-radius: 100px;
+  border-radius: 5px;
   cursor: pointer;
   border: 5px solid #fff;
   display: block;
   margin: auto;
+  margin-bottom: 10px;
+
   &:hover {
     border: 5px solid #b366ff;
   }
@@ -149,7 +151,7 @@ export const NoAssets = ({ user }) => {
             </Error>
           )}
           <p>
-            You'll need to have a 2545 NFT in your{" "}
+            You'll need to have a Heads Up Euchre NFT in your{" "}
             {formatUsername(user.username)} wallet to get access the game.
           </p>
           <button
