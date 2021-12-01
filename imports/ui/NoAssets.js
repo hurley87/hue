@@ -9,6 +9,8 @@ import { Nav } from "./Nav";
 import { ethers } from "ethers";
 import Modal from "react-modal";
 import formatUsername from "../lib/formatUsername";
+import { createAlchemyWeb3 } from "@alch/alchemy-web3";
+import axios from "axios";
 
 const Main = styled.div`
   width: 95%;
@@ -53,6 +55,7 @@ const Main = styled.div`
     max-width: 300px;
     margin: auto;
     display: block;
+    margin-bottom: 5px;
   }
 `;
 
@@ -88,6 +91,11 @@ export const NoAssets = ({ user }) => {
   const [pickAvatar, setPickAvatar] = useState(false);
   const [assets, setAssets] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [isMinting, setIsMinting] = useState(false);
+  const [address, setAddress] = useState("");
+  const [contact, setContract] = useState(null);
+  const [supply, setSupply] = useState(null);
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     checkWallet();
@@ -97,12 +105,9 @@ export const NoAssets = ({ user }) => {
   async function checkWallet() {
     setLoading(true);
     setError(false);
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const address = await provider.resolveName(user.username);
-    const collectionAddress = "0xdb01de1d241d1e654b8344da9cda7dad1301f78a";
 
     fetch(
-      `https://api.opensea.io/api/v1/assets?owner=${address}&asset_contract_address=${collectionAddress}&limit=20`,
+      `https://api.opensea.io/api/v1/assets?owner=${address}&asset_contract_address=0xdb01de1d241d1e654b8344da9cda7dad1301f78a&limit=20`,
       {
         method: "GET",
       }
@@ -115,7 +120,47 @@ export const NoAssets = ({ user }) => {
       })
       .catch((err) => console.error(err));
 
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const walletAddress = await provider.resolveName(user.username);
+    setAddress(walletAddress);
+    const alchemyapi =
+      "https://eth-mainnet.alchemyapi.io/v2/sWFNWWS7dk2mxBO9nvGShTrqb5-N8-UK";
+
+    const etherscanRequest = await axios.get(
+      `https://api.etherscan.io/api?module=contract&action=getabi&address=0xdb01de1d241d1e654b8344da9cda7dad1301f78a&apikey=SHVWTFP641J7NHDHWFJ4VES93ZFIEM27M2`
+    );
+    const contractAbi = JSON.parse(etherscanRequest.data.result);
+    const web3 = createAlchemyWeb3(alchemyapi);
+    const value = web3.utils.toWei((0.05).toString(), "ether");
+    const nftContract = new web3.eth.Contract(
+      contractAbi,
+      "0xdb01de1d241d1e654b8344da9cda7dad1301f78a"
+    );
+    const totalSupply = await nftContract.methods.totalSupply().call();
+
+    setContract(nftContract);
+    setValue(value);
+    setSupply(totalSupply);
     setLoading(false);
+  }
+
+  async function mintNFT() {
+    setIsMinting(true);
+
+    contact.methods
+      .mint(address, 1)
+      .send({
+        from: address,
+        value,
+      })
+      .once("error", (err) => {
+        console.log(err);
+        setIsMinting(false);
+      })
+      .then((receipt) => {
+        console.log(receipt);
+        setIsMinting(false);
+      });
   }
 
   return loading ? (
@@ -125,7 +170,7 @@ export const NoAssets = ({ user }) => {
       <Nav user={user} />
       {pickAvatar ? (
         <Main>
-          <p>Choose your avatar.</p>
+          <p>Choose an NFT to be your avatar.</p>
           {assets.map((asset, i) => (
             <Avatar
               onClick={() => {
@@ -150,24 +195,27 @@ export const NoAssets = ({ user }) => {
               You don't own the right NFT. Refresh the page to check again.
             </Error>
           )}
-          <p>
-            You'll need to have a Heads Up Euchre NFT in your{" "}
-            {formatUsername(user.username)} wallet to get access the game.
-          </p>
-          <button
-            onClick={() =>
-              window.open(
-                "https://opensea.io/collection/headsupeuchre",
-                "_blank"
-              )
-            }
-          >
-            Buy one on OpenSea
-          </button>
-          <Switch onClick={() => setIsOpen(true)}>What is OpenSea?</Switch>
+          {!isMinting ? (
+            <>
+              <p>
+                You'll need to have a Heads Up Euchre NFT in your wallet to get
+                access the game. It's easy to buy or mint one.
+              </p>
+              <p>
+                <b>{1337 - supply} / 1337 left</b>
+              </p>
+              <button onClick={() => mintNFT(1)}>Mint 1 for 0.05 ETH</button>
+              <Switch onClick={() => setIsOpen(true)}>
+                What does Mint NFT mean?
+              </Switch>
+            </>
+          ) : (
+            <Loading />
+          )}
+
           <Modal isOpen={modalIsOpen} style={ModalStyle}>
             <h2>
-              What is OpenSea?{" "}
+              What does Mint NFT mean?{" "}
               <Close onClick={() => setIsOpen(false)}>close</Close>
             </h2>
             <br />
@@ -176,6 +224,14 @@ export const NoAssets = ({ user }) => {
               think of NFTs as collectable digital assets that you can own like
               art in the real world. On OpenSea, anyone can buy or sell these
               assets using their crypto wallet.
+            </p>
+            <p>
+              <a
+                target="_blank"
+                href={`https://etherscan.io/address/0xdb01de1d241d1e654b8344da9cda7dad1301f78a#code`}
+              >
+                Verified Contract Address
+              </a>
             </p>
           </Modal>
         </Main>

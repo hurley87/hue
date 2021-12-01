@@ -41,9 +41,9 @@ export const Nav = ({ user }) => {
         <NavStyle>
             <p> {user.profile ? <img src={user.profile.avatar} /> : "gm, "}  {formatUsername(user.username)}</p>
             <button onClick={() => Meteor.logout()}>logout</button>
-            <Rules />
             <About />
-            <Discord />
+            <button onClick={() => window.open("https://opensea.io/collection/headsupeuchre", "_blank")}>opensea</button>
+            <button onClick={() => window.open("https://discord.gg/G8NcDnWb", "_blank")}>discord</button>
         </NavStyle>
     )
 };
