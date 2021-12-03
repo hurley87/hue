@@ -5,7 +5,6 @@ export default TransparantBtnStyle = css`
   color: #141414;
   padding: 2px 5px;
   font-weight: 1px;
-  background: #e8e2dc;
   border: none;
   border-bottom: 4px solid #e8e2dc;
   text-decoration: none;

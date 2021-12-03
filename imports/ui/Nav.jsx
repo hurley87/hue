@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TransparantBtnStyle from './Styles/TransparantBtnStyle';
-import { Rules } from './Rules';
 import { About } from './About';
-import { Discord } from './Discord';
 import formatUsername from '../lib/formatUsername';
 
 const NavStyle = styled.div`
@@ -12,6 +10,7 @@ const NavStyle = styled.div`
     padding: 10px;
     clear: both;
     margin-bottom: 100px;
+    background-color: #fbf6f1;
 
     img {
         height: 40px;   

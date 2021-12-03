@@ -48,6 +48,7 @@ const Headline = styled.div`
 
     ul li button{
       margin: 0px;
+      background-color: #fbf6f1;
     }
 
 
