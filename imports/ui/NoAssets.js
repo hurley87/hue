@@ -11,6 +11,7 @@ import Modal from "react-modal";
 import formatUsername from "../lib/formatUsername";
 import { createAlchemyWeb3 } from "@alch/alchemy-web3";
 import axios from "axios";
+import IosRefresh from "react-ionicons/lib/IosRefresh";
 
 const Main = styled.div`
   width: 95%;
@@ -212,7 +213,15 @@ export const NoAssets = ({ user }) => {
               </Switch>
             </>
           ) : (
-            <Loading />
+            <>
+              <p>
+                Crypto transactions can be slow so don't be surprised if it
+                takes a few minutes to process.
+              </p>
+              <p>
+                <IosRefresh fontSize="60px" color="#020202" rotate={true} />
+              </p>
+            </>
           )}
 
           <Modal isOpen={modalIsOpen} style={ModalStyle}>
