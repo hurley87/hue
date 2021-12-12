@@ -216,7 +216,7 @@ export const App = () => {
                     </ul>
                   </nav>
                   <h1>Heads Up Euchre</h1>
-                  <p>Challenge a friend to a simple NFT card game. Connect your Ethereum wallet to get started.</p>
+                  <p>Challenge a friend to a fun NFT card game. Connect your Ethereum wallet to get started.</p>
               </Headline>
               {
                 error && (

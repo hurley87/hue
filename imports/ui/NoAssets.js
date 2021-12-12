@@ -106,8 +106,12 @@ export const NoAssets = ({ user }) => {
     setLoading(true);
     setError(false);
 
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const walletAddress = await provider.resolveName(user.username);
+    setAddress(walletAddress);
+
     fetch(
-      `https://api.opensea.io/api/v1/assets?owner=${address}&asset_contract_address=0xdb01de1d241d1e654b8344da9cda7dad1301f78a&limit=20`,
+      `https://api.opensea.io/api/v1/assets?owner=${walletAddress}&asset_contract_address=0xdb01de1d241d1e654b8344da9cda7dad1301f78a`,
       {
         method: "GET",
       }
@@ -115,14 +119,12 @@ export const NoAssets = ({ user }) => {
       .then((response) => response.json())
       .then((response) => {
         const osAssets = response.assets;
+        console.log(osAssets);
         setAssets(osAssets);
         osAssets.length === 0 ? setError(true) : setPickAvatar(true);
       })
       .catch((err) => console.error(err));
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const walletAddress = await provider.resolveName(user.username);
-    setAddress(walletAddress);
     const alchemyapi =
       "https://eth-mainnet.alchemyapi.io/v2/sWFNWWS7dk2mxBO9nvGShTrqb5-N8-UK";
 
