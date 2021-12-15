@@ -30,7 +30,7 @@ export const Opensea = () => {
                 target="_blank"
                 href="https://opensea.io/collection/headsupeuchre"
               >
-                View Opensea Collection
+                View Opensea
               </a>
             </p>
         </Modal>

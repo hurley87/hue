@@ -21,14 +21,14 @@ export const About = () => {
             </h2>
             <br />
             <p>
-              I wrote a background on why I created an online version of Heads Up Euchre. Subscribe and I'll send you monthly updates.
+              I wrote about why I created an online version of Heads Up Euchre. Subscribe and I'll send you monthly updates.
             </p>
             <p>
               <a
                 target="_blank"
                 href="https://www.getrevue.co/profile/davidhurley/archive/798201"
               >
-                View more
+                View about
               </a>
             </p>
         </Modal>

@@ -293,13 +293,13 @@ export const App = () => {
               <Content>
                 <h2>Game & NFT Collection</h2>
                 <p>
-                  I’ve always played euchre with my family growing up. Traditionally, the game is played with four people, two players to a team. My Mom and I created a two player version years ago so we could play without having to find two other players. I created Heads Up Euchre so we could continue playing online but if you’re fan of euchre or crypto I think you’ll enjoy it too.
+                  Traditionally, euchre is played with four people but my Mom and I created a two player version we've been playing for years. If you’re fan of euchre I think you’ll enjoy it too.
                 </p>
                 <p>
-                  1337 unique, randomly generated NFTs make up the Heads Up Euchre collection. You’ll need to own one of these NFTs to play the game and join our euchre community. Once you’re part of the community you’ll get access to exclusive online tournaments where winners can earn ETH.
+                  1337 unique, randomly generated pieces of art make up the NFT collection. You’ll need to own one to play the game and join our euchre community. Once you’re part of the community you’ll get access to exclusive online tournaments where winners can earn ETH.
                 </p>
                 <p>
-                  The NFT collection is based around a euchre deck which consists of cards nine and up. Higher value cards are rarer which makes them more valuable to own. If you know euchre you’ll know that trump is decided before the start of each hand. Jacks can be more valuable depending on what suit is trump. Choose a suit to see how,
+                  The NFT collection is based around a euchre. Higher value cards are rarer which makes them more valuable to own. If you know euchre you’ll know that trump is decided before the start of each hand and Jacks can be more valuable depending on what suit is trump. Choose a suit to see how,
                 </p>
                 <div className='suitButtons'>
                   <button onClick={() => setSuit('clubs')} className={suit === "clubs" ? "active": null}>
@@ -324,7 +324,7 @@ export const App = () => {
                         <img onClick={() => showCard(`/Spades/J.png`)} src={`/Spades/J.png`} />
                         {['A', 'K', 'Q', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Clubs/${card}.png`)} src={`/Clubs/${card}.png`} />)}
                       </CardRow>
-                      <p>Notice how the Jack of Clubs has the highest value when clubs is trump and the Jack of Spades is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest,</p>
+                      <p>Notice how the Jack of Clubs has the highest value when clubs is trump and the Jack of Spades is the second highest. Any trump card can beat any non trump card. These cards are ranked normally where Ace is the highest. Here's an example ranking if a spade was lead,</p>
                       <CardRow>
                         {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Spades/${card}.png`)} src={`/Spades/${card}.png`} />)}
                       </CardRow>
@@ -341,7 +341,7 @@ export const App = () => {
                         {['A', 'K', 'Q', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Spades/${card}.png`)} src={`/Spades/${card}.png`} />)}
 
                       </CardRow>
-                      <p>Notice how the Jack of Spades has the highest value when Spades is trump and the Jack of Clubs is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest,</p>
+                      <p>Notice how the Jack of Spades has the highest value when Spades is trump and the Jack of Clubs is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest. Here's an example ranking if a club was lead,</p>
                       <CardRow>
                         {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Clubs/${card}.png`)} src={`/Spades/${card}.png`} />)}
                       </CardRow>
@@ -356,7 +356,7 @@ export const App = () => {
                         <img src={`/Hearts/J.png`} onClick={() => showCard(`/Hearts/J.png`)}/>
                         {['A', 'K', 'Q', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Diamonds/${card}.png`)} src={`/Diamonds/${card}.png`} />)}
                       </CardRow>
-                      <p>Notice how the Jack of Diamonds has the highest value when Diamonds is trump and the Jack of Hearts is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest,</p>
+                      <p>Notice how the Jack of Diamonds has the highest value when Diamonds is trump and the Jack of Hearts is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest. Here's an example ranking if a heart was lead,</p>
                       <CardRow>
                         {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)}
                       </CardRow>
@@ -374,16 +374,16 @@ export const App = () => {
                         {['A', 'K', 'Q', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)}
                         
                       </CardRow>
-                      <p>Notice how the Jack of Hearts has the highest value when Hearts is trump and the Jack of Diamonds is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest,</p>
+                      <p>Notice how the Jack of Hearts has the highest value when Hearts is trump and the Jack of Diamonds is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest. Here's an example ranking if a diamond was lead,</p>
                       <CardRow>
-                        {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Diamonds/${card}.png`)} src={`/Hearts/${card}.png`} />)}
+                        {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Diamonds/${card}.png`)} src={`/Diamonds/${card}.png`} />)}
                       </CardRow>
                     </>
 
                   )
                 }
                 <p>                  
-                  A Joker isn't tradionally used in euchre but we added one to spice things up. No matter what trump is the Joker is always the highest card and if it's lead the other player is forced to play thier highest card. In the NFT collection Jokers are rare - there are only 33 Royal Jokers and 4 Zombie Jokers.
+                  A Joker isn't tradionally used in euchre but we added one to spice things up. No matter what trump is the Joker is always the highest card and if it's lead the other player is forced to play their highest card. Jokers are rarest and most valuable - there are only 33 Royal Jokers and 4 Zombie Jokers.
                 </p>
                 <CardRow>
                     <img src={`/Jokers/Royal.png`} onClick={() => showCard(`/Jokers/Royal.png`)}/>
@@ -393,19 +393,17 @@ export const App = () => {
                 <ol>
                   <li>Publish online game, establish Discord community and mint all 1337 Heads Up Euchre NFTs.</li>
                   <li>  
-                    Create a leaderboard and the first 10 players to get to 1,000 points will earn 0.1 ETH. There'll also be day long tournament where the winner at the end of the day wins 0.1 ETH. 
+                    Create a leaderboard showcasing players with the most points. The first 10 players to get to 1,000 points will earn 0.1 ETH. There'll also be day long tournament where the winner at the end of the day wins 0.1 ETH. 
                   </li>
                   <li>
                     Introduce a token so players can earn $hue while playing. Players will be able to win and lose $hue tokens based on if they win or lose a game. 
                   </li>
                   <li>Create a device that'll record games played in real life. Sure, we'll start in the Metaverse, but it doesn't mean we can't meet for games in real life.</li>
                 </ol>
-                <ConnectButton  style={{float: 'left', marginTop: '10px',}} onClick={() => connect()}>Connect your wallet</ConnectButton>
-                <br /><br />
                 <h2>Join Our Euchre Club</h2>
                 <p>
                   Ever wanted to join a club of friends who love playing euchre and appreciate what's new in tech? Then our euchre club is perfect for you. 
-                  By owning a Heads Up Euchre NFT you’d immediately be part of the community and get access to many things but not limited to exclusive euchre tournaments where you can win ETH.</p>
+                  By owning a Heads Up Euchre NFT you’d immediately be part of the community and get access to exclusive euchre tournaments where you can win ETH.</p>
                 <h2>Frequently Asked Questions</h2>
                 <p><b>What is an NFT?</b></p>
                 <p><small>An NFT stands for “Non-fungible token” and is a fancy way of saying it’s a unique, one of a kind digital item that users can buy, own, and trade. Some NFTs main function are to be digital art and look cool, some offer additional utility like exclusive access to websites or participation in an event, think of it like a rare piece of art that can also act as a “membership” card.</small></p>
@@ -440,7 +438,7 @@ export const App = () => {
           <h2>What is a wallet? <Close onClick={() => setIsOpen(false)}>close</Close></h2>
           <br />
           <p>
-            Wallets are used to send, receive, and store digital assets like NFTs, tokens and cryptocurrencies. 
+            Wallets are used to send, receive, and store digital assets like NFTs, tokens and cryptocurrencies like ETH. 
             We recommend signing up for <a target="_blank" href="https://metamask.io/">MetaMask</a> or <a target="_blank" href="https://wallet.coinbase.com/">Coinbase</a> and using their browser extension. 
           </p>
           <ReactPlayer width="100%" height="340px" url="https://www.youtube.com/watch?v=OsRIHlr0_Iw" />
