@@ -6,9 +6,7 @@ import Web3Modal from "web3modal";
 import { useTracker } from 'meteor/react-meteor-data';
 import { NoGame } from './NoGame';
 import { Game } from './Game';
-import { About } from './About';
-import { Discord } from './Discord';
-import { Rules } from './Rules';
+import { HomepageNav } from './HomepageNav';
 import { GamesCollection } from "../db/GamesCollection";
 import styled from 'styled-components';
 import { NoAssets } from './NoAssets';
@@ -17,47 +15,20 @@ import ModalStyle from "./Styles/ModalStyle";
 import MainCTAStyle from "./Styles/MainCTAStyle"; 
 import Modal from 'react-modal';
 import formatUsername from '../lib/formatUsername';
+import ReactPlayer from "react-player";
 
 const Headline = styled.div`
     margin: auto;
     width: 95%;
     max-width: 1000px;
     text-align: center;
-    padding-top: 50px;
-
-    nav {
-      max-width: 300px;
-      margin: auto;
-    }
-
-    nav ul {
-      display: flex;
-      align-items: stretch; /* Default */
-      justify-content: space-between;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    ul li {
-      display: block;
-      flex: 0 1 auto; /* Default */
-      list-style-type: none;
-      background: #fafafa;
-    }
-
-    ul li button{
-      margin: 0px;
-      background-color: #fbf6f1;
-    }
-
 
     h1 {
         font-size: 72px;
         line-height: 96px;
         font-family: "Domine";
         color: #292827;
-        margin-top: 40px;
+        margin-top: 0px;
         margin-bottom: 0px;
     }
 
@@ -80,6 +51,62 @@ const Headline = styled.div`
     }
 `;
 
+const Content = styled.div`
+  width: 95%;
+  margin: auto;
+  max-width: 1200px;
+  padding-top: 50px;
+
+  h2 {
+    font-size: 45px;
+    line-height: 110%;
+    font-family: "Domine";
+    color: #292827;
+    margin-top: 100px;
+    margin-bottom: 30px;
+  }
+
+  p, ol, li {
+    color: #2f2c2a;
+    font-size: 24px;
+    line-height: 110%;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
+  }
+
+  li {
+    margin: 20px 0px;
+  }
+
+  b{
+    font-weight: 900;
+  }
+
+  .suitButtons {
+    display: flex;
+    max-width: 500px;
+    padding-top: 10px;
+    padding-bottom: 25px;
+  }
+
+  .suitButtons button{
+    justify-content: space-between;
+    width: 30%;
+    margin-right: 10px;
+    border-radius: 100px;
+    border: 5px solid #2f2c2a;
+    cursor: pointer;
+  }
+
+  .suitButtons button img{
+    width: 100%;
+  }
+
+  .active {
+    border: 5px solid #b366ff !important;
+  }
+`;
+
 const ConnectButton = styled.button`${MainCTAStyle}`;  
 
 const Error = styled.div`${ErrorStyle}`;
@@ -90,6 +117,18 @@ const Switch = styled.div`
 const Close = styled.button`
     ${TransparantBtnStyle}
 
+`;
+const CardRow = styled.div`
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  img {
+    justify-content: space-between;
+    width: 13%;
+    margin-right: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
 `;
 
 const INFURA_ID = "d8fe044a671e41e6b3697f1167a3a5be";
@@ -151,9 +190,13 @@ const Mobile = styled.div`
 export const App = () => {
   const [error, setError] = useState(false);
   const [modalIsOpen,setIsOpen] = useState(false);
+  const [cardModalIsOpen, setCardModalIsOpen] = useState(false);
+  const [card, setCard] = useState(null);
+  const [suit, setSuit] = useState('clubs');
   const { user, game } = useTracker(() => {
     const noDataAvailable = { user: null, game: null};
     const handler = Meteor.subscribe('games');
+    
 
     if (!handler.ready()) {
       return { ...noDataAvailable };
@@ -163,7 +206,30 @@ export const App = () => {
 
     return { user, game };
   });
+
+  function showCard(card) {
+    setCardModalIsOpen(true)
+    setCard(card)
+  }
   
+  function convertCard(card) {
+    switch(card) {
+      case "A":
+        return "Ace"
+      case "K":
+        return "King"
+      case "Q":
+        return "Queen"
+      case "J":
+        return "Jack"
+      case "10":
+        return "Ten"
+      case "9":
+        return "Nine"
+      default:
+        return card;
+    }
+  }
 
   async function connect() {
     setError(false);
@@ -208,15 +274,9 @@ export const App = () => {
         ) : (
           <>
               <Headline>
-                  <nav>
-                    <ul>
-                      <li><Rules /></li>
-                      <li><About /></li>
-                      <li><Discord /></li>
-                    </ul>
-                  </nav>
+                  <HomepageNav/>
                   <h1>Heads Up Euchre</h1>
-                  <p>Challenge a friend to a fun NFT card game. Connect your Ethereum wallet to get started.</p>
+                  <p>Earn ETH while playing euchre online with your friends. Connect your wallet to get started. </p>
               </Headline>
               {
                 error && (
@@ -230,6 +290,146 @@ export const App = () => {
               <Mobile>
                 <Error>This game is only available on desktop.</Error>
               </Mobile>
+              <Content>
+                <h2>Game & NFT Collection</h2>
+                <p>
+                  I’ve always played euchre with my family growing up. Traditionally, the game is played with four people, two players to a team. My Mom and I created a two player version years ago so we could play without having to find two other players. I created Heads Up Euchre so we could continue playing online but if you’re fan of euchre or crypto I think you’ll enjoy it too.
+                </p>
+                <p>
+                  1337 unique, randomly generated NFTs make up the Heads Up Euchre collection. You’ll need to own one of these NFTs to play the game and join our euchre community. Once you’re part of the community you’ll get access to exclusive online tournaments where winners can earn ETH.
+                </p>
+                <p>
+                  The NFT collection is based around a euchre deck which consists of cards nine and up. Higher value cards are rarer which makes them more valuable to own. If you know euchre you’ll know that trump is decided before the start of each hand. Jacks can be more valuable depending on what suit is trump. Choose a suit to see how,
+                </p>
+                <div className='suitButtons'>
+                  <button onClick={() => setSuit('clubs')} className={suit === "clubs" ? "active": null}>
+                    {suit === "clubs" ? <img src="/Suit/Clubs-active.svg"/> : <img style={{height: '93px'}} src="/Suit/Clubs.svg"/>}
+                  </button>
+                  <button onClick={() => setSuit('diamonds')} className={suit === "diamonds" ? "active": null}>
+                    {suit === "diamonds" ? <img src="/Suit/Diamonds-active.svg"/> : <img src="/Suit/Diamonds.svg"/>}
+                  </button>
+                  <button onClick={() => setSuit('spades')} className={suit === "spades" ? "active": null}>
+                    {suit === "spades" ? <img src="/Suit/Spades-active.svg"/> : <img src="/Suit/Spades.svg"/>}
+                  </button>
+                  <button onClick={() => setSuit('hearts')} className={suit === "hearts" ? "active": null}>
+                    {suit === "hearts" ? <img style={{position: "relative", top: "10px"}} src="/Suit/Hearts-active.svg"/> : <img style={{position: "relative", top: "10px"}} src="/Suit/Hearts.svg"/>}
+                  </button>
+                </div>
+                <p>If <span style={{color: "#b366ff"}}>{suit}</span> is trump the cards with the highest value are ranked in this order,</p>
+                {
+                  suit === 'clubs' && (
+                    <>
+                      <CardRow>
+                        <img onClick={() => showCard(`/Clubs/J.png`)} src={`/Clubs/J.png`} />
+                        <img onClick={() => showCard(`/Spades/J.png`)} src={`/Spades/J.png`} />
+                        {['A', 'K', 'Q', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Clubs/${card}.png`)} src={`/Clubs/${card}.png`} />)}
+                      </CardRow>
+                      <p>Notice how the Jack of Clubs has the highest value when clubs is trump and the Jack of Spades is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest,</p>
+                      <CardRow>
+                        {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Spades/${card}.png`)} src={`/Spades/${card}.png`} />)}
+                      </CardRow>
+                    </>
+
+                  )
+                }
+                {
+                  suit === 'spades' && (
+                    <>
+                      <CardRow>
+                        <img src={`/Spades/J.png`} onClick={() => showCard(`/Spades/J.png`)}/>
+                        <img src={`/Clubs/J.png`} onClick={() => showCard(`/Clubs/J.png`)}/>
+                        {['A', 'K', 'Q', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Spades/${card}.png`)} src={`/Spades/${card}.png`} />)}
+
+                      </CardRow>
+                      <p>Notice how the Jack of Spades has the highest value when Spades is trump and the Jack of Clubs is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest,</p>
+                      <CardRow>
+                        {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Clubs/${card}.png`)} src={`/Spades/${card}.png`} />)}
+                      </CardRow>
+                    </>
+                  )
+                }
+                {
+                  suit === 'diamonds' && (
+                    <>
+                      <CardRow>
+                        <img src={`/Diamonds/J.png`} onClick={() => showCard(`/Diamonds/J.png`)}/>
+                        <img src={`/Hearts/J.png`} onClick={() => showCard(`/Hearts/J.png`)}/>
+                        {['A', 'K', 'Q', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Diamonds/${card}.png`)} src={`/Diamonds/${card}.png`} />)}
+                      </CardRow>
+                      <p>Notice how the Jack of Diamonds has the highest value when Diamonds is trump and the Jack of Hearts is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest,</p>
+                      <CardRow>
+                        {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)}
+                      </CardRow>
+                    </>
+
+                  )
+                }
+                {
+                  suit === 'hearts' && (
+                    <>
+                      <CardRow>
+                        
+                        <img src={`/Hearts/J.png`} onClick={() => showCard(`/Hearts/J.png`)}/>
+                        <img src={`/Diamonds/J.png`} onClick={() => showCard(`/Diamonds/J.png`)}/>
+                        {['A', 'K', 'Q', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)}
+                        
+                      </CardRow>
+                      <p>Notice how the Jack of Hearts has the highest value when Hearts is trump and the Jack of Diamonds is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest,</p>
+                      <CardRow>
+                        {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Diamonds/${card}.png`)} src={`/Hearts/${card}.png`} />)}
+                      </CardRow>
+                    </>
+
+                  )
+                }
+                <p>                  
+                  A Joker isn't tradionally used in euchre but we added one to spice things up. No matter what trump is the Joker is always the highest card and if it's lead the other player is forced to play thier highest card. In the NFT collection Jokers are rare - there are only 33 Royal Jokers and 4 Zombie Jokers.
+                </p>
+                <CardRow>
+                    <img src={`/Jokers/Royal.png`} onClick={() => showCard(`/Jokers/Royal.png`)}/>
+                    <img src={`/Jokers/Zombie.png`} onClick={() => showCard(`/Jokers/Zombie.png`)}/>
+                </CardRow>
+                <h2>Roadmap</h2>
+                <ol>
+                  <li>Publish online game, establish Discord community and mint all 1337 Heads Up Euchre NFTs.</li>
+                  <li>  
+                    Create a leaderboard and the first 10 players to get to 1,000 points will earn 0.1 ETH. There'll also be day long tournament where the winner at the end of the day wins 0.1 ETH. 
+                  </li>
+                  <li>
+                    Introduce a token so players can earn $hue while playing. Players will be able to win and lose $hue tokens based on if they win or lose a game. 
+                  </li>
+                  <li>Create a device that'll record games played in real life. Sure, we'll start in the Metaverse, but it doesn't mean we can't meet for games in real life.</li>
+                </ol>
+                <ConnectButton  style={{float: 'left', marginTop: '10px',}} onClick={() => connect()}>Connect your wallet</ConnectButton>
+                <br /><br />
+                <h2>Join Our Euchre Club</h2>
+                <p>
+                  Ever wanted to join a club of friends who love playing euchre and appreciate what's new in tech? Then our euchre club is perfect for you. 
+                  By owning a Heads Up Euchre NFT you’d immediately be part of the community and get access to many things but not limited to exclusive euchre tournaments where you can win ETH.</p>
+                <h2>Frequently Asked Questions</h2>
+                <p><b>What is an NFT?</b></p>
+                <p><small>An NFT stands for “Non-fungible token” and is a fancy way of saying it’s a unique, one of a kind digital item that users can buy, own, and trade. Some NFTs main function are to be digital art and look cool, some offer additional utility like exclusive access to websites or participation in an event, think of it like a rare piece of art that can also act as a “membership” card.</small></p>
+                <br />
+                <p><b>What is a wallet?</b></p>
+                <p><small>A crypto wallet is used to store your Ethereum and is needed to purchase and mint a Heads Up Euchre NFT. This will allow websites (that you authorize) access to your wallet for transactions. Having a wallet gives you an Ethereum address (i.e. 0xABCD….1234), this is where your NFT will be stored.</small></p>
+                <br />
+                <p><b>Why only 1337 Heads Up Euchre NFTs? </b></p>
+                <p><small>1337 is a language for internet users known for replacing letters with numbers or symbols. The term itself has gone on as a slang term for “extremely skilled (at gaming or computing)” or, more generally, “awesome.” 
+                  Basically, the Heads Up Euchre game is awesome.</small></p>
+                <br />
+                <p><b>What does minting mean?</b></p>
+                <p><small>Minting NFT refers to the process of turning a digital file into a crypto collectible or digital asset on the Ethereum blockchain. The digital item or file is stored in this decentralized database or distributed ledger forever, and it is impossible to edit, modify, or delete it. You own your Heads Up Euchre card and only you can decide to keep or sell it.</small></p>
+                <br />
+                <p><b>How much is a Heads Up Euchre NFT?</b></p>
+                <p><small>You can mint one for 0.05 ETH + gas fees.</small></p>
+                <br />
+                <p><b>How many NFTs can I mint? </b></p>
+                <p><small>You can only mint 1 NFT. This is done to maximize the number of unique owners and hopefully, players in our Heads Up Euchre league.</small></p>
+                <br />
+                <p><b>I have more questions</b></p>
+                <p><small>Join our discord and I can answer any questions you have.</small></p>
+              </Content>
+              <HomepageNav/>
           </>
         )
       }
@@ -243,6 +443,20 @@ export const App = () => {
             Wallets are used to send, receive, and store digital assets like NFTs, tokens and cryptocurrencies. 
             We recommend signing up for <a target="_blank" href="https://metamask.io/">MetaMask</a> or <a target="_blank" href="https://wallet.coinbase.com/">Coinbase</a> and using their browser extension. 
           </p>
+          <ReactPlayer width="100%" height="340px" url="https://www.youtube.com/watch?v=OsRIHlr0_Iw" />
+      </Modal>
+      <Modal
+        isOpen={cardModalIsOpen}
+        style={ModalStyle}
+      >
+          <h2>
+            {card && !card.includes("Joker") && convertCard(card.split("/")[2].split(".")[0]) + " of " + card.split("/")[1]}
+            {card && card.includes("Royal") && "Royal Joker"}
+            {card && card.includes("Zombie") && "Zombie Joker"}
+            <Close onClick={() => setCardModalIsOpen(false)}>close</Close>
+          </h2>
+          <br />
+          <img style={{width: "400px", margin: "auto"}} src={card} />  
       </Modal>
     </Main>
   )

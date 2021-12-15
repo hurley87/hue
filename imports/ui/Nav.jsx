@@ -42,7 +42,7 @@ export const Nav = ({ user }) => {
             <button onClick={() => Meteor.logout()}>logout</button>
             <About />
             <button onClick={() => window.open("https://opensea.io/collection/headsupeuchre", "_blank")}>opensea</button>
-            <button onClick={() => window.open("https://discord.gg/G8NcDnWb", "_blank")}>discord</button>
+            <button onClick={() => window.open("https://discord.gg/rfpqYcmHPu", "_blank")}>discord</button>
         </NavStyle>
     )
 };

@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import TransparantBtnStyle from "./Styles/TransparantBtnStyle";
 import ModalStyle from "./Styles/ModalStyle";
-import MainCTAStyle from "./Styles/MainCTAStyle";
 import Modal from "react-modal";
-
-const JoinDiscordButton = styled.button`${MainCTAStyle}`;  
 
 const SimpleBtn = styled.button`
   ${TransparantBtnStyle}
@@ -25,12 +22,17 @@ export const Discord = () => {
             </h2>
             <br />
             <p>
-                OpenSea is the largest peer-to-peer marketplace for NFTs. You can
-                think of NFTs as collectable digital assets that you can own like
-                art in the real world. On OpenSea, anyone can buy or sell these
-                assets using their crypto wallet.
+              Discord is a free voice, video, and text chat app that we use to coordinate online euchre games. 
+              Ideally, we create a thriving community around the conversations that'll happen there.
             </p>
-            <p><a style={{textDecoration: "none"}} target="_blank" href="https://discord.gg/G8NcDnWb"><JoinDiscordButton>Join our Discord</JoinDiscordButton></a></p>
+            <p>
+              <a
+                target="_blank"
+                href="https://discord.gg/rfpqYcmHPu"
+              >
+                View Discord
+              </a>
+            </p>
         </Modal>
     </>
   )

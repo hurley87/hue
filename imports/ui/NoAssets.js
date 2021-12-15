@@ -193,24 +193,25 @@ export const NoAssets = ({ user }) => {
         </Main>
       ) : (
         <Main>
-          {error && (
-            <Error>
-              You don't own the right NFT. Refresh the page to check again.
-            </Error>
-          )}
+          {error && <Error>You don't own a Heads Up Euchre NFT yet.</Error>}
           {!isMinting ? (
             <>
               <p>
-                You'll need to have a Heads Up Euchre NFT in your wallet to get
-                access the game. It's easy to buy or mint one.
+                You'll need to have one in your wallet to get access the game.
+                You can mint one for 0.05 ETH.
               </p>
               <p>
                 <b>{1337 - supply} / 1337 left</b>
               </p>
               <button onClick={() => mintNFT(1)}>Mint 1 for 0.05 ETH</button>
               <Switch onClick={() => setIsOpen(true)}>
-                What does Mint NFT mean?
+                What does it mean to mint an NFT?
               </Switch>
+              <br />
+              <br />
+              <img src="/preview.gif" />
+              <br />
+              <br />
             </>
           ) : (
             <>
@@ -226,15 +227,18 @@ export const NoAssets = ({ user }) => {
 
           <Modal isOpen={modalIsOpen} style={ModalStyle}>
             <h2>
-              What does Mint NFT mean?{" "}
+              Minting an NFT{" "}
               <Close onClick={() => setIsOpen(false)}>close</Close>
             </h2>
             <br />
             <p>
-              OpenSea is the largest peer-to-peer marketplace for NFTs. You can
-              think of NFTs as collectable digital assets that you can own like
-              art in the real world. On OpenSea, anyone can buy or sell these
-              assets using their crypto wallet.
+              Minting NFT refers to the process of turning a digital file into a
+              crypto collectible or digital asset on the Ethereum blockchain.
+              The digital item or file is stored in this decentralized database
+              or distributed ledger forever, and it is impossible to edit,
+              modify, or delete it. You own your Heads Up Euchre card and only
+              you can decide to keep or sell it. You can use your NFT to access
+              the game and community.
             </p>
             <p>
               <a

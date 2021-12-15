@@ -4,31 +4,33 @@ import TransparantBtnStyle from "./Styles/TransparantBtnStyle";
 import ModalStyle from "./Styles/ModalStyle";
 import Modal from "react-modal";
 
-const Close = styled.button`
+const Button = styled.button`
   ${TransparantBtnStyle}
 `;
 
-export const About = () => {
+export const Opensea = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   return (
     <>
-        <Close onClick={() => setIsOpen(true)}>about</Close>
+        <Button onClick={() => setIsOpen(true)}>opensea</Button>
         <Modal isOpen={modalIsOpen} style={ModalStyle}>
             <h2>
-                About{" "}
-                <Close onClick={() => setIsOpen(false)}>close</Close>
+                OpenSea{" "}
+                <Button onClick={() => setIsOpen(false)}>close</Button>
             </h2>
             <br />
             <p>
-              I wrote a background on why I created an online version of Heads Up Euchre. Subscribe and I'll send you monthly updates.
+                OpenSea is the largest peer-to-peer marketplace for NFTs. You can
+                think of NFTs as collectable digital assets that you can own like
+                art in the real world. On OpenSea, anyone can buy or sell Heads Up Euchre NFTs.
             </p>
             <p>
               <a
                 target="_blank"
-                href="https://www.getrevue.co/profile/davidhurley/archive/798201"
+                href="https://opensea.io/collection/headsupeuchre"
               >
-                View more
+                View Opensea Collection
               </a>
             </p>
         </Modal>
