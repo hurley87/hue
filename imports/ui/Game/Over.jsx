@@ -77,7 +77,7 @@ export const Over = ({ game, updateGame, userId, recordHand }) => {
             }
             const points = (game.playerOne.trick - game.playerTwo.trick) * 2;
             return (
-                <p>You euchred {game.playerTwo.username} and earned {points} {points === 1 ? 'point' : 'points'}</p>
+                <p>You Euchred {game.playerTwo.username} and earned {points} {points === 1 ? 'point' : 'points'}</p>
             );
 
         } else {
@@ -89,7 +89,7 @@ export const Over = ({ game, updateGame, userId, recordHand }) => {
             } else {
                 const points = (game.playerTwo.trick - game.playerOne.trick) * 2;
                 return (
-                    <p>{game.playerTwo.username} euchred you and earned {points} {points === 1 ? 'point' : 'points'}</p>
+                    <p>{game.playerTwo.username} Euchred you and earned {points} {points === 1 ? 'point' : 'points'}</p>
                 );
             }
         }
@@ -106,7 +106,7 @@ export const Over = ({ game, updateGame, userId, recordHand }) => {
             }
             const points = (game.playerTwo.trick - game.playerOne.trick) * 2;
             return (
-                <p>You euchred {game.playerOne.username} and earned {points} {points === 1 ? 'point' : 'points'}.</p>
+                <p>You Euchred {game.playerOne.username} and earned {points} {points === 1 ? 'point' : 'points'}.</p>
             );
 
         } else {
@@ -118,7 +118,7 @@ export const Over = ({ game, updateGame, userId, recordHand }) => {
             } else {
                 const points = (game.playerOne.trick - game.playerTwo.trick) * 2;
                 return (
-                    <p>{game.playerOne.username} euchred you and earned {points} {points === 1 ? 'point' : 'points'}.</p>
+                    <p>{game.playerOne.username} Euchred you and earned {points} {points === 1 ? 'point' : 'points'}.</p>
                 );
             }
         }

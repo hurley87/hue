@@ -69,7 +69,7 @@ const Content = styled.div`
   p, ol, li {
     color: #2f2c2a;
     font-size: 24px;
-    line-height: 110%;
+    line-height: 130%;
     font-family: 'Montserrat', sans-serif;
     margin-top: 10px;
   }
@@ -91,7 +91,7 @@ const Content = styled.div`
 
   .suitButtons button{
     justify-content: space-between;
-    width: 30%;
+    width: 100px;
     margin-right: 10px;
     border-radius: 100px;
     border: 5px solid #2f2c2a;
@@ -192,7 +192,6 @@ export const App = () => {
   const [modalIsOpen,setIsOpen] = useState(false);
   const [cardModalIsOpen, setCardModalIsOpen] = useState(false);
   const [card, setCard] = useState(null);
-  const [suit, setSuit] = useState('clubs');
   const { user, game } = useTracker(() => {
     const noDataAvailable = { user: null, game: null};
     const handler = Meteor.subscribe('games');
@@ -276,7 +275,7 @@ export const App = () => {
               <Headline>
                   <HomepageNav/>
                   <h1>Heads Up Euchre</h1>
-                  <p>Earn ETH while playing euchre online with your friends. Connect your wallet to get started. </p>
+                  <p>Earn ETH while playing Euchre online with your friends. Connect your wallet to get started. </p>
               </Headline>
               {
                 error && (
@@ -293,97 +292,15 @@ export const App = () => {
               <Content>
                 <h2>Game & NFT Collection</h2>
                 <p>
-                  Traditionally, euchre is played with four people but my Mom and I created a two player version we've been playing for years. If you’re fan of euchre I think you’ll enjoy it too.
-                </p>
+                  Traditionally, Euchre is played with four people but my Mom and I created a two player version we've been playing for years. If you’re fan of Euchre you’ll enjoy playing it heads up. Only Heads Up Euchre NFT holders will have access to the online game.</p>
                 <p>
-                  1337 unique, randomly generated pieces of art make up the NFT collection. You’ll need to own one to play the game and join our euchre community. Once you’re part of the community you’ll get access to exclusive online tournaments where winners can earn ETH.
+                  1337 unique, randomly generated pieces of art make up the NFT collection. You’ll need to own one to join our Euchre community as well. Community members will get access to exclusive online tournaments where winners can win ETH.
                 </p>
-                <p>
-                  The NFT collection is based around a euchre. Higher value cards are rarer which makes them more valuable to own. If you know euchre you’ll know that trump is decided before the start of each hand and Jacks can be more valuable depending on what suit is trump. Choose a suit to see how,
-                </p>
-                <div className='suitButtons'>
-                  <button onClick={() => setSuit('clubs')} className={suit === "clubs" ? "active": null}>
-                    {suit === "clubs" ? <img src="/Suit/Clubs-active.svg"/> : <img style={{height: '93px'}} src="/Suit/Clubs.svg"/>}
-                  </button>
-                  <button onClick={() => setSuit('diamonds')} className={suit === "diamonds" ? "active": null}>
-                    {suit === "diamonds" ? <img src="/Suit/Diamonds-active.svg"/> : <img src="/Suit/Diamonds.svg"/>}
-                  </button>
-                  <button onClick={() => setSuit('spades')} className={suit === "spades" ? "active": null}>
-                    {suit === "spades" ? <img src="/Suit/Spades-active.svg"/> : <img src="/Suit/Spades.svg"/>}
-                  </button>
-                  <button onClick={() => setSuit('hearts')} className={suit === "hearts" ? "active": null}>
-                    {suit === "hearts" ? <img style={{position: "relative", top: "10px"}} src="/Suit/Hearts-active.svg"/> : <img style={{position: "relative", top: "10px"}} src="/Suit/Hearts.svg"/>}
-                  </button>
-                </div>
-                <p>If <span style={{color: "#b366ff"}}>{suit}</span> is trump the cards with the highest value are ranked in this order,</p>
-                {
-                  suit === 'clubs' && (
-                    <>
-                      <CardRow>
-                        <img onClick={() => showCard(`/Clubs/J.png`)} src={`/Clubs/J.png`} />
-                        <img onClick={() => showCard(`/Spades/J.png`)} src={`/Spades/J.png`} />
-                        {['A', 'K', 'Q', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Clubs/${card}.png`)} src={`/Clubs/${card}.png`} />)}
-                      </CardRow>
-                      <p>Notice how the Jack of Clubs has the highest value when clubs is trump and the Jack of Spades is the second highest. Any trump card can beat any non trump card. These cards are ranked normally where Ace is the highest. Here's an example ranking if a spade was lead,</p>
-                      <CardRow>
-                        {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Spades/${card}.png`)} src={`/Spades/${card}.png`} />)}
-                      </CardRow>
-                    </>
-
-                  )
-                }
-                {
-                  suit === 'spades' && (
-                    <>
-                      <CardRow>
-                        <img src={`/Spades/J.png`} onClick={() => showCard(`/Spades/J.png`)}/>
-                        <img src={`/Clubs/J.png`} onClick={() => showCard(`/Clubs/J.png`)}/>
-                        {['A', 'K', 'Q', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Spades/${card}.png`)} src={`/Spades/${card}.png`} />)}
-
-                      </CardRow>
-                      <p>Notice how the Jack of Spades has the highest value when Spades is trump and the Jack of Clubs is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest. Here's an example ranking if a club was lead,</p>
-                      <CardRow>
-                        {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Clubs/${card}.png`)} src={`/Spades/${card}.png`} />)}
-                      </CardRow>
-                    </>
-                  )
-                }
-                {
-                  suit === 'diamonds' && (
-                    <>
-                      <CardRow>
-                        <img src={`/Diamonds/J.png`} onClick={() => showCard(`/Diamonds/J.png`)}/>
-                        <img src={`/Hearts/J.png`} onClick={() => showCard(`/Hearts/J.png`)}/>
-                        {['A', 'K', 'Q', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Diamonds/${card}.png`)} src={`/Diamonds/${card}.png`} />)}
-                      </CardRow>
-                      <p>Notice how the Jack of Diamonds has the highest value when Diamonds is trump and the Jack of Hearts is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest. Here's an example ranking if a heart was lead,</p>
-                      <CardRow>
-                        {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)}
-                      </CardRow>
-                    </>
-
-                  )
-                }
-                {
-                  suit === 'hearts' && (
-                    <>
-                      <CardRow>
-                        
-                        <img src={`/Hearts/J.png`} onClick={() => showCard(`/Hearts/J.png`)}/>
-                        <img src={`/Diamonds/J.png`} onClick={() => showCard(`/Diamonds/J.png`)}/>
-                        {['A', 'K', 'Q', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)}
-                        
-                      </CardRow>
-                      <p>Notice how the Jack of Hearts has the highest value when Hearts is trump and the Jack of Diamonds is the second highest. Any trump card can beat any other card. Every other card is ranked normally where Ace is the highest. Here's an example ranking if a diamond was lead,</p>
-                      <CardRow>
-                        {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Diamonds/${card}.png`)} src={`/Diamonds/${card}.png`} />)}
-                      </CardRow>
-                    </>
-
-                  )
-                }
+                <CardRow>
+                  {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)}
+                </CardRow>
                 <p>                  
-                  A Joker isn't tradionally used in euchre but we added one to spice things up. No matter what trump is the Joker is always the highest card and if it's lead the other player is forced to play their highest card. Jokers are rarest and most valuable - there are only 33 Royal Jokers and 4 Zombie Jokers.
+                  A Joker isn't tradionally used in Euchre but we added one to spice things up. Jokers are rarest and most valuable - there are only 33 Royal Jokers and 4 Zombie Jokers.
                 </p>
                 <CardRow>
                     <img src={`/Jokers/Royal.png`} onClick={() => showCard(`/Jokers/Royal.png`)}/>
@@ -393,17 +310,17 @@ export const App = () => {
                 <ol>
                   <li>Publish online game, establish Discord community and mint all 1337 Heads Up Euchre NFTs.</li>
                   <li>  
-                    Create a leaderboard showcasing players with the most points. The first 10 players to get to 1,000 points will earn 0.1 ETH. There'll also be day long tournament where the winner at the end of the day wins 0.1 ETH. 
+                    Create a leaderboard showcasing players with the most points. The first 10 players to get to 1,000 points will win 0.1 ETH. There'll also be day long tournament where the winner at the end of the day wins 0.1 ETH. 
                   </li>
                   <li>
-                    Introduce a token so players can earn $hue while playing. Players will be able to win and lose $hue tokens based on if they win or lose a game. 
+                    Introduce a token so players can earn $hue while playing. Players will be able to win and lose $hue tokens based on their performance. 
                   </li>
-                  <li>Create a device that'll record games played in real life. Sure, we'll start in the Metaverse, but it doesn't mean we can't meet for games in real life.</li>
+                  <li>Create a device that'll record games played in real life. Sure, we'll start online, but it doesn't mean we can't meet for games IRL.</li>
                 </ol>
                 <h2>Join Our Euchre Club</h2>
                 <p>
-                  Ever wanted to join a club of friends who love playing euchre and appreciate what's new in tech? Then our euchre club is perfect for you. 
-                  By owning a Heads Up Euchre NFT you’d immediately be part of the community and get access to exclusive euchre tournaments where you can win ETH.</p>
+                  Ever wanted to join a club of friends who love playing Euchre and appreciate what's new in tech? Then our Euchre club is perfect for you. 
+                  By owning a Heads Up Euchre NFT you’d immediately be part of the community and get access to exclusive Euchre tournaments where you can win ETH.</p>
                 <h2>Frequently Asked Questions</h2>
                 <p><b>What is an NFT?</b></p>
                 <p><small>An NFT stands for “Non-fungible token” and is a fancy way of saying it’s a unique, one of a kind digital item that users can buy, own, and trade. Some NFTs main function are to be digital art and look cool, some offer additional utility like exclusive access to websites or participation in an event, think of it like a rare piece of art that can also act as a “membership” card.</small></p>

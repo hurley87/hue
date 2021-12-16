@@ -22,7 +22,7 @@ export const Discord = () => {
             </h2>
             <br />
             <p>
-              Discord is a free voice, video, and text chat app that we use to coordinate online euchre games. 
+              Discord is a free voice, video, and text chat app that we use to coordinate online Euchre games. 
               Ideally, we create a thriving community around the conversations that'll happen there.
             </p>
             <p>
