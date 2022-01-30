@@ -275,7 +275,7 @@ export const App = () => {
               <Headline>
                   <HomepageNav/>
                   <h1>Heads Up Euchre</h1>
-                  <p>Earn ETH while playing Euchre online with your friends. Connect your wallet to get started. </p>
+                  <p>Earn ETH while playing Euchre online with your friends. Connect your wallet to get started.</p>
               </Headline>
               {
                 error && (
@@ -292,36 +292,27 @@ export const App = () => {
               <Content>
                 <h2>Game & NFT Collection</h2>
                 <p>
-                  Traditionally, Euchre is played with four people but my Mom and I created a two player version we've been playing for years. If you’re fan of Euchre you’ll enjoy playing it heads up. Only Heads Up Euchre NFT holders will have access to the online game.</p>
-                <p>
-                  1337 unique, randomly generated pieces of art make up the NFT collection. You’ll need to own one to join our Euchre community as well. Community members will get access to exclusive online tournaments where winners can win ETH.
+                  1337 unique, randomly generated cards in a Euchre deck make up our NFT collection. NFT holders will get access to online card tournaments where they can earn ETH.
                 </p>
                 <CardRow>
-                  {['A', 'K', 'Q', 'J', '10', '9'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)}
-                </CardRow>
-                <p>                  
-                  A Joker isn't tradionally used in Euchre but we added one to spice things up. Jokers are rarest and most valuable - there are only 33 Royal Jokers and 4 Zombie Jokers.
-                </p>
-                <CardRow>
-                    <img src={`/Jokers/Royal.png`} onClick={() => showCard(`/Jokers/Royal.png`)}/>
-                    <img src={`/Jokers/Zombie.png`} onClick={() => showCard(`/Jokers/Zombie.png`)}/>
+                  {['A', 'K', 'Q', 'J', '10'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)} <img src={`/Jokers/Zombie.png`} onClick={() => showCard(`/Jokers/Zombie.png`)}/>
                 </CardRow>
                 <h2>Roadmap</h2>
                 <ol>
-                  <li>Publish online game, establish Discord community and mint all 1337 Heads Up Euchre NFTs.</li>
-                  <li>  
-                    Create a leaderboard showcasing players with the most points. The first 10 players to get to 1,000 points will win 0.1 ETH. There'll also be day long tournament where the winner at the end of the day wins 0.1 ETH. 
+                  <li>Publish online game, establish Discord community and mint all 1337 NFTs.</li>
+                  <li>
+                    Create a leaderboard. The first 10 players to get to 1,000 points will earn 0.1 ETH. 
+                    
                   </li>
                   <li>
-                    Introduce a token so players can earn $hue while playing. Players will be able to win and lose $hue tokens based on their performance. 
+                    Create a day long tournament where the winner earns 0.1 ETH.  
                   </li>
-                  <li>Create a device that'll record games played in real life. Sure, we'll start online, but it doesn't mean we can't meet for games IRL.</li>
                 </ol>
-                <h2>Join Our Euchre Club</h2>
-                <p>
-                  Ever wanted to join a club of friends who love playing Euchre and appreciate what's new in tech? Then our Euchre club is perfect for you. 
-                  By owning a Heads Up Euchre NFT you’d immediately be part of the community and get access to exclusive Euchre tournaments where you can win ETH.</p>
                 <h2>Frequently Asked Questions</h2>
+                <br />
+                <p><b>What is ETH?</b></p>
+                <p><small>ETH is short for Ethereum, the number one cryptocurrency.</small></p>
+                <br />
                 <p><b>What is an NFT?</b></p>
                 <p><small>An NFT stands for “Non-fungible token” and is a fancy way of saying it’s a unique, one of a kind digital item that users can buy, own, and trade. Some NFTs main function are to be digital art and look cool, some offer additional utility like exclusive access to websites or participation in an event, think of it like a rare piece of art that can also act as a “membership” card.</small></p>
                 <br />
