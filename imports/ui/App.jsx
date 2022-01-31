@@ -292,7 +292,7 @@ export const App = () => {
               <Content>
                 <h2>Game & NFT Collection</h2>
                 <p>
-                  1337 unique, randomly generated cards in a Euchre deck make up our NFT collection. NFT holders will get access to online card tournaments where they can earn ETH.
+                  1337 unique, randomly generated cards make up the collection. NFT holders will get access to online card tournaments where they can earn ETH.
                 </p>
                 <CardRow>
                   {['A', 'K', 'Q', 'J', '10'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)} <img src={`/Jokers/Zombie.png`} onClick={() => showCard(`/Jokers/Zombie.png`)}/>
