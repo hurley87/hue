@@ -194,7 +194,7 @@ export const App = () => {
   const { user, game, loading } = useTracker(() => {
     const handler = Meteor.subscribe('games');
     console.log("HAND")
-    console.log()
+    console.log(handler)
     const game = GamesCollection.find().fetch()[0];
     console.log("GM")
     console.log(game)
