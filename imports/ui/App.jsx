@@ -202,6 +202,7 @@ export const App = () => {
   console.log(loading)
   const game = useTracker(() => {
     let games = GamesCollection.find().fetch()
+    console.log('games')
     console.log(games)
     console.log(games)
     return games[0];
