@@ -191,21 +191,24 @@ export const App = () => {
   const [modalIsOpen,setIsOpen] = useState(false);
   const [cardModalIsOpen, setCardModalIsOpen] = useState(false);
   const [card, setCard] = useState(null);
-  const { user, game } = useTracker(() => {
-    const noDataAvailable = { user: null, game: null};
+  const { user, game, loading } = useTracker(() => {
+    const noDataAvailable = { user: null, game: null, loading: true };
     const handler = Meteor.subscribe('games');
     
-
     if (!handler.ready()) {
       return { ...noDataAvailable };
+    } else {
+      console.log( GamesCollection.find().fetch())
+      const game = GamesCollection.find().fetch()[0];
+      const user = Meteor.user();
+  
+      console.log('USER')
+      console.log(user)
+      console.log(game)
+      return { user, game, loading: false };
     }
-    const game = GamesCollection.find().fetch()[0];
-    const user = Meteor.user();
 
-    console.log(user)
-    console.log(game)
 
-    return { user, game };
   });
 
   function showCard(card) {
@@ -263,12 +266,15 @@ export const App = () => {
     }
   }
 
+  console.log("GAME")
   console.log(game)
+
+  console.log(loading)
 
   return (
     <Main>
       {
-        user ? (
+        loading ? <div>loading ...</div> : user ? (
           <>
             {
               game ? <Game user={user} game={game} /> : user.profile && user.profile.avatar ? <NoGame user={user} /> : <NoAssets user={user} />
