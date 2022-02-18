@@ -192,21 +192,17 @@ export const App = () => {
   const [cardModalIsOpen, setCardModalIsOpen] = useState(false);
   const [card, setCard] = useState(null);
   const { user, game, loading } = useTracker(() => {
-    const noDataAvailable = { user: null, game: null, loading: true };
     const handler = Meteor.subscribe('games');
-    
-    if (!handler.ready()) {
-      return { ...noDataAvailable };
-    } else {
-      console.log( GamesCollection.find().fetch())
-      const game = GamesCollection.find().fetch()[0];
-      const user = Meteor.user();
-  
-      console.log('USER')
-      console.log(user)
-      console.log(game)
-      return { user, game, loading: false };
-    }
+    console.log("HAND")
+    console.log()
+    const game = GamesCollection.find().fetch()[0];
+    console.log("GM")
+    console.log(game)
+    const user = Meteor.user();
+    console.log("User")
+    console.log(user)
+
+    return { user, game, loading: !handler.ready() };
 
 
   });
@@ -306,7 +302,7 @@ export const App = () => {
                 </p>
                 <CardRow>
                   <img src={`/Jokers/Zombie.png`} onClick={() => showCard(`/Jokers/Zombie.png`)}/>
-                  {['A', 'K', 'Q', 'J', '10'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)}
+                  {['A', 'K', 'Q', 'J', '10'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} />)}
                 </CardRow>
                 <h2>Roadmap</h2>
                 <ol>
