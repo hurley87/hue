@@ -54,7 +54,7 @@ const Headline = styled.div`
 const Content = styled.div`
   width: 95%;
   margin: auto;
-  max-width: 1200px;
+  max-width: 1000px;
   padding-top: 50px;
 
   h2 {
@@ -161,7 +161,6 @@ let web3Modal;
 if (typeof window !== "undefined") {
   web3Modal = new Web3Modal({
     network: "mainnet",
-    cacheProvider: true,
     providerOptions,
   });
 }
@@ -202,6 +201,9 @@ export const App = () => {
     }
     const game = GamesCollection.find().fetch()[0];
     const user = Meteor.user();
+
+    console.log(user)
+    console.log(game)
 
     return { user, game };
   });
@@ -261,6 +263,8 @@ export const App = () => {
     }
   }
 
+  console.log(game)
+
   return (
     <Main>
       {
@@ -292,10 +296,11 @@ export const App = () => {
               <Content>
                 <h2>Game & NFT Collection</h2>
                 <p>
-                  1337 unique, randomly generated cards make up the collection. NFT holders will get access to online card tournaments where they can earn ETH.
+                  1337 unique, randomly generated cards make up the collection. NFT owners will get access to online card tournaments where they can earn ETH. You can mint one using this website or buy one from someone else on Opensea.
                 </p>
                 <CardRow>
-                  {['A', 'K', 'Q', 'J', '10'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)} <img src={`/Jokers/Zombie.png`} onClick={() => showCard(`/Jokers/Zombie.png`)}/>
+                  <img src={`/Jokers/Zombie.png`} onClick={() => showCard(`/Jokers/Zombie.png`)}/>
+                  {['A', 'K', 'Q', 'J', '10'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} src={`/Hearts/${card}.png`} />)}
                 </CardRow>
                 <h2>Roadmap</h2>
                 <ol>
@@ -311,7 +316,7 @@ export const App = () => {
                 <h2>Frequently Asked Questions</h2>
                 <br />
                 <p><b>What is ETH?</b></p>
-                <p><small>ETH is short for Ethereum, the number one cryptocurrency.</small></p>
+                <p><small>ETH is short for Ethereum.</small></p>
                 <br />
                 <p><b>What is an NFT?</b></p>
                 <p><small>An NFT stands for “Non-fungible token” and is a fancy way of saying it’s a unique, one of a kind digital item that users can buy, own, and trade. Some NFTs main function are to be digital art and look cool, some offer additional utility like exclusive access to websites or participation in an event, think of it like a rare piece of art that can also act as a “membership” card.</small></p>
@@ -332,8 +337,8 @@ export const App = () => {
                 <p><b>How many NFTs can I mint? </b></p>
                 <p><small>You can only mint 1 NFT. This is done to maximize the number of unique owners and hopefully, players in our Heads Up Euchre league.</small></p>
                 <br />
-                <p><b>I have more questions</b></p>
-                <p><small>Join our discord and I can answer any questions you have.</small></p>
+                <p><b>What if I have more questions?</b></p>
+                <p><small>Join Discord and ask away.</small></p>
               </Content>
               <HomepageNav/>
           </>

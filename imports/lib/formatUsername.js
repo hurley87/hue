@@ -1,5 +1,5 @@
 const formatUsername = (username) => {
-  return username.includes(".eth")
+  return username && username.includes(".eth")
     ? username
     : username.slice(0, 2) + "..." + username.slice(-4);
 };

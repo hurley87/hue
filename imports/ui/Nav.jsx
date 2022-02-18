@@ -38,7 +38,7 @@ const NavStyle = styled.div`
 export const Nav = ({ user }) => {
     return (
         <NavStyle>
-            <p> {user.profile ? <img src={user.profile.avatar} /> : "gm, "}  {formatUsername(user.username)}</p>
+            <p> {user.profile && <img src={user.profile.avatar} />}  {formatUsername(user.username)}</p>
             <button onClick={() => Meteor.logout()}>logout</button>
             <About />
             <button onClick={() => window.open("https://opensea.io/collection/headsupeuchre", "_blank")}>opensea</button>
