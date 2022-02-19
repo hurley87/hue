@@ -11,8 +11,11 @@ export const NewGame = ({ setLoading, user }) => {
     const createGame = limit => {
         try {
             setLoading(true);
-            const game = Meteor.call('games.insert', limit, (error) => {
+            const game = Meteor.call('games.insert', limit, (error, result) => {
                 if (error) setError(error)
+                if(result) {
+                    Meteor.call('game.updateProfile', result)
+                }
             });
             console.log(game)
             Meteor.call("games.discord", "911394307095801866", `${user.username} just create a game up to ${limit}`)

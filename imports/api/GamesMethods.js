@@ -58,7 +58,7 @@ Meteor.methods({
     const avatar = Meteor.users.findOne(this.userId).profile.avatar;
 
     try {
-      const gameId = GamesCollection.insert({
+      return GamesCollection.insert({
         limit,
         inviteCode,
         playerOne: {
@@ -91,17 +91,18 @@ Meteor.methods({
         status: "InviteSent",
         trump: "",
       });
-      console.log("GAMEID");
-      console.log(gameId);
-      Meteor.users.update(this.userId, {
-        $set: {
-          "profile.gameId": gameId,
-        },
-      });
-      return game;
     } catch (e) {
       throw new Meteor.Error(e);
     }
+  },
+  "game.updateProfile"(gameId) {
+    check(gameId, String);
+    console.log(gameId);
+    Meteor.users.update(this.userId, {
+      $set: {
+        "profile.gameId": gameId,
+      },
+    });
   },
   "games.remove"(taskId) {
     check(taskId, String);
@@ -145,13 +146,7 @@ Meteor.methods({
 
     const creatorUsername = Meteor.users.findOne(newGame.playerOne.id).username;
 
-    Meteor.users.update(newGame.playerOne.id, {
-      $set: {
-        "profile.gameId": gameId,
-      },
-    });
-
-    Meteor.users.update(newGame.playerTwo.id, {
+    Meteor.users.update(this.userId, {
       $set: {
         "profile.gameId": gameId,
       },
