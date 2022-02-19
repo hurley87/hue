@@ -191,14 +191,23 @@ export const App = () => {
   const [modalIsOpen,setIsOpen] = useState(false);
   const [cardModalIsOpen, setCardModalIsOpen] = useState(false);
   const [card, setCard] = useState(null);
+
+  const loading2 = useTracker(() => {
+    const handler =  Meteor.subscribe('games.userData');
+    return !handler.ready();
+  },[])
+
   const user = useTracker(() => Meteor.user(), [])
   const gameId = user?.profile.gameId
   console.log("GAMEID")
-  console.log(gameId)
+  console.log(gameId)  
+
   const loading = useTracker(() => {
     const handler = Meteor.subscribe('games.view', gameId);
-    return !handler.ready();
+    const handler2 =  Meteor.subscribe('games.userData');
+    return !handler.ready() && !handler2.ready();
   },[gameId])
+
   const game = useTracker(() => {
     console.log('cool tron')
     console.log(gameId)
@@ -273,11 +282,12 @@ export const App = () => {
   return (
     <Main>
       {
-        user ? loading ? <div>loading ...</div> : (
+        user ? loading && loading2 ? <div>loading ...</div> : (
           <>
             {
               game ? <Game user={user} game={game} /> : user.profile && user.profile.avatar ? <NoGame user={user} /> : <NoAssets user={user} />
             }
+
           </>
         ) : (
           <>
