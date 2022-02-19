@@ -151,6 +151,7 @@ Meteor.methods({
         "profile.gameId": gameId,
       },
     });
+
     Meteor.call(
       "games.discord",
       "911394307095801866",
