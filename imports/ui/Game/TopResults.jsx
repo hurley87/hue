@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { CardModal } from '../CardModal';
 
 const Results = styled.div`
+    pointer-events: none;
     b {
         background-color:#B366FF;
         color: white;
@@ -18,6 +19,7 @@ const Results = styled.div`
         margin-right: 5px;
     }
     h5 {
+        pointer-events: none;
         position: relative;
         bottom: 5px;
         pointer-events: none;

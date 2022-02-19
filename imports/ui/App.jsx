@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { providers } from "ethers";
 import WalletLink from "walletlink";
 import Web3Modal from "web3modal";
@@ -111,7 +112,7 @@ const Content = styled.div`
 const ConnectButton = styled.button`${MainCTAStyle}`;  
 
 const Error = styled.div`${ErrorStyle}`;
-const Switch = styled.div`
+const SwitchLink = styled.div`
   ${SwitchStyle}
   margin-top: 30px;
 `;
@@ -190,11 +191,6 @@ const Mobile = styled.div`
 export const App = () => {
   const [error, setError] = useState(false);
   const [modalIsOpen,setIsOpen] = useState(false);
-  const loading2 = useTracker(() => {
-    const handler =  Meteor.subscribe('games.userData');
-    return !handler.ready();
-  },[])
-
   const user = useTracker(() => Meteor.user(), [])
   const gameId = user?.profile.gameId
   console.log("GAMEID")
@@ -256,7 +252,7 @@ export const App = () => {
   return (
     <Main>
       {
-       loading2 ? <div>loading ...</div> : user ? loading ? <div>loading ...</div> : (
+        user ? loading ? <div>loading ...</div> : (
           <>
             {
               game ? <Game user={user} game={game} /> : user.profile && user.profile.avatar ? <NoGame user={user} /> : <NoAssets user={user} />
@@ -277,7 +273,7 @@ export const App = () => {
               }
               <Desktop>
                 <ConnectButton onClick={() => connect()}>Connect your wallet</ConnectButton>
-                <Switch onClick={() => setIsOpen(true)}>{`Don't have a wallet?`}</Switch>
+                <SwitchLink onClick={() => setIsOpen(true)}>{`Don't have a wallet?`}</SwitchLink>
               </Desktop>
               <Mobile>
                 <Error>This game is only available on desktop.</Error>

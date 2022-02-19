@@ -10,6 +10,7 @@ const Close = styled.button`
 export const CardModal = ({ cardImg }) => {
   const [cardModalIsOpen, setCardModalIsOpen] = useState(false);
   const [card, setCard] = useState(null);
+  console.log(cardImg);
 
   function showCard(card) {
     setCardModalIsOpen(true);
@@ -37,7 +38,11 @@ export const CardModal = ({ cardImg }) => {
 
   return (
     <>
-      <img src={cardImg} onClick={() => showCard(cardImg)} />
+      <img
+        syle={{ zIndex: 99999 }}
+        src={cardImg}
+        onClick={() => showCard(cardImg)}
+      />
       <Modal isOpen={cardModalIsOpen} style={ModalStyle}>
         <h2>
           {card &&
