@@ -202,7 +202,7 @@ export const App = () => {
   const game = useTracker(() => {
     console.log('cool tron')
     console.log(gameId)
-    const game = GamesCollection.findOne(gameId);
+    const game = GamesCollection.findOne({_id: gameId});
     console.log('TRON')
     console.log(game)
     return game
