@@ -6,6 +6,7 @@ import Web3Modal from "web3modal";
 import { useTracker } from 'meteor/react-meteor-data';
 import { NoGame } from './NoGame';
 import { Game } from './Game';
+import { CardModal } from './CardModal';
 import { HomepageNav } from './HomepageNav';
 import { GamesCollection } from "../db/GamesCollection";
 import styled from 'styled-components';
@@ -189,9 +190,6 @@ const Mobile = styled.div`
 export const App = () => {
   const [error, setError] = useState(false);
   const [modalIsOpen,setIsOpen] = useState(false);
-  const [cardModalIsOpen, setCardModalIsOpen] = useState(false);
-  const [card, setCard] = useState(null);
-
   const loading2 = useTracker(() => {
     const handler =  Meteor.subscribe('games.userData');
     return !handler.ready();
@@ -218,30 +216,6 @@ export const App = () => {
   }, [gameId]);
   console.log("GM")
   console.log(game)
-
-  function showCard(card) {
-    setCardModalIsOpen(true)
-    setCard(card)
-  }
-  
-  function convertCard(card) {
-    switch(card) {
-      case "A":
-        return "Ace"
-      case "K":
-        return "King"
-      case "Q":
-        return "Queen"
-      case "J":
-        return "Jack"
-      case "10":
-        return "Ten"
-      case "9":
-        return "Nine"
-      default:
-        return card;
-    }
-  }
 
   async function connect() {
     setError(false);
@@ -314,8 +288,8 @@ export const App = () => {
                   1337 unique, randomly generated cards make up the collection. NFT owners will get access to online card tournaments where they can earn ETH. You can mint one using this website or buy one from someone else on Opensea.
                 </p>
                 <CardRow>
-                  <img src={`/Jokers/Zombie.png`} onClick={() => showCard(`/Jokers/Zombie.png`)}/>
-                  {['A', 'K', 'Q', 'J', '10'].map((card, i) => <img key={i} onClick={() => showCard(`/Hearts/${card}.png`)} />)}
+                  <CardModal cardImg={"/Jokers/Zombie.png"} />
+                  {['A', 'K', 'Q', 'J', '10'].map((card, i) => <CardModal key={i} cardImg={`/Hearts/${card}.png`} />)}
                 </CardRow>
                 <h2>Roadmap</h2>
                 <ol>
@@ -370,19 +344,6 @@ export const App = () => {
             We recommend signing up for <a target="_blank" href="https://metamask.io/">MetaMask</a> or <a target="_blank" href="https://wallet.coinbase.com/">Coinbase</a> and using their browser extension. 
           </p>
           <ReactPlayer width="100%" height="340px" url="https://www.youtube.com/watch?v=OsRIHlr0_Iw" />
-      </Modal>
-      <Modal
-        isOpen={cardModalIsOpen}
-        style={ModalStyle}
-      >
-          <h2>
-            {card && !card.includes("Joker") && convertCard(card.split("/")[2].split(".")[0]) + " of " + card.split("/")[1]}
-            {card && card.includes("Royal") && "Royal Joker"}
-            {card && card.includes("Zombie") && "Zombie Joker"}
-            <Close onClick={() => setCardModalIsOpen(false)}>close</Close>
-          </h2>
-          <br />
-          <img style={{width: "400px", margin: "auto"}} src={card} />  
       </Modal>
     </Main>
   )

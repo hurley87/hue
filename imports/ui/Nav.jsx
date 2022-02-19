@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import TransparantBtnStyle from './Styles/TransparantBtnStyle';
 import { About } from './About';
 import formatUsername from '../lib/formatUsername';
+import { CardModal } from './CardModal';
 
 const NavStyle = styled.div`
     width: 95%;
@@ -38,7 +39,7 @@ const NavStyle = styled.div`
 export const Nav = ({ user }) => {
     return (
         <NavStyle>
-            <p> {user.profile && <img src={user.profile.avatar} />}  {formatUsername(user.username)}</p>
+            <p> {user.profile && <CardModal cardImg={user.profile.avatar} />}  {formatUsername(user.username)}</p>
             <button onClick={() => Meteor.logout()}>logout</button>
             <About />
             <button onClick={() => window.open("https://opensea.io/collection/headsupeuchre", "_blank")}>opensea</button>

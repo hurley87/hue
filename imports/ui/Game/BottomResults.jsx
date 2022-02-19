@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Rules } from '../Rules';
 import Modal from 'react-modal';
+import { CardModal } from '../CardModal';
 
 Modal.setAppElement('#react-target')
 
@@ -38,7 +39,7 @@ export const BottomResults = ({ player, game, renderSuit }) => {
     return (
         <Results>
             <h5>
-                <img src={player.avatar} />
+                <CardModal cardImg={player.avatar} />
                 {player.username} {game.dealer === player.id ? <b>Dealer</b>  : null} 
                 {game.maker === player.id && game.trump !== "" ? (<span>{renderSuit(game.trump)}</span>) : null}
                 <span><b>{player.score} / {game.limit}</b> {" "} Tricks: {player.trick}</span>
