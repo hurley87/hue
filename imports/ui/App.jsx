@@ -282,7 +282,7 @@ export const App = () => {
   return (
     <Main>
       {
-        user ? loading && loading2 ? <div>loading ...</div> : (
+       loading2 ? <div>loading ...</div> : user ? loading ? <div>loading ...</div> : (
           <>
             {
               game ? <Game user={user} game={game} /> : user.profile && user.profile.avatar ? <NoGame user={user} /> : <NoAssets user={user} />
