@@ -58,7 +58,7 @@ Meteor.methods({
     const avatar = Meteor.users.findOne(this.userId).profile.avatar;
 
     try {
-      return GamesCollection.insert({
+      const gameId = GamesCollection.insert({
         limit,
         inviteCode,
         playerOne: {
@@ -91,6 +91,14 @@ Meteor.methods({
         status: "InviteSent",
         trump: "",
       });
+      console.log("GAMEID");
+      console.log(gameId);
+      Meteor.users.update(this.userId, {
+        $set: {
+          "profile.gameId": gameId,
+        },
+      });
+      return game;
     } catch (e) {
       throw new Meteor.Error(e);
     }

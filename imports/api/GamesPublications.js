@@ -8,3 +8,8 @@ Meteor.publish("games", function publishGames() {
     $or: [{ "playerTwo.id": this.userId }, { "playerOne.id": this.userId }],
   });
 });
+
+// Note: games.view is also used when editing an existing game.
+Meteor.publish("games.view", function gamesView(gameId) {
+  return GamesCollection.find({ _id: gameId });
+});

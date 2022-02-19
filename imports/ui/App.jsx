@@ -196,9 +196,9 @@ export const App = () => {
   console.log("GAMEID")
   console.log(gameId)
   const loading = useTracker(() => {
-    const handler = Meteor.subscribe('games');
+    const handler = Meteor.subscribe('games.view', gameId);
     return !handler.ready();
-  },[])
+  },[gameId])
   const game = useTracker(() => {
     console.log('cool tron')
     console.log(gameId)
