@@ -58,11 +58,6 @@ Meteor.methods({
     const avatar = Meteor.users.findOne(this.userId).profile.avatar;
 
     try {
-      Meteor.users.update(this.userId, {
-        $set: {
-          "profile.gameId": avatar,
-        },
-      });
       return GamesCollection.insert({
         limit,
         inviteCode,
