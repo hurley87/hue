@@ -26,7 +26,6 @@ const EndGame = styled.button`${TransparantBtnStyle}`;
 const GameStyle = styled.div`
     height: 97.5vh;
     padding-top: 12px;
-    pointer-events: none;
 `;
 
 const Main = styled.div`
