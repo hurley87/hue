@@ -192,16 +192,23 @@ export const App = () => {
   const [cardModalIsOpen, setCardModalIsOpen] = useState(false);
   const [card, setCard] = useState(null);
   const user = useTracker(() => Meteor.user(), [])
+  const gameId = user?.profile.gameId
+  console.log("GAMEID")
+  console.log(gameId)
   const loading = useTracker(() => {
     const handler = Meteor.subscribe('games');
     return !handler.ready();
   },[])
   const game = useTracker(() => {
-    let games = GamesCollection.find().fetch()
-    console.log(games)
-    return games[0];
-  }, []);
+    console.log('cool tron')
+    console.log(gameId)
+    const game = GamesCollection.findOne(gameId);
+    console.log('TRON')
+    console.log(game)
+    return game
+  }, [gameId]);
   console.log("GM")
+  console.log(game)
 
   function showCard(card) {
     setCardModalIsOpen(true)

@@ -58,6 +58,11 @@ Meteor.methods({
     const avatar = Meteor.users.findOne(this.userId).profile.avatar;
 
     try {
+      Meteor.users.update(this.userId, {
+        $set: {
+          "profile.gameId": avatar,
+        },
+      });
       return GamesCollection.insert({
         limit,
         inviteCode,
@@ -136,6 +141,18 @@ Meteor.methods({
     GamesCollection.update(gameId, { $set: newGame });
 
     const creatorUsername = Meteor.users.findOne(newGame.playerOne.id).username;
+
+    Meteor.users.update(newGame.playerOne.id, {
+      $set: {
+        "profile.gameId": gameId,
+      },
+    });
+
+    Meteor.users.update(newGame.playerTwo.id, {
+      $set: {
+        "profile.gameId": gameId,
+      },
+    });
     Meteor.call(
       "games.discord",
       "911394307095801866",
