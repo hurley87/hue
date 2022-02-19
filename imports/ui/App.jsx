@@ -1,23 +1,19 @@
 import { Meteor } from 'meteor/meteor';
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { providers } from "ethers";
 import WalletLink from "walletlink";
 import Web3Modal from "web3modal";
 import { useTracker } from 'meteor/react-meteor-data';
-import { NoGame } from './NoGame';
-import { Game } from './Game';
 import { CardModal } from './CardModal';
 import { HomepageNav } from './HomepageNav';
-import { GamesCollection } from "../db/GamesCollection";
 import styled from 'styled-components';
-import { NoAssets } from './NoAssets';
 import ErrorStyle from "./Styles/ErrorStyle";
 import ModalStyle from "./Styles/ModalStyle"; 
 import MainCTAStyle from "./Styles/MainCTAStyle"; 
 import Modal from 'react-modal';
 import formatUsername from '../lib/formatUsername';
 import ReactPlayer from "react-player";
+import { Authenticated } from './Authenticated';
 
 const Headline = styled.div`
     margin: auto;
@@ -189,29 +185,9 @@ const Mobile = styled.div`
 `;
 
 export const App = () => {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(false);  
   const [modalIsOpen,setIsOpen] = useState(false);
   const user = useTracker(() => Meteor.user(), [])
-  const gameId = user?.profile.gameId
-  console.log("GAMEID")
-  console.log(gameId)  
-
-  const loading = useTracker(() => {
-    const handler = Meteor.subscribe('games.view', gameId);
-    const handler2 =  Meteor.subscribe('games.userData');
-    return !handler.ready() && !handler2.ready();
-  },[gameId])
-
-  const game = useTracker(() => {
-    console.log('cool tron')
-    console.log(gameId)
-    const game = GamesCollection.findOne({_id: gameId});
-    console.log('TRON')
-    console.log(game)
-    return game
-  }, [gameId]);
-  console.log("GM")
-  console.log(game)
 
   async function connect() {
     setError(false);
@@ -244,22 +220,11 @@ export const App = () => {
     }
   }
 
-  console.log("GAME")
-  console.log(game)
-
-  console.log(loading)
 
   return (
     <Main>
       {
-        user ? loading ? <div>loading ...</div> : (
-          <>
-            {
-              game ? <Game user={user} game={game} /> : user.profile && user.profile.avatar ? <NoGame user={user} /> : <NoAssets user={user} />
-            }
-
-          </>
-        ) : (
+        user ? <Authenticated user={user} /> : (
           <>
               <Headline>
                   <HomepageNav/>

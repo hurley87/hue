@@ -3,6 +3,8 @@ import styled from "styled-components";
 import ModalStyle from "./Styles/ModalStyle";
 import Modal from "react-modal";
 
+import TransparantBtnStyle from "./Styles/TransparantBtnStyle";
+
 const Close = styled.button`
   ${TransparantBtnStyle}
 `;
@@ -10,7 +12,6 @@ const Close = styled.button`
 export const CardModal = ({ cardImg }) => {
   const [cardModalIsOpen, setCardModalIsOpen] = useState(false);
   const [card, setCard] = useState(null);
-  console.log(cardImg);
 
   function showCard(card) {
     setCardModalIsOpen(true);
