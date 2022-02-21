@@ -31,8 +31,8 @@ export const TopResults = ({ player, renderSuit, game }) => {
         <Results>
             <h5> 
                 <CardModal cardImg={player.avatar} /> {player.username} {game.dealer === player.id ? <b>Dealer</b>  : null}{" "}
-                {game.maker === player.id && game.trump !== "" ? (<span>{renderSuit(game.trump)}</span>) : null}{" "}
                 <span><b>{player.score} / {game.limit}</b>{" "}Tricks: {player.trick}</span>
+                {game.maker === player.id && game.trump !== "" ? (<span style={{fontSize: '32px'}}>{renderSuit(game.trump)}</span>) : null}{" "}
             </h5>
         </Results>
     );

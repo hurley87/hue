@@ -3,8 +3,8 @@
         "env": {
             "ENV": "production",
             "ROOT_URL": "http://www.headsupeuchre.com",
-            "MONGO_URL": "mongodb+srv://admin:EuakAf3jV74hrarH@cluster0.xn21z.mongodb.net/hue?retryWrites=true&w=majority",
-            "MONGO_OPLOG_URL": "mongodb+srv://admin:EuakAf3jV74hrarH@cluster0.xn21z.mongodb.net/local"
+            "MONGO_URL": "mongodb+srv://dave:gXKQRRmPN1yRcwrf@cluster0.xn21z.mongodb.net/hue?retryWrites=true&w=majority",
+            "MONGO_OPLOG_URL": "mongodb+srv://dave:gXKQRRmPN1yRcwrf@cluster0.xn21z.mongodb.net/local"
         }
     }
 }
