@@ -207,7 +207,8 @@ export const App = () => {
               username,
               password,
           }, function (err) {
-              if (err) {
+              if (!err) {
+                console.log('ERR')
                 console.log(err)
               } else {
                 Meteor.call("games.discord", "911391777955659819", `${formatUsername(username)} connected their wallet`)
