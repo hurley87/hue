@@ -25,9 +25,7 @@ export const JoinGame = ({ setLoading }) => {
 
     function joinGame(gameId) {
         setLoading(true);
-        Meteor.call('games.joinGame', gameId, (error, result) => {
-            if (result) console.log(result)
-        });
+        Meteor.call('games.joinGame', gameId);
     }
 
     return (

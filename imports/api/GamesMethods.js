@@ -97,7 +97,6 @@ Meteor.methods({
   },
   "game.updateProfile"(gameId) {
     check(gameId, String);
-    console.log(gameId);
     Meteor.users.update(this.userId, {
       $set: {
         "profile.gameId": gameId,
