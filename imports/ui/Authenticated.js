@@ -13,7 +13,7 @@ export const Authenticated = ({ user }) => {
       const gameId = user.profile.gameId;
       const handler = Meteor.subscribe("games.view", gameId);
       loading = !handler.ready();
-      game = GamesCollection.findOne();
+      game = GamesCollection.findOne(gameId);
     }
     return { game, loading };
   });
